@@ -3,6 +3,7 @@ import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import styled from "styled-components";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
@@ -37,7 +38,7 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  ${mobile({ flex:"2" , justifyContent: "center" })}
+  ${mobile({ flex: "2", justifyContent: "center" })}
 `;
 
 const MenuItem = styled.div`
@@ -76,12 +77,17 @@ const Navbar = () => {
           </SearchConatiner>
         </Left>
         <Center>
-          <Logo>ANUP'S.</Logo>
+          <Link to="/" className="link">
+            <Logo>ANUP'S.</Logo>
+          </Link>
         </Center>
         <Right>
-          <MenuItem>Register </MenuItem>
-          <MenuItem>Sign In </MenuItem>
-
+          <Link to="/register" className="link">
+            <MenuItem>Register </MenuItem>
+          </Link>
+          <Link to="/login" className="link">
+            <MenuItem>Sign In </MenuItem>
+          </Link>
           <MenuItem>
             <ShoppingCartOutlinedIcon />
           </MenuItem>
