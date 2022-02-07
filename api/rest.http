@@ -1,0 +1,12 @@
+################## LOGIN / USER ####################
+
+### REGISTER/CREATE USER
+POST http://localhost:5000/api/v1/user/register
+Content-Type: application/json
+
+{
+  "firstName": "Anup",
+  "lastName": "Poudel",
+  "email": "ap@w.com",
+  "password": "vangunneR@45"
+}

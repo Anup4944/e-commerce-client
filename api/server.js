@@ -35,6 +35,21 @@ const storage = multer.diskStorage({
   },
 });
 
+// Load routers
+import userRouter from "./routes/user.route.js";
+
+//Use Api
+app.use("/api/v1/user", userRouter);
+
+//404 return
+app.use((req, res, next) => {
+  const error = new Error("Resources not found");
+  error.status = 404;
+
+  next(error);
+});
+
+// handle error
 app.use((error, req, res, next) => {
   handleError(error, res);
 });
