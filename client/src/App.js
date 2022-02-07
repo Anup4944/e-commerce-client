@@ -2,14 +2,10 @@ import React from "react";
 import HomePage from "./pages/HomePage";
 import ProductList from "./pages/ProductList";
 import SingleProduct from "./pages/SingleProduct";
-
 import Cart from "./pages/Cart";
-
 import SignIn from "./pages/SignIn";
-
 import Register from "./pages/Register";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
