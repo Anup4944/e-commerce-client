@@ -6,7 +6,7 @@ import {
   getUserByEmail,
   getUserProfileByRefreshJWT,
   getUsers,
-} from "../models/user/user.model.js";
+} from "../models/client/client.model.js";
 
 import { hashPassword } from "../helpers/bcrypt.helper.js";
 
@@ -31,7 +31,6 @@ router.post("/register", async (req, res) => {
 
     res.json({ status: "error", message: "Invalid login details" });
   } catch (error) {
-    console.log(error);
     if (error.message.includes("duplicate key error collection")) {
       return res.json({ status: "error", message: "This email already exist" });
     }

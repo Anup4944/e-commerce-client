@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -27,6 +28,8 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   font-size: 25px;
   font-weight: 300;
+  color: palevioletred;
+  text-align: center;
 `;
 
 const Form = styled.form`
@@ -47,14 +50,21 @@ const Agreement = styled.span`
 `;
 
 const Button = styled.button`
-  width: 60%;
+  width: inherit;
   border: none;
-  padding: 15px 20px;
+  padding: 10px 10px;
   background-color: teal;
   color: white;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: 120px;
 `;
 
+const linkStyle = {
+  textDecoration: "none",
+  color: "inherit",
+};
 const Register = () => {
   return (
     <Container>
@@ -68,10 +78,13 @@ const Register = () => {
           <Input placeholder="Enter your password" />
           <Input placeholder="Please confirm password" />
           <Agreement>
-            By creating this account ,I consent to the processing of my personal
+            By creating this account, I consent to the processing of my personal
             data in accordance with <b>PRIVACY POLICY</b>
           </Agreement>
           <Button>Create account</Button>
+          <Link to="/login" style={linkStyle}>
+            <Button>Back to Sign In</Button>
+          </Link>
         </Form>
       </Wrapper>{" "}
     </Container>

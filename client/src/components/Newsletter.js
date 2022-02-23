@@ -32,12 +32,15 @@ const InputContainer = styled.div`
   border: 1px solid lightgray;
   ${mobile({ width: "80%" })}
 `;
-const Input = styled.div`
+const Input = styled.input`
   border: none;
+  outline: none;
   flex: 14;
   padding-left: 20px;
+  height: 20px;
 `;
 const Button = styled.div`
+  cursor: pointer;
   width: 50%;
   height: 40px;
   flex: 2;
@@ -55,7 +58,7 @@ const Newsletter = () => {
       <Tilte>Newsletter</Tilte>
       <Description>Get timely updates from your favourite products</Description>
       <InputContainer>
-        <Input placeholder="Your email here....." />
+        <Input placeholder="Your email here....." name="email" type="email" />
         <Button>
           <SendOutlined />
         </Button>

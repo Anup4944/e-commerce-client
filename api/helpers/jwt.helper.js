@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 import { storeAccessJwt } from "../models/session/session.model.js";
 
-import { storeRefreshJwt } from "../models/user/user.model.js";
+import { storeRefreshJwt } from "../models/client/client.model.js";
 
 export const createAccessJwt = (email, _id) => {
   return new Promise((resolve, reject) => {

@@ -1,27 +1,27 @@
-import UserSchema from "./user.schema.js";
+import ClientSchema from "./client.schema.js";
 
 export const createUser = (userObj) => {
-  return UserSchema(userObj).save();
+  return ClientSchema(userObj).save();
 };
 
 export const getUserByEmail = (email) => {
-  return UserSchema.findOne({ email });
+  return ClientSchema.findOne({ email });
 };
 
 export const getUserById = (_id) => {
-  return UserSchema.findById(_id);
+  return ClientSchema.findById(_id);
 };
 
 export const getUsers = () => {
-  return UserSchema.find();
+  return ClientSchema.find();
 };
 
 export const verifyEmail = () => {
-  return UserSchema.findOne({ email });
+  return ClientSchema.findOne({ email });
 };
 
 export const storeRefreshJwt = (_id, refreshJwt) => {
-  return UserSchema.findOneAndUpdate(
+  return ClientSchema.findOneAndUpdate(
     { _id },
     {
       $set: {
@@ -34,7 +34,7 @@ export const storeRefreshJwt = (_id, refreshJwt) => {
 };
 
 export const deleteRefreshJwtByUserId = (_id) => {
-  return UserSchema.findOneAndUpdate(
+  return ClientSchema.findOneAndUpdate(
     { _id },
     {
       $set: { "refreshJWT.token": "", "refreshJWT.addedAt": Date.now() },
@@ -46,7 +46,7 @@ export const deleteRefreshJwtByUserId = (_id) => {
 };
 
 export const deleteRefreshJwtByToken = (refreshJWT) => {
-  UserSchema.findOneAndUpdate(
+  ClientSchema.findOneAndUpdate(
     { "refreshJWT.token": refreshJWT },
     {
       "refreshJWT.token": "",
@@ -57,7 +57,7 @@ export const deleteRefreshJwtByToken = (refreshJWT) => {
 };
 
 export const deleteRefreshJwtByUserEmail = (email) => {
-  return UserSchema.findOneAndUpdate(
+  return ClientSchema.findOneAndUpdate(
     { email },
     {
       $set: { "refreshJWT.token": " ", "refreshJWT.addedAt": Date.now() },
@@ -69,18 +69,18 @@ export const deleteRefreshJwtByUserEmail = (email) => {
 };
 
 export const getUserByEmailAndRefreshJWT = ({ email, refreshJwt }) => {
-  return UserSchema.findOne({
+  return ClientSchema.findOne({
     email,
     "refreshJWT.token": refreshJwt,
   });
 };
 
 export const getUserProfileByRefreshJWT = (refJwt) => {
-  return UserSchema.findOne({ "refreshJWT.token": refJwt });
+  return ClientSchema.findOne({ "refreshJWT.token": refJwt });
 };
 
 export const updateNewPassword = ({ email, hashPass }) => {
-  return UserSchema.findOneAndUpdate(
+  return ClientSchema.findOneAndUpdate(
     { email },
     {
       $set: { password: hashPass },
@@ -92,7 +92,7 @@ export const updateNewPassword = ({ email, hashPass }) => {
 };
 
 export const updatePass = ({ newPassword, email }) => {
-  return UserSchema.findOneAndUpdate(
+  return ClientSchema.findOneAndUpdate(
     { email },
     {
       $set: { password: newPassword },

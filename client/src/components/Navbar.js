@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
+import Register from "../pages/Register";
 
 const Container = styled.div`
   height: 60px;

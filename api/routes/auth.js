@@ -6,10 +6,10 @@ import {
   getUserByEmail,
   updateNewPassword,
   updatePass,
-} from "../models/user/user.model.js";
+} from "../models/client/client.model.js";
 
 import { comparePassword, hashPassword } from "../helpers/bcrypt.helper.js";
-import { createAccessJwt, createRefreshJwt } from "../helpers/jwt.helpers.js";
+import { createAccessJwt, createRefreshJwt } from "../helpers/jwt.helper.js";
 import { deleteAccessJwt } from "../models/session/session.model.js";
 import { getRandOTP } from "../helpers/otp.helpers.js";
 import {

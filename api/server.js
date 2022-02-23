@@ -12,7 +12,7 @@ import mongoose from "mongoose";
 import multer from "multer";
 import { handleError } from "./utils/errorHandler.js";
 
-const PORT = 5000;
+const PORT = 5001;
 
 //midddleware
 app.use(helmet());
@@ -36,10 +36,12 @@ const storage = multer.diskStorage({
 });
 
 // Load routers
-import userRouter from "./routes/user.route.js";
+import clientRouter from "./routes/client.route.js";
+import authRouter from "./routes/auth.js";
 
 //Use Api
-app.use("/api/v1/user", userRouter);
+app.use("/api/v1/user", clientRouter);
+app.use("/api/v1/auth", authRouter);
 
 //404 return
 app.use((req, res, next) => {

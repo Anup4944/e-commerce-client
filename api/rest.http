@@ -1,12 +1,27 @@
 ################## LOGIN / USER ####################
 
 ### REGISTER/CREATE USER
-POST http://localhost:5000/api/v1/user/register
+POST http://localhost:5001/api/v1/user/register
 Content-Type: application/json
 
 {
-  "firstName": "Anup",
-  "lastName": "Poudel",
-  "email": "ap@w.com",
+  "firstName": "Mesut",
+  "lastName": "Ozil",
+  "email": "mo@0.com",
   "password": "vangunneR@45"
 }
+
+### CLIENT LOGIN
+POST http://localhost:5001/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "firstName": "Aaron",
+  "lastName": "Ramsey",
+  "email": "ar@r.com",
+  "password": "vangunneR@45"
+}
+
+
+### GET ALL CLIENTS
+GET http://localhost:5001/api/v1/user/all
