@@ -4,7 +4,7 @@ import ProductList from "./pages/ProductList";
 import SingleProduct from "./pages/SingleProduct";
 import Cart from "./pages/Cart";
 import SignIn from "./pages/login/SignIn";
-import Register from "./pages/Register";
+import Register from "./pages/register/Register";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const App = () => {

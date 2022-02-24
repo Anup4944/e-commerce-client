@@ -24,7 +24,8 @@ router.post("/register", async (req, res) => {
     if (result?._id) {
       return res.json({
         status: "success",
-        message: "Registration Success",
+        message:
+          "You account has been successfully created, please login to continue",
         result,
       });
     }
