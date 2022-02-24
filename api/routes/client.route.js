@@ -13,11 +13,17 @@ import { hashPassword } from "../helpers/bcrypt.helper.js";
 // REGISTER/CREATE USER
 router.post("/register", async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, userName, email, password } = req.body;
 
     const hashPass = await hashPassword(password);
 
-    const newUser = { firstName, lastName, email, password: hashPass };
+    const newUser = {
+      firstName,
+      lastName,
+      userName,
+      email,
+      password: hashPass,
+    };
 
     const result = await createUser(newUser);
 

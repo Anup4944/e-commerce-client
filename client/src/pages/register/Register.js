@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../../responsive";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "./registerAction";
 
 const Container = styled.div`
@@ -49,6 +49,7 @@ const Input = styled.input`
 const Agreement = styled.span`
   font-size: 12px;
   margin: 20px 0px;
+  font-weight: bold;
 `;
 
 const Button = styled.button`
@@ -74,12 +75,21 @@ const Warning = styled.div`
 `;
 
 const List = styled.ul`
-  margin: 5px;
+  margin: 5px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const Items = styled.li`
+  margin-top: 5px;
   list-style: none;
-  color: ${(props) => (props.isLengthy ? "green" : "red")};
+  color: red;
+`;
+
+const SuccessMg = styled.span`
+  color: green;
+  margin-top: 10px;
 `;
 
 const initialState = {
@@ -104,6 +114,8 @@ const Register = () => {
   const [clientDetails, setClientDetails] = useState(initialState);
 
   const [passwordError, setPasswordError] = useState(passVerificationError);
+
+  const { status, message } = useSelector((state) => state.register);
 
   const dispatch = useDispatch();
 
@@ -142,6 +154,7 @@ const Register = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    console.log(clientDetails);
     dispatch(registerAction(clientDetails));
   };
 
@@ -149,6 +162,8 @@ const Register = () => {
     <Container>
       <Wrapper>
         <Title>Create an account</Title>
+
+        {status === "success" && <SuccessMg>{message}</SuccessMg>}
         <Form onSubmit={handleOnSubmit}>
           <Input
             placeholder="Enter your first name"
@@ -174,7 +189,6 @@ const Register = () => {
             onChange={handleOnChange}
             required
           />
-
           <Input
             placeholder="Enter your email"
             name="email"
@@ -199,24 +213,31 @@ const Register = () => {
             onChange={handleOnChange}
             required
           />
-
           <List>
-            {!passwordError.confPassword && (
+            {!passwordError.confPass && (
               <Warning>Password doesnt match</Warning>
             )}
 
-            <Items> Min 8 characters</Items>
-            <Items> At least one uppercase</Items>
-            <Items> At least one lowercase</Items>
-            <Items> At least one number</Items>
-            <Items>At least one special character i.e @ # $ %</Items>
-          </List>
+            {!passwordError.isLengthy && <Items> Min 8 characters</Items>}
 
+            {!passwordError.hasUpperCase && (
+              <Items> At least one uppercase</Items>
+            )}
+
+            {!passwordError.hasLowerCase && (
+              <Items> At least one lowercase</Items>
+            )}
+
+            {!passwordError.hasOneNumber && <Items> At least one number</Items>}
+
+            {!passwordError.hasSpecialChar && (
+              <Items>At least one special character i.e @ # $ %</Items>
+            )}
+          </List>
           <Agreement>
             By creating this account, I consent to the processing of my personal
             data in accordance with <b>PRIVACY POLICY</b>
           </Agreement>
-
           <Button>Create account</Button>
         </Form>
 

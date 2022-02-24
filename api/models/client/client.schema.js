@@ -29,12 +29,10 @@ const ClientSchema = new mongoose.Schema(
     refreshJWT: {
       token: {
         type: String,
-        require: true,
         default: "",
       },
       addedAt: {
         type: Date,
-        require: true,
         default: Date.now(),
       },
     },
