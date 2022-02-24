@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../../responsive";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginAction } from "./loginAction";
 
 const Container = styled.div`
   width: 100vw;
@@ -58,14 +60,48 @@ const linkStyle = {
   margin: "10px 0px",
 };
 
+const initialState = {
+  email: "",
+  password: "",
+};
+
 const SignIn = () => {
+  const [client, setClient] = useState(initialState);
+
+  const dispatch = useDispatch();
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+
+    setClient({
+      ...client,
+      [name]: value,
+    });
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginAction(client));
+  };
   return (
     <Container>
       <Wrapper>
         <Title>LOGIN</Title>
-        <Form>
-          <Input placeholder="Enter your username" />
-          <Input placeholder="Enter your password" />
+        <Form onSubmit={handleOnSubmit}>
+          <Input
+            placeholder="Enter your ëmail"
+            name="email"
+            type="email"
+            value={client.email}
+            onChange={handleOnChange}
+          />
+          <Input
+            placeholder="Enter your password"
+            name="password"
+            type="password"
+            value={client.password}
+            onChange={handleOnChange}
+          />
           <Button>LOGIN</Button>
           <Link style={linkStyle}>FORGOT PASSWORD</Link>
           <Link to="/register" style={linkStyle}>
