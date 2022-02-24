@@ -6,6 +6,7 @@ const initialState = {
   status: "",
   message: "",
   clients: [],
+  passUpdate: false,
 };
 const loginSlice = createSlice({
   name: "login",

@@ -54,6 +54,10 @@ const Button = styled.button`
   margin-bottom: 10px;
 `;
 
+const SuccessMg = styled.span`
+  color: red;
+  margin-top: 10px;
+`;
 const linkStyle = {
   textDecoration: "none",
   color: "inherit",
@@ -71,7 +75,7 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { isAuth } = useSelector((state) => state.login);
+  const { isAuth, status, message } = useSelector((state) => state.login);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -92,6 +96,8 @@ const SignIn = () => {
     <Container>
       <Wrapper>
         <Title>LOGIN</Title>
+        {status === "error" && <SuccessMg>{message}</SuccessMg>}
+
         <Form onSubmit={handleOnSubmit}>
           <Input
             placeholder="Enter your ëmail"
