@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../../responsive";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "./loginAction";
 
 const Container = styled.div`
@@ -69,6 +69,9 @@ const SignIn = () => {
   const [client, setClient] = useState(initialState);
 
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { isAuth } = useSelector((state) => state.login);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -82,6 +85,8 @@ const SignIn = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     dispatch(loginAction(client));
+
+    isAuth && history.push("/");
   };
   return (
     <Container>
@@ -102,7 +107,7 @@ const SignIn = () => {
             value={client.password}
             onChange={handleOnChange}
           />
-          <Button>LOGIN</Button>
+          <Button type="submit">LOGIN</Button>
           <Link style={linkStyle}>FORGOT PASSWORD</Link>
           <Link to="/register" style={linkStyle}>
             CREATE ACCOUNT

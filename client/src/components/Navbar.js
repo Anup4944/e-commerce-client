@@ -4,6 +4,8 @@ import styled from "styled-components";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutAction } from "../pages/login/loginAction";
 
 const Container = styled.div`
   height: 60px;
@@ -64,8 +66,16 @@ const Logo = styled.h1`
   font-weight: bold;
   ${mobile({ fontSize: "24px" })}
 `;
+const Name = styled.h1`
+  font-size: 15px;
+  ${mobile({ fontSize: "24px" })}
+`;
 
 const Navbar = () => {
+  const { isAuth, clients } = useSelector((state) => state.login);
+
+  const dispatch = useDispatch();
+
   return (
     <Container>
       <Wrapper>
@@ -82,12 +92,25 @@ const Navbar = () => {
           </Link>
         </Center>
         <Right>
-          <Link to="/register" className="link">
-            <MenuItem>Register </MenuItem>
-          </Link>
-          <Link to="/login" className="link">
-            <MenuItem>Sign In </MenuItem>
-          </Link>
+          {!isAuth ? (
+            <>
+              {" "}
+              <Link to="/register" className="link">
+                <MenuItem>Register </MenuItem>
+              </Link>
+              <Link to="/login" className="link">
+                <MenuItem>Sign In </MenuItem>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Name>Hello ! {clients.firstName}</Name>
+              <MenuItem onClick={() => dispatch(logoutAction())}>
+                Sign Out{" "}
+              </MenuItem>
+            </>
+          )}
+
           <MenuItem>
             <ShoppingCartOutlinedIcon />
           </MenuItem>

@@ -154,7 +154,6 @@ const Register = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(clientDetails);
     dispatch(registerAction(clientDetails));
   };
 

@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import {
+  deleteRefreshJwtByToken,
   deleteRefreshJwtByUserId,
   getUserByEmail,
   updateNewPassword,
@@ -77,7 +78,7 @@ router.put("/logout", (req, res) => {
 
     deleteAccessJwt(accessJwt);
 
-    deleteRefreshJwtByUserId(refreshJwt);
+    deleteRefreshJwtByToken(refreshJwt);
     res.send({
       status: "success",
       message: "You are logged out now!",

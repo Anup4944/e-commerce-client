@@ -16,10 +16,18 @@ POST http://localhost:5001/api/v1/auth/login
 Content-Type: application/json
 
 {
-  "firstName": "Aaron",
-  "lastName": "Ramsey",
-  "email": "ar@r.com",
+  "email": "jm@m.com",
   "password": "vangunneR@45"
+}
+
+
+### LOGOUT
+PUT http://localhost:5001/api/v1/auth/logout
+Content-Type: application/json
+
+{
+  "accessJwt" :"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImptQG0uY29tIiwiX2lkIjoiNjIxNmZhZmU2M2Q4YzI5ODNlNjVmZTY3IiwiaWF0IjoxNjQ1NzA1MTk4LCJleHAiOjE2NDc0MzMxOTh9.PwAba-3F2IsX2QoYZTUS0aTigqOAAceQ7M2StmOmjUA",
+  "refreshJwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImptQG0uY29tIiwiaWF0IjoxNjQ1NzA1MTk4LCJleHAiOjE2NDgyOTcxOTh9.kti_0E_jKJHgNsVR97JkXw0qzz5EKxkZ29JcTg5j0gk"
 }
 
 

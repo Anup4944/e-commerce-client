@@ -22,6 +22,13 @@ const loginSlice = createSlice({
       state.message = payload.message;
       state.clients = payload.user;
     },
+    logoutSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.isAuth = false;
+      state.status = payload.status;
+      state.message = payload.message;
+      state.clients = null;
+    },
     loginFail: (state, { payload }) => {
       state.isLoading = false;
       state.isAuth = false;
@@ -32,6 +39,6 @@ const loginSlice = createSlice({
 });
 
 const { reducer, actions } = loginSlice;
-export const { loginPending, loginSuccess, loginFail } = actions;
+export const { loginPending, loginSuccess, logoutSuccess, loginFail } = actions;
 
 export default reducer;
