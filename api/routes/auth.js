@@ -122,6 +122,7 @@ router.post("/otp", async (req, res) => {
     res.send({
       status: "success",
       message: `We have sent you password reset pin  on your given email ${email} .  It may take upto 5min to arrive the email. Please check your junk/spam folder if you don't see email in  your inbox.`,
+      email,
     });
   } catch (error) {
     console.log(error);
@@ -139,8 +140,6 @@ router.patch("/password", async (req, res) => {
     const { pin, email, password } = req.body;
 
     const pinInfo = await findPin({ pin, email });
-
-    console.log(pinInfo);
 
     if (pinInfo?._id) {
       const hashPass = await hashPassword(password);

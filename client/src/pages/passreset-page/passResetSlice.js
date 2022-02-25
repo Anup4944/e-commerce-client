@@ -5,6 +5,7 @@ const initialState = {
   status: "",
   message: "",
   sendOtpReq: false,
+  email: "",
 };
 const passSlice = createSlice({
   name: "passwordReset",
@@ -18,6 +19,7 @@ const passSlice = createSlice({
       state.status = payload.status;
       state.message = payload.message;
       state.sendOtpReq = true;
+      state.email = payload.email;
     },
     passResetSuccess: (state, { payload }) => {
       state.isLoading = false;

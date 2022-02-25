@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import { updatePasswordAction } from "../../pages/passreset-page/passResetAction";
 
 const MainContainer = styled.div`
   width: 100vw;
@@ -81,7 +82,7 @@ const Items = styled.li`
 `;
 
 const initialState = {
-  otp: "",
+  pin: "",
   newPassword: "",
   confPass: "",
 };
@@ -91,7 +92,11 @@ const UpdatePass = () => {
 
   const [updatePass, setUpdatePass] = useState(initialState);
 
-  const { status, message } = useSelector((state) => state.passwordReset);
+  const { status, message, email } = useSelector(
+    (state) => state.passwordReset
+  );
+
+  const dispatch = useDispatch();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -126,18 +131,26 @@ const UpdatePass = () => {
     }
   };
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const { pin, newPassword } = updatePass;
+
+    const newPassObj = { pin, password: newPassword, email };
+
+    dispatch(updatePasswordAction(newPassObj));
+  };
+
   return (
     <MainContainer>
-      <EmailForm>
+      <EmailForm onSubmit={handleOnSubmit}>
         {status === "success" && <SuccessMg>{message}</SuccessMg>}
 
         <Header>Update password</Header>
-
         <Iuput
           placeholder="Enter your 5 digit pin"
           type="number"
-          name="otp"
-          value={updatePass.otp}
+          name="pin"
+          value={updatePass.pin}
           required
           onChange={handleOnChange}
         />
@@ -176,7 +189,7 @@ const UpdatePass = () => {
             <Items>At least one special character i.e @ # $ %</Items>
           )}
         </List>
-        <Button>Update password</Button>
+        <Button type="submit">Update password</Button>
       </EmailForm>
     </MainContainer>
   );

@@ -38,6 +38,17 @@ Content-Type: application/json
   "email" : "jm@m.com"
 }
 
+### UPDATE PASSWORD
+PATCH http://localhost:5000/api/v1/auth/password
+Content-Type: application/json
+
+{
+  "pin": 67720,
+  "email": "jm@m.com",
+  "password" : "aspirinE@49"
+}
+
+
 ### GET ALL CLIENTS
 GET http://localhost:5001/api/v1/user/all
 

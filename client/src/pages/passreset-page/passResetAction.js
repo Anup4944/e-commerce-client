@@ -1,8 +1,9 @@
-import { otpApi } from "../../apiS/passResetApi";
+import { otpApi, updatePassApi } from "../../apiS/passResetApi";
 import {
   passResetPending,
   sendOtpSuccess,
   passResetFail,
+  passResetSuccess,
 } from "./passResetSlice";
 
 export const otpAction = (email) => async (dispatch) => {
@@ -20,5 +21,19 @@ export const otpAction = (email) => async (dispatch) => {
       message: error.message,
     };
     dispatch(passResetFail(err));
+  }
+};
+
+export const updatePasswordAction = (frmDt) => async (dispatch) => {
+  try {
+    dispatch(passResetPending());
+
+    const { status, message } = await updatePassApi(frmDt);
+
+    if (status === "successful") {
+      return dispatch(passResetSuccess({ status, message }));
+    }
+  } catch (error) {
+    dispatch(passResetFail(error.message));
   }
 };
