@@ -3,9 +3,9 @@ import HomePage from "./pages/HomePage";
 import ProductList from "./pages/ProductList";
 import SingleProduct from "./pages/SingleProduct";
 import Cart from "./pages/Cart";
-import SignIn from "./pages/login/SignIn";
 import Register from "./pages/register/Register";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import LoginPage from "./pages/login/LoginPage";
 
 const App = () => {
   return (
@@ -25,7 +25,7 @@ const App = () => {
           </Route>
 
           <Route exact path="/login">
-            <SignIn />
+            <LoginPage />
           </Route>
 
           <Route exact path="/cart">

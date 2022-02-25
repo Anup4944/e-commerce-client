@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { mobile } from "../../responsive";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "./loginAction";
+import { loginAction } from "../../pages/login/loginAction";
 
 const Container = styled.div`
   width: 100vw;
@@ -69,7 +69,7 @@ const initialState = {
   password: "",
 };
 
-const SignIn = () => {
+const LoginForm = () => {
   const [client, setClient] = useState(initialState);
 
   const dispatch = useDispatch();
@@ -114,7 +114,9 @@ const SignIn = () => {
             onChange={handleOnChange}
           />
           <Button type="submit">LOGIN</Button>
-          <Link style={linkStyle}>FORGOT PASSWORD</Link>
+          <Link to="/password-reset" style={linkStyle}>
+            FORGOT PASSWORD
+          </Link>
           <Link to="/register" style={linkStyle}>
             CREATE ACCOUNT
           </Link>
@@ -124,4 +126,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default LoginForm;
