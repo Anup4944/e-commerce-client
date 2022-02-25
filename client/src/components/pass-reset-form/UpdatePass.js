@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updatePasswordAction } from "../../pages/passreset-page/passResetAction";
 
@@ -81,6 +82,11 @@ const Items = styled.li`
   color: red;
 `;
 
+const ErrorMsg = styled.div`
+  color: green;
+  margin-bottom: 10px;
+`;
+
 const initialState = {
   pin: "",
   newPassword: "",
@@ -97,6 +103,7 @@ const UpdatePass = () => {
   );
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -144,6 +151,8 @@ const UpdatePass = () => {
     <MainContainer>
       <EmailForm onSubmit={handleOnSubmit}>
         {status === "success" && <SuccessMg>{message}</SuccessMg>}
+        {status === "error" && <ErrorMsg>{message}</ErrorMsg>}
+        {status === "successful" && <SuccessMg>{message}</SuccessMg>}
 
         <Header>Update password</Header>
         <Iuput

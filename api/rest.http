@@ -39,7 +39,7 @@ Content-Type: application/json
 }
 
 ### UPDATE PASSWORD
-PATCH http://localhost:5000/api/v1/auth/password
+PATCH http://localhost:5001/api/v1/auth/password
 Content-Type: application/json
 
 {
