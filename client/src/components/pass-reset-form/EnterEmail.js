@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { otpAction } from "../../pages/passreset-page/passResetAction";
 
 const MainContainer = styled.div`
   width: 100vw;
@@ -47,14 +49,50 @@ const Button = styled.button`
   margin-bottom: 10px;
 `;
 
+const SuccessMg = styled.span`
+  color: red;
+  margin-top: 10px;
+`;
+
 const EnterEmail = () => {
+  const { status, message, sendOtpReq } = useSelector(
+    (state) => state.passwordReset
+  );
+  const [email, setEmail] = useState("");
+
+  const [formSwitcher, setFormSwitcher] = useState(sendOtpReq);
+
+  const dispatch = useDispatch();
+
+  // const handleOnClick = (e) => {
+  //   e.preventDefault();
+  //   setFormSwitcher(!formSwitcher);
+  // };
+
+  const handleOnChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    dispatch(otpAction(email));
+  };
+
   return (
     <MainContainer>
-      <EmailForm>
+      <EmailForm onSubmit={handleOnSubmit}>
+        {status === "error" && <SuccessMg>{message}</SuccessMg>}
+
         <Header> Enter your email</Header>
 
-        <Email />
-        <Button>Send pin</Button>
+        <Email
+          placeholder="Enter your email"
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleOnChange}
+        />
+        <Button type="submit">Send pin</Button>
       </EmailForm>
     </MainContainer>
   );

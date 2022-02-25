@@ -5,8 +5,8 @@ import EnterEmail from "../../components/pass-reset-form/EnterEmail";
 import UpdatePass from "../../components/pass-reset-form/UpdatePass";
 
 const PassResetPage = () => {
-  const { passUpdate } = useSelector((state) => state.login);
-  return passUpdate ? <UpdatePass /> : <EnterEmail />;
+  const { sendOtpReq } = useSelector((state) => state.passwordReset);
+  return sendOtpReq ? <UpdatePass /> : <EnterEmail />;
 };
 
 export default PassResetPage;
