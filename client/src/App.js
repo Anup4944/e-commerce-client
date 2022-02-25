@@ -5,6 +5,7 @@ import SingleProduct from "./pages/SingleProduct";
 import Cart from "./pages/Cart";
 import Register from "./pages/register/Register";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import PassResetPage from "./pages/passreset-page/PassResetPage";
 import LoginPage from "./pages/login/LoginPage";
 
 const App = () => {
@@ -26,6 +27,10 @@ const App = () => {
 
           <Route exact path="/login">
             <LoginPage />
+          </Route>
+
+          <Route exact path="/password-reset">
+            <PassResetPage />
           </Route>
 
           <Route exact path="/cart">
