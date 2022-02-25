@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 
 const MainContainer = styled.div`
   width: 100vw;
@@ -29,7 +30,7 @@ const EmailForm = styled.form`
   width: 20%;
 `;
 
-const Email = styled.input`
+const Iuput = styled.input`
   min-width: 65%;
   margin: 10px 0px;
   padding: 10px;
@@ -47,14 +48,135 @@ const Button = styled.button`
   margin-bottom: 10px;
 `;
 
+const SuccessMg = styled.span`
+  color: green;
+  margin-bottom: 10px;
+`;
+
+const passVerificationError = {
+  isLengthy: false,
+  hasUpperCase: false,
+  hasLowerCase: false,
+  hasOneNumber: false,
+  hasSpecialChar: false,
+  confPassword: false,
+};
+
+const Warning = styled.div`
+  margin-top: 3px;
+  color: red;
+`;
+
+const List = styled.ul`
+  margin: 5px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const Items = styled.li`
+  margin-top: 5px;
+  list-style: none;
+  color: red;
+`;
+
+const initialState = {
+  otp: "",
+  newPassword: "",
+  confPass: "",
+};
+
 const UpdatePass = () => {
+  const [passwordError, setPasswordError] = useState(passVerificationError);
+
+  const [updatePass, setUpdatePass] = useState(initialState);
+
+  const { status, message } = useSelector((state) => state.passwordReset);
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+
+    setUpdatePass({
+      ...updatePass,
+      [name]: value,
+    });
+
+    if (name === "newPassword") {
+      const isLengthy = value.length > 8;
+      const hasUpperCase = /[A-Z]/.test(value);
+      const hasLowerCase = /[a-z]/.test(value);
+      const hasOneNumber = /[0-9]/.test(value);
+      const hasSpecialChar = /[@ ,#, $ ,%]/.test(value);
+
+      setPasswordError({
+        ...passwordError,
+        isLengthy,
+        hasUpperCase,
+        hasLowerCase,
+        hasOneNumber,
+        hasSpecialChar,
+      });
+    }
+
+    if (name === "confPass") {
+      setPasswordError({
+        ...passwordError,
+        confPass: updatePass.newPassword === value,
+      });
+    }
+  };
+
   return (
     <MainContainer>
       <EmailForm>
-        <Header>UPDATE PASS FORM</Header>
+        {status === "success" && <SuccessMg>{message}</SuccessMg>}
 
-        <Email />
-        <Button>Send pin</Button>
+        <Header>Update password</Header>
+
+        <Iuput
+          placeholder="Enter your 5 digit pin"
+          type="number"
+          name="otp"
+          value={updatePass.otp}
+          required
+          onChange={handleOnChange}
+        />
+        <Iuput
+          placeholder="Enter your new password"
+          type="password"
+          name="newPassword"
+          value={updatePass.newPassword}
+          required
+          onChange={handleOnChange}
+        />
+        <Iuput
+          placeholder="Confirm passowrd"
+          type="password"
+          name="confPass"
+          value={updatePass.confPass}
+          onChange={handleOnChange}
+          required
+        />
+        <List>
+          {!passwordError.confPass && <Warning>Password doesnt match</Warning>}
+
+          {!passwordError.isLengthy && <Items> Min 8 characters</Items>}
+
+          {!passwordError.hasUpperCase && (
+            <Items> At least one uppercase</Items>
+          )}
+
+          {!passwordError.hasLowerCase && (
+            <Items> At least one lowercase</Items>
+          )}
+
+          {!passwordError.hasOneNumber && <Items> At least one number</Items>}
+
+          {!passwordError.hasSpecialChar && (
+            <Items>At least one special character i.e @ # $ %</Items>
+          )}
+        </List>
+        <Button>Update password</Button>
       </EmailForm>
     </MainContainer>
   );

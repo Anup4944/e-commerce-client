@@ -64,11 +64,6 @@ const EnterEmail = () => {
 
   const dispatch = useDispatch();
 
-  // const handleOnClick = (e) => {
-  //   e.preventDefault();
-  //   setFormSwitcher(!formSwitcher);
-  // };
-
   const handleOnChange = (e) => {
     setEmail(e.target.value);
   };
