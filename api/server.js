@@ -38,10 +38,12 @@ const storage = multer.diskStorage({
 // Load routers
 import clientRouter from "./routes/client.route.js";
 import authRouter from "./routes/auth.js";
+import productRouter from "./routes/product.route.js";
 
 //Use Api
 app.use("/api/v1/user", clientRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/product", productRouter);
 
 //404 return
 app.use((req, res, next) => {
