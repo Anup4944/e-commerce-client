@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { popularProducts } from "../data/data";
+import { getAllProductsAction } from "../pages/product/productAction";
 import Product from "./Product";
 
 const Container = styled.div`
@@ -11,6 +13,11 @@ const Container = styled.div`
 `;
 
 const Products = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProductsAction());
+  }, [dispatch]);
   return (
     <Container>
       {popularProducts.map((item) => (
