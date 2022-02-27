@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import Newsletter from "../components/Newsletter";
-import Products from "../components/Products";
-import Announcement from "../components/Announcement";
-import Footer from "../components/Footer";
-import { mobile } from "../responsive";
+import Navbar from "../../components/Navbar";
+import Newsletter from "../../components/Newsletter";
+import Products from "../../components/Products";
+import Announcement from "../../components/Announcement";
+import Footer from "../../components/Footer";
+import { mobile } from "../../responsive";
 
 const Container = styled.div``;
 const Title = styled.div`
