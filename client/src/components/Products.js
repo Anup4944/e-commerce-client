@@ -15,12 +15,14 @@ const Container = styled.div`
 const Products = () => {
   const dispatch = useDispatch();
 
+  const { allProducts } = useSelector((state) => state.product);
+
   useEffect(() => {
     dispatch(getAllProductsAction());
   }, [dispatch]);
   return (
     <Container>
-      {popularProducts.map((item) => (
+      {allProducts.map((item) => (
         <Product item={item} key={item.id} />
       ))}
     </Container>
