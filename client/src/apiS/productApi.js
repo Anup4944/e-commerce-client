@@ -16,7 +16,6 @@ export const singleProductApi = async (_id) => {
     const { data } = await axios.get(
       `http://localhost:5001/api/v1/product/${_id}`
     );
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);

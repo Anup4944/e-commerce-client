@@ -112,9 +112,9 @@ const Button = styled.button`
 const SingleProduct = () => {
   const dispatch = useDispatch();
 
-  let { id } = useParams();
+  const { singleProduct } = useSelector((state) => state.product);
 
-  console.log(id);
+  let { id } = useParams();
 
   useEffect(() => {
     dispatch(getSingleProductsAction(id));
@@ -125,22 +125,12 @@ const SingleProduct = () => {
       <Announcement />
       <Wrapper>
         <ImageContainer>
-          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+          <Image src={singleProduct.images[0]} />
         </ImageContainer>
         <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
-          <Decs>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </Decs>
-          <Price>$50</Price>
+          <Title> {singleProduct?.title}</Title>
+          <Decs>{singleProduct.description}</Decs>
+          <Price> $ {singleProduct.price} </Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
