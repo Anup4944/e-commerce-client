@@ -120,16 +120,14 @@ const SingleProduct = () => {
 
   const [number, setNumber] = useState(1);
 
-  const qtyRef = useRef(0);
+  const qtyRef = useRef();
 
   const { singleProduct } = useSelector((state) => state.product);
 
   let { id } = useParams();
 
   const handleOnClick = () => {
-    const buyingItem = qtyRef.current.value;
-
-    console.log(qtyRef.current.value);
+    const buyingItem = number;
 
     const itemToCart = {
       buyingItem,
