@@ -33,6 +33,10 @@ const App = () => {
             <PassResetPage />
           </Route>
 
+          <Route exact path="/product/:id">
+            <SingleProduct />
+          </Route>
+
           <Route exact path="/cart">
             <Cart />
           </Route>

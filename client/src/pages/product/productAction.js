@@ -30,6 +30,8 @@ export const getSingleProductsAction = (_id) => async (dispatch) => {
 
     const result = await singleProductApi(_id);
 
+    console.log(result);
+
     result.status === "success"
       ? dispatch(getSingleProductSuccess(result))
       : dispatch(productRequestFail(result));

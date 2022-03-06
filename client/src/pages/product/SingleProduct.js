@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Newsletter from "../../components/Newsletter";
@@ -6,6 +6,9 @@ import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
 import { AddCircleOutlined, RemoveCircleOutline } from "@material-ui/icons";
 import { mobile } from "../../responsive";
+import { useSelector, useDispatch } from "react-redux";
+import { getSingleProductsAction } from "./productAction";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -107,6 +110,15 @@ const Button = styled.button`
 `;
 
 const SingleProduct = () => {
+  const dispatch = useDispatch();
+
+  let { id } = useParams();
+
+  console.log(id);
+
+  useEffect(() => {
+    dispatch(getSingleProductsAction(id));
+  }, [dispatch, id]);
   return (
     <Container>
       <Navbar />
