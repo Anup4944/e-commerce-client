@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
@@ -85,6 +85,7 @@ const AmountContainer = styled.div`
   align-items: center;
   justify-content: center;
   font: 700;
+  cursor: pointer;
 `;
 
 const Amount = styled.span`
@@ -110,8 +111,15 @@ const Button = styled.button`
   }
 `;
 
+const Info = styled.span`
+  color: red;
+`;
+
 const SingleProduct = () => {
   const dispatch = useDispatch();
+
+  const [number, setNumber] = useState(1);
+
   const qtyRef = useRef(0);
 
   const { singleProduct } = useSelector((state) => state.product);
@@ -120,6 +128,8 @@ const SingleProduct = () => {
 
   const handleOnClick = () => {
     const buyingItem = qtyRef.current.value;
+
+    console.log(qtyRef.current.value);
 
     const itemToCart = {
       buyingItem,
@@ -143,7 +153,9 @@ const SingleProduct = () => {
         <InfoContainer>
           <Title> {singleProduct?.title}</Title>
           <Decs>{singleProduct?.description}</Decs>
-          <Price> $ {singleProduct.price} </Price>
+
+          <Price> $ {singleProduct.price * number} </Price>
+
           {singleProduct?.isAvailable === true ? (
             <Title>Availabiality: Yes </Title>
           ) : (
@@ -170,9 +182,15 @@ const SingleProduct = () => {
           </FilterContainer> */}
           <AddContainer>
             <AmountContainer>
-              <RemoveCircleOutline />
-              <Amount ref={qtyRef}>1</Amount>
-              <AddCircleOutlined />
+              <RemoveCircleOutline
+                ref={qtyRef}
+                onClick={() => setNumber(number - 1)}
+              />
+              <Amount>{number}</Amount>
+              <AddCircleOutlined
+                ref={qtyRef}
+                onClick={() => setNumber(number + 1)}
+              />
             </AmountContainer>
             <Button onClick={handleOnClick}>ADD TO CART </Button>
           </AddContainer>
