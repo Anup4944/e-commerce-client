@@ -151,7 +151,6 @@ const Button = styled.button`
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
 
-  console.log(cart);
   return (
     <Container>
       <Navbar />
@@ -170,7 +169,11 @@ const Cart = () => {
           <Info>
             <Product>
               <ProductDetails>
-                <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
+                {cart.length &&
+                  cart.map((item, i) => {
+                    return <Image src={item.singleProduct.images} />;
+                  })}
+
                 <Details>
                   <ProductName>
                     <b>Product: </b>JESSI THUNDERS SHOES
