@@ -2,7 +2,7 @@ import React from "react";
 import HomePage from "./pages/HomePage";
 import ProductList from "./pages/product/ProductList";
 import SingleProduct from "./pages/product/SingleProduct";
-import Cart from "./pages/Cart";
+import Cart from "./pages/cart-page/Cart";
 import Register from "./pages/register/Register";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PassResetPage from "./pages/passreset-page/PassResetPage";

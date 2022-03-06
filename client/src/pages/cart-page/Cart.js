@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
-import Footer from "../components/Footer";
+import Navbar from "../../components/Navbar";
+import Announcement from "../../components/Announcement";
+import Footer from "../../components/Footer";
 import { Add, RemoveCircleOutline } from "@material-ui/icons";
-import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
+import { mobile } from "../../responsive";
 
 const Container = styled.div``;
 
@@ -148,6 +149,9 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const { cart } = useSelector((state) => state.cart);
+
+  console.log(cart);
   return (
     <Container>
       <Navbar />

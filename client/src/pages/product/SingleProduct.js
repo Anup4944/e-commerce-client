@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
-import Newsletter from "../../components/Newsletter";
 import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
 import { AddCircleOutlined, RemoveCircleOutline } from "@material-ui/icons";
@@ -9,6 +8,8 @@ import { mobile } from "../../responsive";
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleProductsAction } from "./productAction";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { addToCart } from "../cart-page/cartAction";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -111,10 +112,22 @@ const Button = styled.button`
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
+  const qtyRef = useRef(0);
 
   const { singleProduct } = useSelector((state) => state.product);
 
   let { id } = useParams();
+
+  const handleOnClick = () => {
+    const buyingItem = qtyRef.current.value;
+
+    const itemToCart = {
+      buyingItem,
+      singleProduct,
+    };
+
+    dispatch(addToCart(itemToCart));
+  };
 
   useEffect(() => {
     dispatch(getSingleProductsAction(id));
@@ -125,13 +138,18 @@ const SingleProduct = () => {
       <Announcement />
       <Wrapper>
         <ImageContainer>
-          <Image src={singleProduct.images[0]} />
+          <Image src={singleProduct?.images} />
         </ImageContainer>
         <InfoContainer>
           <Title> {singleProduct?.title}</Title>
-          <Decs>{singleProduct.description}</Decs>
+          <Decs>{singleProduct?.description}</Decs>
           <Price> $ {singleProduct.price} </Price>
-          <FilterContainer>
+          {singleProduct?.isAvailable === true ? (
+            <Title>Availabiality: Yes </Title>
+          ) : (
+            <Title>Out of stock</Title>
+          )}
+          {/* <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
               <FilterColor color="black" />
@@ -149,18 +167,18 @@ const SingleProduct = () => {
                 <FilterSizeOption>XS</FilterSizeOption>
               </FilterSize>
             </Filter>
-          </FilterContainer>
+          </FilterContainer> */}
           <AddContainer>
             <AmountContainer>
               <RemoveCircleOutline />
-              <Amount>1</Amount>
+              <Amount ref={qtyRef}>1</Amount>
               <AddCircleOutlined />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleOnClick}>ADD TO CART </Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-      <Newsletter />
+
       <Footer />
     </Container>
   );

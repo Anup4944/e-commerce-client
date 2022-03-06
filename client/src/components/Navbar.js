@@ -112,7 +112,9 @@ const Navbar = () => {
           )}
 
           <MenuItem>
-            <ShoppingCartOutlinedIcon />
+            <Link to="/cart">
+              <ShoppingCartOutlinedIcon />
+            </Link>
           </MenuItem>
         </Right>
       </Wrapper>
