@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
@@ -59,12 +59,14 @@ const Info = styled.div`
 
 const Product = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   ${mobile({ flexDirection: "column" })}
 `;
 const ProductDetails = styled.div`
   flex: 2;
   display: flex;
+  border: 1px solid grey;
 `;
 
 const Image = styled.img`
@@ -95,13 +97,14 @@ const PriceDetail = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
 `;
 
 const ProductAmountContainer = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 const ProductAmount = styled.div`
   font-size: 25px;
@@ -148,8 +151,18 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
+const Msg = styled.span`
+  color: tomato;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
+
+  const [number, setNumber] = useState(cart.buyingItem);
 
   return (
     <Container>
@@ -168,60 +181,41 @@ const Cart = () => {
         <Bottom>
           <Info>
             <Product>
-              <ProductDetails>
-                {cart.length &&
-                  cart.map((item, i) => {
-                    return <Image src={item.singleProduct.images} />;
-                  })}
-
-                <Details>
-                  <ProductName>
-                    <b>Product: </b>JESSI THUNDERS SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b> 261651
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetails>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2 </ProductAmount>
-                  <RemoveCircleOutline />
-                </ProductAmountContainer>
-                <ProductPrice>$</ProductPrice>
-              </PriceDetail>
+              {!cart.length && <Msg>Your cart is empty</Msg>}
+              {cart.length &&
+                cart.map((item, i) => {
+                  return (
+                    <>
+                      <ProductDetails>
+                        <Image src={item.singleProduct.images} />
+                        <Details>
+                          <ProductName>
+                            <b>Product: </b> {item.singleProduct.title}
+                          </ProductName>
+                          <ProductId>
+                            <b>ID: </b> 261651
+                          </ProductId>
+                          {/* <ProductColor color="black" />
+                          <ProductSize>
+                            <b>Size:</b> 37.5
+                          </ProductSize> */}
+                        </Details>
+                        <PriceDetail>
+                          <ProductAmountContainer>
+                            <Add onClick={() => setNumber(number + 1)} />
+                            <ProductAmount>{item.buyingItem} </ProductAmount>
+                            <RemoveCircleOutline
+                              onClick={() => setNumber(number - 1)}
+                            />
+                          </ProductAmountContainer>
+                          <ProductPrice>$</ProductPrice>
+                        </PriceDetail>
+                      </ProductDetails>
+                    </>
+                  );
+                })}
             </Product>
             <Hr />
-            <Product>
-              <ProductDetails>
-                <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product: </b>HAKURA T-SHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b> 93813718293
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetails>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2 </ProductAmount>
-                  <RemoveCircleOutline />
-                </ProductAmountContainer>
-                <ProductPrice>$</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummaryTitle>Order Summary</SummaryTitle>
