@@ -106,6 +106,7 @@ const ProductAmountContainer = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  margin: 20px 0px;
 `;
 const ProductAmount = styled.div`
   font-size: 25px;
@@ -162,6 +163,8 @@ const Msg = styled.span`
 
 const iconStyle = {
   cursor: "pointer",
+  fontSize: "30px",
+  margin: "20px 0px",
 };
 const Cart = () => {
   const dispatch = useDispatch();
@@ -221,7 +224,7 @@ const Cart = () => {
                           </ProductAmountContainer>
                           <ProductPrice>$ {finalPrice}</ProductPrice>
                           <DeleteOutline
-                            styled={iconStyle}
+                            style={iconStyle}
                             onClick={() => {
                               dispatch(removeFromCart(item.singleProduct._id));
                             }}
@@ -242,11 +245,11 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+              <SummaryItemPrice>$ 0.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+              <SummaryItemPrice>$ 0.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText type="total">Total</SummaryItemText>
