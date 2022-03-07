@@ -115,6 +115,11 @@ const Info = styled.span`
   color: red;
 `;
 
+const SuccessMg = styled.span`
+  color: green;
+  margin-top: 10px;
+`;
+
 const SingleProduct = () => {
   const dispatch = useDispatch();
 
@@ -123,6 +128,7 @@ const SingleProduct = () => {
   const qtyRef = useRef();
 
   const { singleProduct } = useSelector((state) => state.product);
+  const { message, status } = useSelector((state) => state.cart);
 
   let { id } = useParams();
 
@@ -190,6 +196,8 @@ const SingleProduct = () => {
                 onClick={() => setNumber(number + 1)}
               />
             </AmountContainer>
+
+            {status === "success" && <SuccessMg>{message}</SuccessMg>}
             <Button onClick={handleOnClick}>ADD TO CART </Button>
           </AddContainer>
         </InfoContainer>

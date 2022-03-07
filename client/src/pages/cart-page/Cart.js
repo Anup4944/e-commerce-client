@@ -3,9 +3,10 @@ import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
-import { Add, RemoveCircleOutline } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { Add, DeleteOutline, RemoveCircleOutline } from "@material-ui/icons";
+import { useSelector, useDispatch } from "react-redux";
 import { mobile } from "../../responsive";
+import { removeFromCart } from "./cartAction";
 
 const Container = styled.div``;
 
@@ -159,10 +160,18 @@ const Msg = styled.span`
   justify-content: center;
 `;
 
+const iconStyle = {
+  cursor: "pointer",
+};
 const Cart = () => {
+  const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
 
   const [number, setNumber] = useState(cart.buyingItem);
+
+  const cartTotal = cart.reduce((iniVal, row) => {
+    return iniVal + row.buyingItem * row.singleProduct.price;
+  }, 0);
 
   return (
     <Container>
@@ -184,6 +193,8 @@ const Cart = () => {
               {!cart.length && <Msg>Your cart is empty</Msg>}
               {cart.length &&
                 cart.map((item, i) => {
+                  const finalPrice = item.singleProduct.price * item.buyingItem;
+
                   return (
                     <>
                       <ProductDetails>
@@ -193,7 +204,7 @@ const Cart = () => {
                             <b>Product: </b> {item.singleProduct.title}
                           </ProductName>
                           <ProductId>
-                            <b>ID: </b> 261651
+                            <b>ID: </b> {item.singleProduct._id}
                           </ProductId>
                           {/* <ProductColor color="black" />
                           <ProductSize>
@@ -208,7 +219,13 @@ const Cart = () => {
                               onClick={() => setNumber(number - 1)}
                             />
                           </ProductAmountContainer>
-                          <ProductPrice>$</ProductPrice>
+                          <ProductPrice>$ {finalPrice}</ProductPrice>
+                          <DeleteOutline
+                            styled={iconStyle}
+                            onClick={() => {
+                              dispatch(removeFromCart(item.singleProduct._id));
+                            }}
+                          />
                         </PriceDetail>
                       </ProductDetails>
                     </>
@@ -221,7 +238,7 @@ const Cart = () => {
             <SummaryTitle>Order Summary</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {cartTotal}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -233,7 +250,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText type="total">Total</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {cartTotal}</SummaryItemPrice>
             </SummaryItem>
             <Button>Check Out Now</Button>
           </Summary>

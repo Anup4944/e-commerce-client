@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoading: false,
+  status: "",
+  message: "",
   cart: [],
 };
 
@@ -14,10 +16,12 @@ const checkOutSlice = createSlice({
     },
     addProductCartSuccess: (state, { payload }) => {
       state.cart.push(payload);
+      state.status = "success";
+      state.message = "Item added to cart";
     },
     removeProductCartSuccess: (state, { payload }) => {
       const filterCart = state.cart.filter(
-        (row) => row.currentViewList._id !== payload
+        (row) => row.singleProduct._id !== payload
       );
       state.cart = filterCart;
     },
