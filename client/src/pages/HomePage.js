@@ -15,8 +15,8 @@ const HomePage = () => {
       <Slider />
       <Categories />
       <Products />
-      <Newsletter/>
-      <Footer/>
+      <Newsletter />
+      <Footer />
     </div>
   );
 };

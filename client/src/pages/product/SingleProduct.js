@@ -152,7 +152,10 @@ const SingleProduct = () => {
       <Announcement />
       <Wrapper>
         <ImageContainer>
-          <Image src={singleProduct?.images} />
+          {singleProduct?.images?.length &&
+            singleProduct.images.map((item, i) => {
+              return <Image src={item} />;
+            })}
         </ImageContainer>
         <InfoContainer>
           <Title> {singleProduct?.title}</Title>
