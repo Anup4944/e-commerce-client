@@ -1,16 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import {
-  AddCircleOutlined,
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-  RemoveCircleOutline,
-} from "@material-ui/icons";
+import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 
 const ImageContainer = styled.div`
   flex: 1;
-  flex-wrap: wrap;
+  position: relative;
+  display: flex;
   height: 100%;
   width: 100%;
 `;
@@ -19,33 +14,48 @@ const Image = styled.img`
   width: 100%;
   height: 90vh;
   object-fit: cover;
+  border-radius: 10px;
 `;
 
-const Left = styled.div`
-  display: grid;
-  cursor: pointer;
-`;
-const Right = styled.div`
-  display: grid;
-  cursor: pointer;
-`;
+const rightStyle = {
+  position: "absolute",
+  top: "50%",
+  right: "30px",
+  cursor: "pointer",
+  zIndex: "10",
+  fontSize: "50px",
+  userSelect: "none",
+};
 
-const ImageSlider = () => {
-  const { singleProduct } = useSelector((state) => state.product);
+const leftStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "30px",
+  cursor: "pointer",
+  zIndex: "10",
+  fontSize: "50px",
+  userSelect: "none",
+};
 
+const ImageSlider = ({ currentImg, singleProduct, setCurrentImg }) => {
+  const length = singleProduct?.images?.length;
+
+  const nextSlide = () => {
+    setCurrentImg(currentImg === length - 1 ? 0 : currentImg + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrentImg(currentImg === 0 ? length - 1 : currentImg - 1);
+  };
+
+  if (!Array.isArray(singleProduct?.images) || length <= 0) {
+    return null;
+  }
   return (
     <ImageContainer>
-      {singleProduct?.images?.length &&
-        singleProduct.images.map((item, i) => {
-          return <Image src={item}></Image>;
-        })}
-      <Left>
-        <KeyboardArrowLeft />
-      </Left>
-      <Right>
-        {" "}
-        <KeyboardArrowRight />
-      </Right>
+      <KeyboardArrowLeft style={leftStyle} onClick={prevSlide} />{" "}
+      <KeyboardArrowRight style={rightStyle} onClick={nextSlide} />
+      <Image src={singleProduct?.images?.[currentImg]}></Image>
     </ImageContainer>
   );
 };

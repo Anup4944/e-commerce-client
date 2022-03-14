@@ -95,7 +95,7 @@ const SingleProduct = () => {
 
   const { singleProduct } = useSelector((state) => state.product);
 
-  const [currentImg, setCurrentImg] = useState(singleProduct?.images?.length);
+  const [currentImg, setCurrentImg] = useState(0);
 
   const qtyRef = useRef();
 
@@ -120,9 +120,12 @@ const SingleProduct = () => {
   return (
     <Container>
       <Navbar />
-      <Announcement />
       <Wrapper>
-        <ImageSlider />
+        <ImageSlider
+          currentImg={currentImg}
+          singleProduct={singleProduct}
+          setCurrentImg={setCurrentImg}
+        />
 
         <InfoContainer>
           <Title> {singleProduct?.title}</Title>
