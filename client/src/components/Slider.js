@@ -82,7 +82,7 @@ const Slider = () => {
     if (direction === "left") {
       setSliderIndex(sliderIndex > 0 ? sliderIndex - 1 : 2);
     } else {
-      setSliderIndex(sliderIndex < 2 ? sliderIndex + 1 : 0);
+      setSliderIndex(sliderIndex < 1 ? sliderIndex + 1 : 0);
     }
   };
   return (

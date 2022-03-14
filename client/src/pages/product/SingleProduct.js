@@ -3,29 +3,27 @@ import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
-import { AddCircleOutlined, RemoveCircleOutline } from "@material-ui/icons";
+import {
+  AddCircleOutlined,
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
+  RemoveCircleOutline,
+} from "@material-ui/icons";
 import { mobile } from "../../responsive";
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleProductsAction } from "./productAction";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { addToCart } from "../cart-page/cartAction";
+import ImageSlider from "../../components/iamge-slider/ImageSlider";
 
 const Container = styled.div``;
+
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
   ${mobile({ padding: "10px", flexDirection: "column" })}
 `;
-const ImageContainer = styled.div`
-  flex: 1;
-`;
-const Image = styled.img`
-  width: 100%;
-  height: 90vh;
-  object-fit: cover;
-  ${mobile({ height: "40%" })}
-`;
+
 const Title = styled.h1`
   font-weight: 200;
 `;
@@ -41,36 +39,6 @@ const Price = styled.span`
   font-weight: 100;
   font-size: 40px;
 `;
-
-const FilterContainer = styled.div`
-  width: 50%;
-  margin-top: 30px;
-  margin-right: 30px;
-  display: flex;
-  justify-content: space-between;
-  ${mobile({ width: "100%" })}
-`;
-const Filter = styled.div`
-  display: flex;
-  align-items: center; ;
-`;
-const FilterTitle = styled.span`
-  font-size: 20px;
-  font-weight: 200;
-`;
-const FilterColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  margin: 0px 5px;
-  cursor: pointer;
-`;
-const FilterSize = styled.select`
-  margin-left: 10px;
-  padding: 5px;
-`;
-const FilterSizeOption = styled.option``;
 
 const AddContainer = styled.div`
   display: flex;
@@ -125,9 +93,12 @@ const SingleProduct = () => {
 
   const [number, setNumber] = useState(1);
 
+  const { singleProduct } = useSelector((state) => state.product);
+
+  const [currentImg, setCurrentImg] = useState(singleProduct?.images?.length);
+
   const qtyRef = useRef();
 
-  const { singleProduct } = useSelector((state) => state.product);
   const { message, status } = useSelector((state) => state.cart);
 
   let { id } = useParams();
@@ -151,12 +122,8 @@ const SingleProduct = () => {
       <Navbar />
       <Announcement />
       <Wrapper>
-        <ImageContainer>
-          {singleProduct?.images?.length &&
-            singleProduct.images.map((item, i) => {
-              return <Image src={item} />;
-            })}
-        </ImageContainer>
+        <ImageSlider />
+
         <InfoContainer>
           <Title> {singleProduct?.title}</Title>
           <Decs>{singleProduct?.description}</Decs>

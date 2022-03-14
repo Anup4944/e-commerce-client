@@ -1,20 +1,13 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "https://j3u9y6m9.rocketcdn.me/wp-content/uploads/2017/01/white-tshirt-and-jeans-388x500.jpg.webp",
-    title: "SUMMER SALE",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    bg: "f5fafd",
-  },
-  {
-    id: 2,
     img: "https://i.ibb.co/DG69bQ4/2.png",
     title: "AUTUMN COLLECTION",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fcf1ed",
   },
   {
-    id: 3,
+    id: 2,
     img: "https://i.ibb.co/cXFnLLV/3.png",
     title: "LOUNGEWEAR LOVE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
