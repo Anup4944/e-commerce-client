@@ -3,12 +3,7 @@ import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
-import {
-  AddCircleOutlined,
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-  RemoveCircleOutline,
-} from "@material-ui/icons";
+import { AddCircleOutlined, RemoveCircleOutline } from "@material-ui/icons";
 import { mobile } from "../../responsive";
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleProductsAction } from "./productAction";
@@ -138,25 +133,7 @@ const SingleProduct = () => {
           ) : (
             <Title>Out of stock</Title>
           )}
-          {/* <FilterContainer>
-            <Filter>
-              <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="grey" />
-            </Filter>
-            <Filter>
-              <FilterTitle>Size</FilterTitle>
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
-                <FilterSizeOption>XS</FilterSizeOption>
-              </FilterSize>
-            </Filter>
-          </FilterContainer> */}
+
           <AddContainer>
             <AmountContainer>
               <RemoveCircleOutline

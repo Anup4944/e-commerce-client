@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
@@ -166,11 +166,11 @@ const iconStyle = {
   fontSize: "30px",
   margin: "20px 0px",
 };
+
 const Cart = () => {
   const dispatch = useDispatch();
-  const { cart } = useSelector((state) => state.cart);
 
-  const [number, setNumber] = useState(cart.buyingItem);
+  const { cart } = useSelector((state) => state.cart);
 
   const cartTotal = cart.reduce((iniVal, row) => {
     return iniVal + row.buyingItem * row.singleProduct.price;
@@ -201,7 +201,7 @@ const Cart = () => {
                   return (
                     <>
                       <ProductDetails>
-                        <Image src={item.singleProduct.images} />
+                        <Image src={item.singleProduct.images[0]} />
                         <Details>
                           <ProductName>
                             <b>Product: </b> {item.singleProduct.title}
@@ -209,17 +209,13 @@ const Cart = () => {
                           <ProductId>
                             <b>ID: </b> {item.singleProduct._id}
                           </ProductId>
-                          {/* <ProductColor color="black" />
-                          <ProductSize>
-                            <b>Size:</b> 37.5
-                          </ProductSize> */}
                         </Details>
                         <PriceDetail>
                           <ProductAmountContainer>
-                            <Add onClick={() => setNumber(number + 1)} />
+                            <Add onClick={() => item.buyingItem + 1} />
                             <ProductAmount>{item.buyingItem} </ProductAmount>
                             <RemoveCircleOutline
-                              onClick={() => setNumber(number - 1)}
+                              onClick={() => item.buyingItem - 1}
                             />
                           </ProductAmountContainer>
                           <ProductPrice>$ {finalPrice}</ProductPrice>
