@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getAllProducts,
+  getAllProductsByCategory,
   getProductById,
 } from "../models/product/product.model.js";
 const router = express.Router();
@@ -8,7 +9,13 @@ const router = express.Router();
 // GET ALL PRODUCTS
 router.get("/", async (req, res) => {
   try {
-    const allProducts = await getAllProducts();
+    let allProducts;
+
+    const categoryName = req.query.category;
+
+    categoryName
+      ? (allProducts = await getAllProductsByCategory(categoryName))
+      : (allProducts = await getAllProducts());
 
     res.send({
       status: "success",

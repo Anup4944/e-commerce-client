@@ -56,7 +56,7 @@ GET http://localhost:5001/api/v1/user/all
 ################## PRODUCTS ####################
 
 ### GET ALL PRODUCTS
-GET http://localhost:5001/api/v1/product
+GET http://localhost:5001/api/v1/product?category=Household
 
 ### GET PRODUCT BY ID
 GET http://localhost:5001/api/v1/product/621ee3d7f2963f611f471271

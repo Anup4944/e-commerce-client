@@ -23,6 +23,18 @@ export const getAllProducts = () => {
   });
 };
 
+export const getAllProductsByCategory = (categories) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await ProductSchema.find({ categories });
+
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 export const getProductById = (_id) => {
   return new Promise(async (resolve, reject) => {
     try {
