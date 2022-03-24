@@ -2,9 +2,13 @@ import mongoose from "mongoose";
 
 const CategorySchema = new mongoose.Schema(
   {
-    name: {
+    newCategory: {
       type: String,
-      required: true,
+      unique: true,
+    },
+    parentCategory: {
+      type: mongoose.Schema.ObjectId,
+      required: false,
     },
   },
   { timestamps: true }

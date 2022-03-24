@@ -26,24 +26,17 @@ mongoose
   .then(console.log("Database connection successful"))
   .catch((err) => console.log(err));
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, req.body.name);
-  },
-});
-
 // Load routers
 import clientRouter from "./routes/client.route.js";
 import authRouter from "./routes/auth.js";
 import productRouter from "./routes/product.route.js";
+import categoryRouter from "./routes/categeory.route.js";
 
 //Use Api
 app.use("/api/v1/user", clientRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/product", productRouter);
+app.use("/api/v1/category", categoryRouter);
 
 //404 return
 app.use((req, res, next) => {
