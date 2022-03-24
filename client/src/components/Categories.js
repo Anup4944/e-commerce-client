@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { categories } from "../data/data";
+import { categoriesItem } from "../data/data";
 import CategoryItem from "./CategoryItem";
 import { mobile } from "../responsive";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,12 +16,17 @@ const Container = styled.div`
 const Categories = () => {
   const dispatch = useDispatch();
 
+  const { categories } = useSelector((state) => state.category);
+
+  const parentCat =
+    categories.length && categories.filter((item) => !item.parentCategory);
+
   useEffect(() => {
     dispatch(getAllCategoriesAction());
-  });
+  }, [dispatch]);
   return (
     <Container>
-      {categories.map((item) => {
+      {categoriesItem.map((item) => {
         return <CategoryItem item={item} key={item.id} />;
       })}{" "}
     </Container>

@@ -5,11 +5,11 @@ const router = express.Router();
 // GET ALL CATEGORY
 router.get("/", async (req, res) => {
   try {
-    const allCatgeories = await getAllCategory();
+    const allCategories = await getAllCategory();
     res.send({
       status: "success",
       message: "Here are all categories",
-      allCatgeories,
+      allCategories,
     });
   } catch (error) {
     throw error;

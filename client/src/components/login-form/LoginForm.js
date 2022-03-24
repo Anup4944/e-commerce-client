@@ -105,6 +105,7 @@ const LoginForm = () => {
             type="email"
             value={client.email}
             onChange={handleOnChange}
+            required
           />
           <Input
             placeholder="Enter your password"
@@ -112,6 +113,7 @@ const LoginForm = () => {
             type="password"
             value={client.password}
             onChange={handleOnChange}
+            required
           />
           <Button type="submit">LOGIN</Button>
           <Link to="/password-reset" style={linkStyle}>
