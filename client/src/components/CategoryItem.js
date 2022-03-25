@@ -10,7 +10,12 @@ const Main = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+
+  background-color: #d9afd9;
+  background-image: linear-gradient(0deg, #d9afd9 0%, #97d9e1 100%);
+  background-color: #d9afd9;
+  /* background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%); */
+
   object-fit: cover;
   ${mobile({ height: "20vh" })}
 `;
@@ -26,9 +31,9 @@ const Info = styled.div`
   justify-content: center;
 `;
 const Tilte = styled.h1`
-  color: white;
+  color: black;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 20px;
 `;
 const Button = styled.button`

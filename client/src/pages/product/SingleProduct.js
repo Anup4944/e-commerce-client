@@ -21,6 +21,12 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   font-weight: 200;
+  margin-top: 20px;
+`;
+const Warning = styled.h1`
+  font-weight: 200;
+  margin-top: 20px;
+  color: tomato;
 `;
 const Decs = styled.p`
   margin: 20px 0px;
@@ -131,25 +137,27 @@ const SingleProduct = () => {
           {singleProduct?.isAvailable === true ? (
             <Title>Availabiality: Yes </Title>
           ) : (
-            <Title>Out of stock</Title>
+            <Warning>Out of stock</Warning>
           )}
 
-          <AddContainer>
-            <AmountContainer>
-              <RemoveCircleOutline
-                ref={qtyRef}
-                onClick={() => setNumber(number - 1)}
-              />
-              <Amount>{number}</Amount>
-              <AddCircleOutlined
-                ref={qtyRef}
-                onClick={() => setNumber(number + 1)}
-              />
-            </AmountContainer>
+          {singleProduct?.isAvailable === true ? (
+            <AddContainer>
+              <AmountContainer>
+                <RemoveCircleOutline
+                  ref={qtyRef}
+                  onClick={() => setNumber(number - 1)}
+                />
+                <Amount>{number}</Amount>
+                <AddCircleOutlined
+                  ref={qtyRef}
+                  onClick={() => setNumber(number + 1)}
+                />
+              </AmountContainer>
 
-            {status === "success" && <SuccessMg>{message}</SuccessMg>}
-            <Button onClick={handleOnClick}>ADD TO CART </Button>
-          </AddContainer>
+              {status === "success" && <SuccessMg>{message}</SuccessMg>}
+              <Button onClick={handleOnClick}>ADD TO CART </Button>
+            </AddContainer>
+          ) : null}
         </InfoContainer>
       </Wrapper>
 
