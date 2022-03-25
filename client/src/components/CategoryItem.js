@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
-const Container = styled.div`
+const Main = styled.div`
   flex: 1;
   margin: 3px;
   position: relative;
@@ -10,6 +10,7 @@ const Container = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   object-fit: cover;
   ${mobile({ height: "20vh" })}
 `;
@@ -26,6 +27,8 @@ const Info = styled.div`
 `;
 const Tilte = styled.h1`
   color: white;
+  font-size: 20px;
+  font-weight: 500;
   margin-bottom: 20px;
 `;
 const Button = styled.button`
@@ -39,13 +42,13 @@ const Button = styled.button`
 
 const CategoryItem = ({ item }) => {
   return (
-    <Container>
+    <Main>
       <Image src={item.img} />
       <Info>
         <Tilte>{item.title}</Tilte>
         <Button>SHOW NOW</Button>
       </Info>
-    </Container>
+    </Main>
   );
 };
 

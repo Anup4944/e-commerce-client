@@ -7,10 +7,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllCategoriesAction } from "../pages/categories-page/categoryAction";
 
 const Container = styled.div`
-  display: flex;
   padding: 20px;
-  justify-content: space-between;
-  ${mobile({ padding: "0px", flexDirection: "column" })}
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  grid-auto-rows: 350px;
+  ${mobile({ padding: "0px", display: "flex", flexDirection: "column" })}
 `;
 
 const Categories = () => {

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { popularProducts } from "../data/data";
 import { getAllProductsAction } from "../pages/product/productAction";
 import Product from "./Product";
 
