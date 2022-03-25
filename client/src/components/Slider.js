@@ -89,7 +89,7 @@ const Slider = () => {
   const dispatch = useDispatch();
 
   const productOnSale = allProducts.filter((item) => item.onSale === true);
-  console.log(productOnSale);
+  console.log("Slider index", sliderIndex);
 
   useEffect(() => {
     dispatch(getAllProductsAction());
@@ -97,11 +97,15 @@ const Slider = () => {
 
   const handleOnClick = (direction) => {
     if (direction === "left") {
-      setSliderIndex(sliderIndex > 0 ? sliderIndex - 1 : productOnSale.length);
-      console.log(sliderIndex);
+      setSliderIndex(
+        sliderIndex === 0 ? productOnSale.length - 1 : sliderIndex - 1
+      );
+      console.log("On left click", sliderIndex);
     } else {
-      setSliderIndex(sliderIndex < productOnSale.length && sliderIndex + 1);
-      console.log(sliderIndex);
+      setSliderIndex(
+        sliderIndex === productOnSale.length - 1 ? 0 : sliderIndex + 1
+      );
+      console.log("On right click", sliderIndex);
     }
   };
   return (
