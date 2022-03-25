@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ArrowBackIosOutlinedIcon from "@material-ui/icons/ArrowBackIosOutlined";
 import ArrowForwardIosOutlinedIcon from "@material-ui/icons/ArrowForwardIosOutlined";
 import { sliderItems } from "../data/data";
 import { mobile } from "../responsive";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllProductsAction } from "../pages/product/productAction";
 
 const Container = styled.div`
   width: 100%;
@@ -45,11 +47,14 @@ const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #${(props) => props.bg};
+  /* background-color: #${(props) => props.bg}; */
 `;
 const ImageContainer = styled.div`
   flex: 1;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Image = styled.img`
@@ -78,11 +83,25 @@ const Button = styled.button`
 
 const Slider = () => {
   const [sliderIndex, setSliderIndex] = useState(0);
+
+  const { allProducts } = useSelector((state) => state.product);
+
+  const dispatch = useDispatch();
+
+  const productOnSale = allProducts.filter((item) => item.onSale === true);
+  console.log(productOnSale);
+
+  useEffect(() => {
+    dispatch(getAllProductsAction());
+  }, [dispatch]);
+
   const handleOnClick = (direction) => {
     if (direction === "left") {
-      setSliderIndex(sliderIndex > 0 ? sliderIndex - 1 : 2);
+      setSliderIndex(sliderIndex > 0 ? sliderIndex - 1 : productOnSale.length);
+      console.log(sliderIndex);
     } else {
-      setSliderIndex(sliderIndex < 1 ? sliderIndex + 1 : 0);
+      setSliderIndex(sliderIndex < productOnSale.length && sliderIndex + 1);
+      console.log(sliderIndex);
     }
   };
   return (
@@ -91,15 +110,15 @@ const Slider = () => {
         <ArrowBackIosOutlinedIcon />
       </Arrow>
       <Wrapper sliderIndex={sliderIndex}>
-        {sliderItems.map((item) => {
+        {productOnSale.map((item) => {
           return (
-            <Slide bg={item.bg} key={item.id}>
+            <Slide key={item._id}>
               <ImageContainer>
-                <Image src={item.img} />
+                <Image src={item.images[0]} />
               </ImageContainer>
               <InfoContainer>
                 <Title>{item.title}</Title>
-                <Description>{item.desc}</Description>
+                <Description>{item.description}</Description>
                 <Button>BUY NOW</Button>
               </InfoContainer>
             </Slide>
