@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import ArrowBackIosOutlinedIcon from "@material-ui/icons/ArrowBackIosOutlined";
 import ArrowForwardIosOutlinedIcon from "@material-ui/icons/ArrowForwardIosOutlined";
 import { sliderItems } from "../data/data";
@@ -68,15 +68,62 @@ const InfoContainer = styled.div`
 const Title = styled.h1`
   font-size: 40px;
 `;
+
 const Description = styled.p`
   margin: 50px 0px;
   font-size: 16px;
   font-weight: 300;
   letter-spacing: 3px;
 `;
+
+const Price = styled.h3`
+  font-size: 40px;
+  color: green;
+`;
+
+const Sale = styled.h3`
+  font-size: 30px;
+  color: red;
+  position: relative;
+  width: 100px;
+  height: 90px;
+`;
+
+const heartBeat = keyframes`
+  0%
+  {
+    transform: scale( .75 );
+  }
+  20%
+  {
+    transform: scale( 1.1 );
+  }
+  40%
+  {
+    transform: scale( .75 );
+  }
+  60%
+  {
+    transform: scale( 1.1 );
+  }
+  80%
+  {
+    transform: scale( .75 );
+  }
+  100%
+  {
+    transform: scale( .75 );
+  }
+`;
+
+const AnimatedSale = styled(Sale)`
+  animation: ${heartBeat} 2s infinite;
+`;
+
 const Button = styled.button`
   padding: 10px;
   font-size: 20px;
+  margin-top: 20px;
   background-color: transparent;
   cursor: pointer;
 `;
@@ -89,7 +136,6 @@ const Slider = () => {
   const dispatch = useDispatch();
 
   const productOnSale = allProducts.filter((item) => item.onSale === true);
-  console.log("Slider index", sliderIndex);
 
   useEffect(() => {
     dispatch(getAllProductsAction());
@@ -100,12 +146,10 @@ const Slider = () => {
       setSliderIndex(
         sliderIndex === 0 ? productOnSale.length - 1 : sliderIndex - 1
       );
-      console.log("On left click", sliderIndex);
     } else {
       setSliderIndex(
         sliderIndex === productOnSale.length - 1 ? 0 : sliderIndex + 1
       );
-      console.log("On right click", sliderIndex);
     }
   };
   return (
@@ -115,17 +159,28 @@ const Slider = () => {
       </Arrow>
       <Wrapper sliderIndex={sliderIndex}>
         {productOnSale.map((item) => {
+          const savedAmount = item.price - item.salePrice;
+
+          const savePercentage = (savedAmount / item.price) * 100;
+
           return (
-            <Slide key={item._id}>
-              <ImageContainer>
-                <Image src={item.images[0]} />
-              </ImageContainer>
-              <InfoContainer>
-                <Title>{item.title}</Title>
-                <Description>{item.description}</Description>
-                <Button>BUY NOW</Button>
-              </InfoContainer>
-            </Slide>
+            <>
+              <Slide key={item._id}>
+                <ImageContainer>
+                  <Image src={item.images[0]} />
+                </ImageContainer>
+                <InfoContainer>
+                  <AnimatedSale>🔴{savePercentage}% OFF</AnimatedSale>
+                  <Title>{item.title}</Title>
+                  <Description>{item.description}</Description>
+
+                  <Price> Sale Price ${item.salePrice}</Price>
+                  <Price> You save ${savedAmount}</Price>
+
+                  <Button>BUY NOW</Button>
+                </InfoContainer>
+              </Slide>
+            </>
           );
         })}
       </Wrapper>
