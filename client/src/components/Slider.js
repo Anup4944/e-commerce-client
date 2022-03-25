@@ -169,8 +169,10 @@ const Slider = () => {
                 <ImageContainer>
                   <Image src={item.images[0]} />
                 </ImageContainer>
+
                 <InfoContainer>
-                  <AnimatedSale>🔴{savePercentage}% OFF</AnimatedSale>
+                  <AnimatedSale>🔴{savePercentage}% OFF </AnimatedSale>
+                  <Price> Sale End before ${item.saleEndDate}</Price>
                   <Title>{item.title}</Title>
                   <Description>{item.description}</Description>
 
