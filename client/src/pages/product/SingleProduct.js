@@ -98,12 +98,15 @@ const SingleProduct = () => {
   const { isAuth } = useSelector((state) => state.login);
 
   const [currentImg, setCurrentImg] = useState(0);
+  let { id } = useParams();
 
   const qtyRef = useRef();
 
   const { message, status, cart } = useSelector((state) => state.cart);
 
-  let { id } = useParams();
+  const cartId = cart.map((item) => item._id);
+
+  const found = cartId.find((item) => item === id);
 
   const handleOnClick = () => {
     const buyingItem = number;
@@ -163,7 +166,7 @@ const SingleProduct = () => {
                 />
               </AmountContainer>
 
-              {id === singleProduct._id && status === "success" ? (
+              {found === singleProduct._id && status === "success" ? (
                 <SuccessMg>{message}</SuccessMg>
               ) : null}
               <Button onClick={handleOnClick}>ADD TO CART </Button>
