@@ -20,9 +20,7 @@ const checkOutSlice = createSlice({
       state.message = "Item added to cart";
     },
     removeProductCartSuccess: (state, { payload }) => {
-      const filterCart = state.cart.filter(
-        (row) => row.singleProduct._id !== payload
-      );
+      const filterCart = state.cart.filter((row) => row._id !== payload);
       state.cart = filterCart;
       state.status = null;
       state.message = null;

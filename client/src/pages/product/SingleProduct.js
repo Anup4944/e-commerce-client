@@ -103,12 +103,6 @@ const SingleProduct = () => {
 
   const { message, status, cart } = useSelector((state) => state.cart);
 
-  // const singleCartId = cart.filter(
-  //   (cartId) => cartId["_id"] === singleProduct._id
-  // );
-
-  // console.log(singleCartId);
-
   let { id } = useParams();
 
   const handleOnClick = () => {
@@ -116,14 +110,14 @@ const SingleProduct = () => {
 
     const itemToCart = {
       buyingItem,
-      singleProduct,
+      ...singleProduct,
     };
 
-    if (isAuth) {
-      dispatch(addToCart(itemToCart));
-    } else {
-      alert("You must login to continue. ");
-    }
+    // if (isAuth) {
+    dispatch(addToCart(itemToCart));
+    // } else {
+    //   alert("You must login to continue. ");
+    // }
   };
 
   useEffect(() => {
@@ -169,7 +163,9 @@ const SingleProduct = () => {
                 />
               </AmountContainer>
 
-              {status === "success" && <SuccessMg>{message}</SuccessMg>}
+              {id === singleProduct._id && status === "success" ? (
+                <SuccessMg>{message}</SuccessMg>
+              ) : null}
               <Button onClick={handleOnClick}>ADD TO CART </Button>
             </AddContainer>
           ) : null}

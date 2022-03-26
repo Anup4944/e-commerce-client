@@ -168,15 +168,16 @@ const iconStyle = {
 };
 
 const Cart = () => {
+  const [number, setNumber] = useState(0);
   const dispatch = useDispatch();
 
   const { cart } = useSelector((state) => state.cart);
 
   const cartTotal = cart.reduce((iniVal, row) => {
-    if (row.singleProduct.onSale === true) {
-      return iniVal + row.buyingItem * row.singleProduct.salePrice;
+    if (row.onSale === true) {
+      return iniVal + row.buyingItem * row.salePrice;
     } else {
-      return iniVal + row.buyingItem * row.singleProduct.price;
+      return iniVal + row.buyingItem * row.price;
     }
   }, 0);
 
@@ -200,20 +201,20 @@ const Cart = () => {
               {!cart.length && <Msg>Your cart is empty</Msg>}
               {cart.length &&
                 cart.map((item, i) => {
-                  const finalPrice = item.singleProduct.onSale
-                    ? item.singleProduct.salePrice * item.buyingItem
-                    : item.singleProduct.price * item.buyingItem;
-
+                  const finalPrice = item.onSale
+                    ? item.salePrice * item.buyingItem
+                    : item.price * item.buyingItem;
+                  // if array consist of
                   return (
                     <>
                       <ProductDetails>
-                        <Image src={item.singleProduct.images[0]} />
+                        <Image src={item.images[0]} />
                         <Details>
                           <ProductName>
-                            <b>Product: </b> {item.singleProduct.title}
+                            <b>Product: </b> {item.title}
                           </ProductName>
                           <ProductId>
-                            <b>ID: </b> {item.singleProduct._id}
+                            <b>ID: </b> {item._id}
                           </ProductId>
                         </Details>
                         <PriceDetail>
@@ -228,7 +229,7 @@ const Cart = () => {
                           <DeleteOutline
                             style={iconStyle}
                             onClick={() => {
-                              dispatch(removeFromCart(item.singleProduct._id));
+                              dispatch(removeFromCart(item._id));
                             }}
                           />
                         </PriceDetail>
