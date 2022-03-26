@@ -29,7 +29,6 @@ export const getAllProductsAction = () => async (dispatch) => {
 };
 
 export const getAllProductsByCategoryAction = (search) => async (dispatch) => {
-  console.log(search);
   try {
     dispatch(productRequestPending());
 

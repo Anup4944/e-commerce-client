@@ -164,8 +164,6 @@ const Slider = () => {
   const productOnSale = allProducts.filter((item) => item.onSale === true);
   const productNotSale = allProducts.filter((item) => item.onSale === !true);
 
-  console.log(productNotSale);
-
   useEffect(() => {
     dispatch(getAllProductsAction());
   }, [dispatch]);
@@ -173,21 +171,30 @@ const Slider = () => {
   const handleOnClick = (direction) => {
     if (direction === "left") {
       setSliderIndex(
-        sliderIndex === 0 ? productOnSale.length - 1 : sliderIndex - 1
+        sliderIndex === 0
+          ? (productOnSale.length
+              ? productOnSale.length
+              : productNotSale.length) - 1
+          : sliderIndex - 1
       );
     } else {
       setSliderIndex(
-        sliderIndex === productOnSale.length - 1 ? 0 : sliderIndex + 1
+        sliderIndex ===
+          (productOnSale.length
+            ? productOnSale.length
+            : productNotSale.length) -
+            1
+          ? 0
+          : sliderIndex + 1
       );
     }
   };
   return (
     <Container>
-      {productOnSale.length && (
-        <Arrow direction="left" onClick={() => handleOnClick("left")}>
-          <ArrowBackIosOutlinedIcon />
-        </Arrow>
-      )}
+      <Arrow direction="left" onClick={() => handleOnClick("left")}>
+        <ArrowBackIosOutlinedIcon />
+      </Arrow>
+
       {productOnSale.length ? (
         <Wrapper sliderIndex={sliderIndex}>
           {productOnSale.map((item) => {
@@ -252,11 +259,9 @@ const Slider = () => {
         </Wrapper>
       )}
 
-      {productOnSale.length && (
-        <Arrow direction="right" onClick={() => handleOnClick("right")}>
-          <ArrowForwardIosOutlinedIcon />
-        </Arrow>
-      )}
+      <Arrow direction="right" onClick={() => handleOnClick("right")}>
+        <ArrowForwardIosOutlinedIcon />
+      </Arrow>
     </Container>
   );
 };

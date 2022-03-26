@@ -52,8 +52,6 @@ const Button = styled(Link)`
 const CategoryItem = ({ item, search }) => {
   const dispatch = useDispatch();
 
-  console.log(search);
-
   const handleOnClick = () => {
     dispatch(getAllProductsByCategoryAction(search));
   };

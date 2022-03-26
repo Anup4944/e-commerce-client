@@ -22,10 +22,9 @@ export const singleProductApi = async (_id) => {
   }
 };
 export const singleProductByCategoryApi = async (search) => {
-  console.log(search);
   try {
     const { data } = await axios.get(prodUrl + `/${search}`);
-    console.log(data);
+
     return data;
   } catch (error) {
     console.log(error);
