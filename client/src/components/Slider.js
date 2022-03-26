@@ -59,6 +59,7 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
   height: 80%;
+  width: 80%;
 `;
 const InfoContainer = styled.div`
   flex: 1;
@@ -161,6 +162,9 @@ const Slider = () => {
   const dispatch = useDispatch();
 
   const productOnSale = allProducts.filter((item) => item.onSale === true);
+  const productNotSale = allProducts.filter((item) => item.onSale === !true);
+
+  console.log(productNotSale);
 
   useEffect(() => {
     dispatch(getAllProductsAction());
@@ -179,48 +183,80 @@ const Slider = () => {
   };
   return (
     <Container>
-      <Arrow direction="left" onClick={() => handleOnClick("left")}>
-        <ArrowBackIosOutlinedIcon />
-      </Arrow>
-      <Wrapper sliderIndex={sliderIndex}>
-        {productOnSale.map((item) => {
-          const savedAmount = item.price - item.salePrice;
+      {productOnSale.length && (
+        <Arrow direction="left" onClick={() => handleOnClick("left")}>
+          <ArrowBackIosOutlinedIcon />
+        </Arrow>
+      )}
+      {productOnSale.length ? (
+        <Wrapper sliderIndex={sliderIndex}>
+          {productOnSale.map((item) => {
+            const savedAmount = item.price - item.salePrice;
 
-          const savePercentage = (savedAmount / item.price) * 100;
+            const savePercentage = (savedAmount / item.price) * 100;
 
-          return (
-            <>
-              <Slide key={item._id}>
-                <ImageContainer>
-                  <Image src={item.images[0]} />
-                </ImageContainer>
+            return (
+              <>
+                <Slide key={item._id}>
+                  <ImageContainer>
+                    <Image src={item.images[0]} />
+                  </ImageContainer>
 
-                <InfoContainer>
-                  <>
-                    <AnimatedSale>
-                      🔴{savePercentage.toFixed(2)}% OFF{" "}
-                    </AnimatedSale>
-                    <Price>
-                      {" "}
-                      Sale End before {new Date(item.saleEndDate).toString()}
-                    </Price>
-                    <Title>{item.title}</Title>
-                    <Description>{item.description}</Description>
+                  <InfoContainer>
+                    <>
+                      <AnimatedSale>
+                        🔴{savePercentage.toFixed(2)}% OFF{" "}
+                      </AnimatedSale>
+                      <Price>
+                        {" "}
+                        Sale End before {new Date(item.saleEndDate).toString()}
+                      </Price>
+                      <Title>{item.title}</Title>
+                      <Description>{item.description}</Description>
 
-                    <ViewMore to={`/product/${item._id}`}>View more</ViewMore>
+                      <ViewMore to={`/product/${item._id}`}>View more</ViewMore>
 
-                    <SalePrice> Sale price ${item.salePrice}</SalePrice>
-                    <SavedAmount> You save ${savedAmount}</SavedAmount>
-                  </>
-                </InfoContainer>
-              </Slide>
-            </>
-          );
-        })}
-      </Wrapper>
-      <Arrow direction="right" onClick={() => handleOnClick("right")}>
-        <ArrowForwardIosOutlinedIcon />
-      </Arrow>
+                      <SalePrice> Sale price ${item.salePrice}</SalePrice>
+                      <SavedAmount> You save ${savedAmount}</SavedAmount>
+                    </>
+                  </InfoContainer>
+                </Slide>
+              </>
+            );
+          })}
+        </Wrapper>
+      ) : (
+        <Wrapper sliderIndex={sliderIndex}>
+          {productNotSale.map((item) => {
+            return (
+              <>
+                <Slide key={item._id}>
+                  <ImageContainer>
+                    <Image src={item.images[0]} />
+                  </ImageContainer>
+
+                  <InfoContainer>
+                    <>
+                      <Title>{item.title}</Title>
+                      <Description>{item.description}</Description>
+
+                      <ViewMore to={`/product/${item._id}`}>View more</ViewMore>
+
+                      <SalePrice> Price ${item.price}</SalePrice>
+                    </>
+                  </InfoContainer>
+                </Slide>
+              </>
+            );
+          })}
+        </Wrapper>
+      )}
+
+      {productOnSale.length && (
+        <Arrow direction="right" onClick={() => handleOnClick("right")}>
+          <ArrowForwardIosOutlinedIcon />
+        </Arrow>
+      )}
     </Container>
   );
 };

@@ -19,11 +19,8 @@ const Container = styled.div`
 const Categories = () => {
   const { search } = useLocation();
 
-  const dispatch = useDispatch();
-
   const { categories } = useSelector((state) => state.category);
 
-  console.log(search);
   const parentCat =
     categories?.length && categories.filter((item) => !item.parentCategory);
 
