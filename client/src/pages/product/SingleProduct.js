@@ -132,7 +132,11 @@ const SingleProduct = () => {
           <Title> {singleProduct?.title}</Title>
           <Decs>{singleProduct?.description}</Decs>
 
-          <Price> $ {singleProduct.price * number} </Price>
+          {singleProduct.onSale ? (
+            <Price> $ {singleProduct.salePrice * number} </Price>
+          ) : (
+            <Price> $ {singleProduct.price * number} </Price>
+          )}
 
           {singleProduct?.isAvailable === true ? (
             <Title>Availabiality: Yes </Title>

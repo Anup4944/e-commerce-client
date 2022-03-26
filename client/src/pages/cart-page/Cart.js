@@ -173,7 +173,11 @@ const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
 
   const cartTotal = cart.reduce((iniVal, row) => {
-    return iniVal + row.buyingItem * row.singleProduct.price;
+    if (row.singleProduct.onSale === true) {
+      return iniVal + row.buyingItem * row.singleProduct.salePrice;
+    } else {
+      return iniVal + row.buyingItem * row.singleProduct.price;
+    }
   }, 0);
 
   return (
@@ -196,7 +200,9 @@ const Cart = () => {
               {!cart.length && <Msg>Your cart is empty</Msg>}
               {cart.length &&
                 cart.map((item, i) => {
-                  const finalPrice = item.singleProduct.price * item.buyingItem;
+                  const finalPrice = item.singleProduct.onSale
+                    ? item.singleProduct.salePrice * item.buyingItem
+                    : item.singleProduct.price * item.buyingItem;
 
                   return (
                     <>

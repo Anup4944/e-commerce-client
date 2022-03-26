@@ -77,10 +77,16 @@ const Description = styled.p`
 `;
 
 const Price = styled.h3`
-  font-size: 40px;
+  font-size: 20px;
   color: green;
 `;
 
+const SavedAmount = styled.h3`
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  color: green;
+`;
 const Sale = styled.h3`
   font-size: 30px;
   color: red;
@@ -171,13 +177,18 @@ const Slider = () => {
                 </ImageContainer>
 
                 <InfoContainer>
-                  <AnimatedSale>🔴{savePercentage}% OFF </AnimatedSale>
-                  <Price> Sale End before ${item.saleEndDate}</Price>
+                  <AnimatedSale>
+                    🔴{savePercentage.toFixed(2)}% OFF{" "}
+                  </AnimatedSale>
+                  <Price>
+                    {" "}
+                    Sale End before {new Date(item.saleEndDate).toString()}
+                  </Price>
                   <Title>{item.title}</Title>
                   <Description>{item.description}</Description>
 
                   <Price> Sale Price ${item.salePrice}</Price>
-                  <Price> You save ${savedAmount}</Price>
+                  <SavedAmount> You save ${savedAmount}</SavedAmount>
 
                   <Button>BUY NOW</Button>
                 </InfoContainer>
