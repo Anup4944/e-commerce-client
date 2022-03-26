@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { categoriesItem } from "../data/data";
-import CategoryItem from "./CategoryItem";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategoriesAction } from "../pages/categories-page/categoryAction";
+import CategoryItem from "./CategoryItem";
 
 const Container = styled.div`
   padding: 20px;
@@ -15,23 +17,20 @@ const Container = styled.div`
 `;
 
 const Categories = () => {
+  const { search } = useLocation();
+
   const dispatch = useDispatch();
 
   const { categories } = useSelector((state) => state.category);
 
+  console.log(search);
   const parentCat =
-    categories.length && categories.filter((item) => !item.parentCategory);
+    categories?.length && categories.filter((item) => !item.parentCategory);
 
-  const mergedCategory = { ...parentCat, ...categoriesItem };
-  console.log(mergedCategory);
-
-  useEffect(() => {
-    dispatch(getAllCategoriesAction());
-  }, [dispatch]);
   return (
     <Container>
       {categoriesItem.map((item) => {
-        return <CategoryItem item={item} key={item.id} />;
+        return <CategoryItem item={item} key={item.id} search={search} />;
       })}{" "}
     </Container>
   );

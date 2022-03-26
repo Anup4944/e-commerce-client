@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { useLocation, useHistory, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getAllProductsByCategoryAction } from "../pages/product/productAction";
+import { getAllCategoriesAction } from "../pages/categories-page/categoryAction";
 
 const Main = styled.div`
   flex: 1;
@@ -36,7 +40,7 @@ const Tilte = styled.h1`
   font-weight: 700;
   margin-bottom: 20px;
 `;
-const Button = styled.button`
+const Button = styled(Link)`
   border: none;
   padding: 10px;
   background-color: white;
@@ -45,13 +49,27 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
-const CategoryItem = ({ item }) => {
+const CategoryItem = ({ item, search }) => {
+  const dispatch = useDispatch();
+
+  console.log(search);
+
+  const handleOnClick = () => {
+    dispatch(getAllProductsByCategoryAction(search));
+  };
+
+  useEffect(() => {
+    dispatch(getAllProductsByCategoryAction(search));
+  }, [dispatch, search]);
+
   return (
     <Main>
       <Image src={item.img} />
       <Info>
         <Tilte>{item.title}</Tilte>
-        <Button>SHOW NOW</Button>
+        <Button to={`?category=${item.title}`} onClick={handleOnClick}>
+          SHOW NOW
+        </Button>
       </Info>
     </Main>
   );

@@ -1,4 +1,8 @@
-import { productApi, singleProductApi } from "../../apiS/productApi";
+import {
+  productApi,
+  singleProductApi,
+  singleProductByCategoryApi,
+} from "../../apiS/productApi";
 import {
   productRequestPending,
   getAllProductsSuccess,
@@ -11,6 +15,25 @@ export const getAllProductsAction = () => async (dispatch) => {
     dispatch(productRequestPending());
 
     const result = await productApi();
+
+    result.status === "success"
+      ? dispatch(getAllProductsSuccess(result))
+      : dispatch(productRequestFail(result));
+  } catch (error) {
+    const err = {
+      status: "error",
+      message: error.message,
+    };
+    dispatch(productRequestFail(err));
+  }
+};
+
+export const getAllProductsByCategoryAction = (search) => async (dispatch) => {
+  console.log(search);
+  try {
+    dispatch(productRequestPending());
+
+    const result = await singleProductByCategoryApi(search);
 
     result.status === "success"
       ? dispatch(getAllProductsSuccess(result))

@@ -40,12 +40,12 @@ export const categoriesItem = [
   {
     id: 5,
     img: "https://www.freshoffthegrid.com/wp-content/uploads/Backpacking-Gear.jpg",
-    title: "Outdoor Equipments",
+    title: "Outdoor",
   },
   {
     id: 6,
     img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80",
-    title: "Cosmetics",
+    title: "Sports-Wear",
   },
 ];
 

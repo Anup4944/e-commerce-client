@@ -8,7 +8,10 @@ Content-Type: application/json
   "firstName": "Mesut",
   "lastName": "Ozil",
   "email": "mo@o.com",
-  "password": "vangunneR@45"
+  "password": "vangunneR@45",
+  "userName": "mo8"
+
+  
 }
 
 ### CLIENT LOGIN
@@ -56,7 +59,7 @@ GET http://localhost:5001/api/v1/user/all
 ################## PRODUCTS ####################
 
 ### GET ALL PRODUCTS
-GET http://localhost:5001/api/v1/product?category=Household
+GET http://localhost:5001/api/v1/product?category=Electronics
 
 ### GET PRODUCT BY ID
 GET http://localhost:5001/api/v1/product/621ee3d7f2963f611f471271

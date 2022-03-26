@@ -7,6 +7,7 @@ import Register from "./pages/register/Register";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PassResetPage from "./pages/passreset-page/PassResetPage";
 import LoginPage from "./pages/login/LoginPage";
+import CategoryPage from "./pages/categories-page/CategoryPage";
 
 const App = () => {
   return (
@@ -20,6 +21,10 @@ const App = () => {
           <Route exact path="/product">
             <ProductList />
           </Route>
+
+          {/* <Route exact path="/category">
+            <CategoryPage />
+          </Route> */}
 
           <Route exact path="/register">
             <Register />

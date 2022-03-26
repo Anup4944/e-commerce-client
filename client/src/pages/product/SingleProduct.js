@@ -101,7 +101,13 @@ const SingleProduct = () => {
 
   const qtyRef = useRef();
 
-  const { message, status } = useSelector((state) => state.cart);
+  const { message, status, cart } = useSelector((state) => state.cart);
+
+  // const singleCartId = cart.filter(
+  //   (cartId) => cartId["_id"] === singleProduct._id
+  // );
+
+  // console.log(singleCartId);
 
   let { id } = useParams();
 

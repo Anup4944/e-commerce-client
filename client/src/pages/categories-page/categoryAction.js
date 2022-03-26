@@ -11,6 +11,8 @@ export const getAllCategoriesAction = () => async (dispatch) => {
 
     const result = await getAllCategoryApi();
 
+    console.log(result);
+
     result.status === "success"
       ? dispatch(getAllCategorySuccess(result))
       : dispatch(requestFail(result));

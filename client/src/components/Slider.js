@@ -69,6 +69,7 @@ const InfoContainer = styled.div`
 
 const Title = styled.h1`
   font-size: 40px;
+  margin-top: 10px;
 `;
 
 const Description = styled.p`

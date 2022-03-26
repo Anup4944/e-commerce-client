@@ -13,6 +13,8 @@ router.get("/", async (req, res) => {
 
     const categoryName = req.query.category;
 
+    console.log(categoryName);
+
     categoryName
       ? (allProducts = await getAllProductsByCategory(categoryName))
       : (allProducts = await getAllProducts());
