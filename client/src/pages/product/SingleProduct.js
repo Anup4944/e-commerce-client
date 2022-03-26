@@ -95,6 +95,7 @@ const SingleProduct = () => {
   const [number, setNumber] = useState(1);
 
   const { singleProduct } = useSelector((state) => state.product);
+  const { isAuth } = useSelector((state) => state.login);
 
   const [currentImg, setCurrentImg] = useState(0);
 
@@ -112,7 +113,11 @@ const SingleProduct = () => {
       singleProduct,
     };
 
-    dispatch(addToCart(itemToCart));
+    if (isAuth) {
+      dispatch(addToCart(itemToCart));
+    } else {
+      alert("You must login to continue. ");
+    }
   };
 
   useEffect(() => {

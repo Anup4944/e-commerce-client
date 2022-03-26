@@ -22,6 +22,9 @@ const Categories = () => {
   const parentCat =
     categories.length && categories.filter((item) => !item.parentCategory);
 
+  const mergedCategory = { ...parentCat, ...categoriesItem };
+  console.log(mergedCategory);
+
   useEffect(() => {
     dispatch(getAllCategoriesAction());
   }, [dispatch]);
