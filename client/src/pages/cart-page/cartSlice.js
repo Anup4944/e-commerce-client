@@ -24,6 +24,8 @@ const checkOutSlice = createSlice({
         (row) => row.singleProduct._id !== payload
       );
       state.cart = filterCart;
+      state.status = null;
+      state.message = null;
     },
 
     requestCartFail: (state) => {

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import ArrowBackIosOutlinedIcon from "@material-ui/icons/ArrowBackIosOutlined";
 import ArrowForwardIosOutlinedIcon from "@material-ui/icons/ArrowForwardIosOutlined";
-import { sliderItems } from "../data/data";
 import { mobile } from "../responsive";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProductsAction } from "../pages/product/productAction";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -63,6 +63,8 @@ const Image = styled.img`
 const InfoContainer = styled.div`
   flex: 1;
   padding: 50px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Title = styled.h1`
@@ -74,6 +76,12 @@ const Description = styled.p`
   font-size: 16px;
   font-weight: 300;
   letter-spacing: 3px;
+  text-align: center;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
 
 const Price = styled.h3`
@@ -93,6 +101,12 @@ const Sale = styled.h3`
   position: relative;
   width: 100px;
   height: 90px;
+`;
+
+const SalePrice = styled.h3`
+  font-size: 30px;
+  color: red;
+  margin-top: 20px;
 `;
 
 const heartBeat = keyframes`
@@ -126,12 +140,16 @@ const AnimatedSale = styled(Sale)`
   animation: ${heartBeat} 2s infinite;
 `;
 
-const Button = styled.button`
+const ViewMore = styled(Link)`
   padding: 10px;
   font-size: 20px;
   margin-top: 20px;
   background-color: transparent;
   cursor: pointer;
+  text-decoration: none;
+  border: 1px solid blue;
+  width: 70px;
+  text-align: center;
 `;
 
 const Slider = () => {
@@ -177,20 +195,22 @@ const Slider = () => {
                 </ImageContainer>
 
                 <InfoContainer>
-                  <AnimatedSale>
-                    🔴{savePercentage.toFixed(2)}% OFF{" "}
-                  </AnimatedSale>
-                  <Price>
-                    {" "}
-                    Sale End before {new Date(item.saleEndDate).toString()}
-                  </Price>
-                  <Title>{item.title}</Title>
-                  <Description>{item.description}</Description>
+                  <>
+                    <AnimatedSale>
+                      🔴{savePercentage.toFixed(2)}% OFF{" "}
+                    </AnimatedSale>
+                    <Price>
+                      {" "}
+                      Sale End before {new Date(item.saleEndDate).toString()}
+                    </Price>
+                    <Title>{item.title}</Title>
+                    <Description>{item.description}</Description>
 
-                  <Price> Sale Price ${item.salePrice}</Price>
-                  <SavedAmount> You save ${savedAmount}</SavedAmount>
+                    <ViewMore to={`/product/${item._id}`}>View more</ViewMore>
 
-                  <Button>BUY NOW</Button>
+                    <SalePrice> Sale price ${item.salePrice}</SalePrice>
+                    <SavedAmount> You save ${savedAmount}</SavedAmount>
+                  </>
                 </InfoContainer>
               </Slide>
             </>
