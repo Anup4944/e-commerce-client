@@ -169,7 +169,7 @@ const iconStyle = {
 };
 
 const Cart = () => {
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState();
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -179,6 +179,7 @@ const Cart = () => {
   };
 
   const { cart } = useSelector((state) => state.cart);
+  console.log(cart);
 
   const cartTotal = cart.reduce((iniVal, row) => {
     if (row.onSale === true) {
@@ -212,6 +213,16 @@ const Cart = () => {
                     ? item.salePrice * item.buyingItem
                     : item.price * item.buyingItem;
 
+                  const increment = () => {
+                    console.log("got hit");
+                    return item.buyingItem + 1;
+                  };
+                  const decrement = () => {
+                    console.log("got hit");
+
+                    return item.buyingItem - 1;
+                  };
+
                   return (
                     <>
                       <ProductDetails key={item._id}>
@@ -226,13 +237,11 @@ const Cart = () => {
                         </Details>
                         <PriceDetail>
                           <ProductAmountContainer>
-                            <Add onClick={() => item.buyingItem + 1} />
+                            <Add onClick={increment} />
 
                             <ProductAmount>{item.buyingItem} </ProductAmount>
 
-                            <RemoveCircleOutline
-                              onClick={() => item.buyingItem - 1}
-                            />
+                            <RemoveCircleOutline onClick={decrement} />
                           </ProductAmountContainer>
                           <ProductPrice>$ {finalPrice}</ProductPrice>
                           <DeleteOutline
