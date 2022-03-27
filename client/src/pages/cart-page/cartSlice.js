@@ -5,6 +5,7 @@ const initialState = {
   status: "",
   message: "",
   cart: [],
+  totalProduct: "",
 };
 
 const checkOutSlice = createSlice({
@@ -27,6 +28,13 @@ const checkOutSlice = createSlice({
         state.message = "Item added to cart";
       }
     },
+    addExtraProductSuccess: (state, { payload }) => {
+      state.totalProduct = payload.buyingItem + 1;
+    },
+    removeProductSuccess: (state, { payload }) => {
+      state.totalProduct = payload.buyingItem - 1;
+    },
+
     removeProductCartSuccess: (state, { payload }) => {
       const filterCart = state.cart.filter((row) => row._id !== payload);
       state.cart = filterCart;
@@ -45,6 +53,8 @@ export const {
   cartRequestPending,
   addProductCartSuccess,
   removeProductCartSuccess,
+  addExtraProductSuccess,
+  removeProductSuccess,
   requestCartFail,
 } = actions;
 export default reducer;

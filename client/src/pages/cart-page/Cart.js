@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { mobile } from "../../responsive";
 import { removeFromCart } from "./cartAction";
 import { useHistory } from "react-router-dom";
+import { addExtraProductSuccess, removeProductSuccess } from "./cartSlice";
 
 const Container = styled.div``;
 
@@ -213,16 +214,6 @@ const Cart = () => {
                     ? item.salePrice * item.buyingItem
                     : item.price * item.buyingItem;
 
-                  const increment = () => {
-                    console.log("got hit");
-                    return item.buyingItem + 1;
-                  };
-                  const decrement = () => {
-                    console.log("got hit");
-
-                    return item.buyingItem - 1;
-                  };
-
                   return (
                     <>
                       <ProductDetails key={item._id}>
@@ -237,11 +228,21 @@ const Cart = () => {
                         </Details>
                         <PriceDetail>
                           <ProductAmountContainer>
-                            <Add onClick={increment} />
+                            <Add
+                              onClick={() =>
+                                dispatch(
+                                  addExtraProductSuccess(item.buyingItem)
+                                )
+                              }
+                            />
 
                             <ProductAmount>{item.buyingItem} </ProductAmount>
 
-                            <RemoveCircleOutline onClick={decrement} />
+                            <RemoveCircleOutline
+                              onClick={() =>
+                                dispatch(removeProductSuccess(item.buyingItem))
+                              }
+                            />
                           </ProductAmountContainer>
                           <ProductPrice>$ {finalPrice}</ProductPrice>
                           <DeleteOutline
