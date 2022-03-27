@@ -180,16 +180,6 @@ const Cart = () => {
 
   const { cart } = useSelector((state) => state.cart);
 
-  const cartIdOnly = cart.map((item) => item._id);
-
-  console.log(cartIdOnly);
-
-  const found = cartIdOnly.filter((item, index) => {
-    return true ? cartIdOnly.indexOf(item) != index : false;
-  });
-
-  console.log(found);
-
   const cartTotal = cart.reduce((iniVal, row) => {
     if (row.onSale === true) {
       return iniVal + row.buyingItem * row.salePrice;
@@ -221,10 +211,10 @@ const Cart = () => {
                   const finalPrice = item.onSale
                     ? item.salePrice * item.buyingItem
                     : item.price * item.buyingItem;
-                  // if array consist of
+
                   return (
                     <>
-                      <ProductDetails>
+                      <ProductDetails key={item._id}>
                         <Image src={item.images[0]} />
                         <Details>
                           <ProductName>
@@ -237,7 +227,9 @@ const Cart = () => {
                         <PriceDetail>
                           <ProductAmountContainer>
                             <Add onClick={() => item.buyingItem + 1} />
+
                             <ProductAmount>{item.buyingItem} </ProductAmount>
+
                             <RemoveCircleOutline
                               onClick={() => item.buyingItem - 1}
                             />
