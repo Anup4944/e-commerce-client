@@ -7,6 +7,7 @@ import { Add, DeleteOutline, RemoveCircleOutline } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { mobile } from "../../responsive";
 import { removeFromCart } from "./cartAction";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -171,7 +172,23 @@ const Cart = () => {
   const [number, setNumber] = useState(0);
   const dispatch = useDispatch();
 
+  const history = useHistory();
+
+  const goBack = () => {
+    history.goBack();
+  };
+
   const { cart } = useSelector((state) => state.cart);
+
+  const cartIdOnly = cart.map((item) => item._id);
+
+  console.log(cartIdOnly);
+
+  const found = cartIdOnly.filter((item, index) => {
+    return true ? cartIdOnly.indexOf(item) != index : false;
+  });
+
+  console.log(found);
 
   const cartTotal = cart.reduce((iniVal, row) => {
     if (row.onSale === true) {
@@ -188,7 +205,7 @@ const Cart = () => {
       <Wrapper>
         <Title>You bag</Title>
         <Top>
-          <TopButton>Continue Shopping</TopButton>
+          <TopButton onClick={goBack}>Continue Shopping</TopButton>
           <TopTexts>
             <TopText>Shopping Bag</TopText>
             <TopText>Your wishlist</TopText>
