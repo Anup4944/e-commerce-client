@@ -24,9 +24,9 @@ const Title = styled.h1`
   margin-top: 20px;
 `;
 const Warning = styled.h1`
-  font-weight: 200;
+  font-weight: 500;
   margin-top: 20px;
-  color: tomato;
+  color: red;
 `;
 const Decs = styled.p`
   margin: 20px 0px;

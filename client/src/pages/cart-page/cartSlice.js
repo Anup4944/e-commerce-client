@@ -29,10 +29,18 @@ const checkOutSlice = createSlice({
       }
     },
     addExtraProductSuccess: (state, { payload }) => {
-      state.totalProduct = payload.buyingItem + 1;
+      console.log(payload);
+      // state.totalProduct = payload.buyingItem + 1;
     },
     removeProductSuccess: (state, { payload }) => {
-      state.totalProduct = payload.buyingItem - 1;
+      const itemIndex = state.cart.findIndex(
+        (item) => item._id === payload._id
+      );
+      if (state.cart[itemIndex].buyingItem > 1) {
+        state.cart[itemIndex].buyingItem -= 1;
+      } else if (state.cart[itemIndex].buyingItem === 1) {
+        const cart = state.cart.filter((row) => row._id !== payload);
+      }
     },
 
     removeProductCartSuccess: (state, { payload }) => {

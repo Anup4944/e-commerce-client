@@ -179,7 +179,7 @@ const Cart = () => {
     history.goBack();
   };
 
-  const { cart } = useSelector((state) => state.cart);
+  const { cart, totalProduct } = useSelector((state) => state.cart);
   console.log(cart);
 
   const cartTotal = cart.reduce((iniVal, row) => {

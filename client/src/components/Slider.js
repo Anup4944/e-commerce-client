@@ -187,6 +187,7 @@ const Slider = () => {
           ? 0
           : sliderIndex + 1
       );
+      console.log(sliderIndex);
     }
   };
   return (
