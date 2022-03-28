@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getAllProductsByCategoryAction } from "../../pages/product/productAction";
-import Products from "../Products";
+import Slider from "../Slider";
 
 const Container = styled.div`
   padding: 20px 20px;
@@ -31,7 +31,7 @@ const ProductByCategory = () => {
     <>
       {" "}
       <Container>
-        <Products />
+        <Slider productByCat={productByCat} />
       </Container>
     </>
   );

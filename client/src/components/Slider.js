@@ -154,42 +154,13 @@ const ViewMore = styled(Link)`
   text-align: center;
 `;
 
-const Slider = () => {
-  const [sliderIndex, setSliderIndex] = useState(0);
-
-  const { allProducts } = useSelector((state) => state.product);
-
-  const dispatch = useDispatch();
-
-  const productOnSale = allProducts.filter((item) => item.onSale === true);
-  const productNotSale = allProducts.filter((item) => item.onSale === !true);
-
-  useEffect(() => {
-    dispatch(getAllProductsAction());
-  }, [dispatch]);
-
-  const handleOnClick = (direction) => {
-    if (direction === "left") {
-      setSliderIndex(
-        sliderIndex === 0
-          ? (productOnSale.length
-              ? productOnSale.length
-              : productNotSale.length) - 1
-          : sliderIndex - 1
-      );
-    } else {
-      setSliderIndex(
-        sliderIndex ===
-          (productOnSale.length
-            ? productOnSale.length
-            : productNotSale.length) -
-            1
-          ? 0
-          : sliderIndex + 1
-      );
-      console.log(sliderIndex);
-    }
-  };
+const Slider = ({
+  sliderIndex,
+  setSliderIndex,
+  productOnSale,
+  productNotSale,
+  handleOnClick,
+}) => {
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleOnClick("left")}>

@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
+import ProductsOnSale from "../components/ProductsOnSale";
 import Slider from "../components/Slider";
 
 const HomePage = () => {
@@ -12,7 +13,7 @@ const HomePage = () => {
     <div>
       <Announcement />
       <Navbar />
-      <Slider />
+      <ProductsOnSale />
       <Categories />
       <Products />
       <Newsletter />
