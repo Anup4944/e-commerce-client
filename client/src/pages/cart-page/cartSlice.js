@@ -16,6 +16,7 @@ const checkOutSlice = createSlice({
       state.isLoading = true;
     },
     addProductCartSuccess: (state, { payload }) => {
+      console.log("from reducer", payload);
       const itemIndex = state.cart.findIndex(
         (item) => item._id === payload._id
       );
@@ -28,19 +29,17 @@ const checkOutSlice = createSlice({
         state.message = "Item added to cart";
       }
     },
-    addExtraProductSuccess: (state, { payload }) => {
-      console.log(payload);
-      // state.totalProduct = payload.buyingItem + 1;
-    },
-    removeProductSuccess: (state, { payload }) => {
-      const itemIndex = state.cart.findIndex(
-        (item) => item._id === payload._id
-      );
-      if (state.cart[itemIndex].buyingItem > 1) {
-        state.cart[itemIndex].buyingItem -= 1;
-      } else if (state.cart[itemIndex].buyingItem === 1) {
-        const cart = state.cart.filter((row) => row._id !== payload);
-      }
+    increaseCartQty: (state, { payload }) => {},
+    decreaseCartQty: (state, { payload }) => {
+      // console.log(itemIndex);
+      // console.log(
+      //   state.cart[itemIndex].payload?.map((item) => item.buyingItem)
+      // );
+      // if (state.cart[itemIndex].buyingItem > 1) {
+      //   state.cart[itemIndex].buyingItem -= 1;
+      // } else if (state.cart[itemIndex].buyingItem === 1) {
+      //   const cart = state.cart.filter((row) => row._id !== payload);
+      // }
     },
 
     removeProductCartSuccess: (state, { payload }) => {
@@ -60,9 +59,9 @@ const { reducer, actions } = checkOutSlice;
 export const {
   cartRequestPending,
   addProductCartSuccess,
+  decreaseCartQty,
+  increaseCartQty,
   removeProductCartSuccess,
-  addExtraProductSuccess,
-  removeProductSuccess,
   requestCartFail,
 } = actions;
 export default reducer;

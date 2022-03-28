@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { mobile } from "../../responsive";
 import { removeFromCart } from "./cartAction";
 import { useHistory } from "react-router-dom";
-import { addExtraProductSuccess, removeProductSuccess } from "./cartSlice";
+import { increaseCartQty, decreaseCartQty } from "./cartSlice";
 
 const Container = styled.div``;
 
@@ -180,7 +180,6 @@ const Cart = () => {
   };
 
   const { cart, totalProduct } = useSelector((state) => state.cart);
-  console.log(cart);
 
   const cartTotal = cart.reduce((iniVal, row) => {
     if (row.onSale === true) {
@@ -213,7 +212,6 @@ const Cart = () => {
                   const finalPrice = item.onSale
                     ? item.salePrice * item.buyingItem
                     : item.price * item.buyingItem;
-
                   return (
                     <>
                       <ProductDetails key={item._id}>
@@ -230,9 +228,7 @@ const Cart = () => {
                           <ProductAmountContainer>
                             <Add
                               onClick={() =>
-                                dispatch(
-                                  addExtraProductSuccess(item.buyingItem)
-                                )
+                                dispatch(increaseCartQty(item.buyingItem))
                               }
                             />
 
@@ -240,7 +236,7 @@ const Cart = () => {
 
                             <RemoveCircleOutline
                               onClick={() =>
-                                dispatch(removeProductSuccess(item.buyingItem))
+                                dispatch(decreaseCartQty(item.buyingItem))
                               }
                             />
                           </ProductAmountContainer>
