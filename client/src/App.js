@@ -22,8 +22,12 @@ const App = () => {
             <ProductList />
           </Route>
 
-          {/* <Route exact path="/category">
+          <Route exact path="/categories">
             <CategoryPage />
+          </Route>
+
+          {/* <Route exact path="/categories?category=category">
+            <ProductByCategory />
           </Route> */}
 
           <Route exact path="/register">

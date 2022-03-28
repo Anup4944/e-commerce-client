@@ -7,6 +7,7 @@ import {
   productRequestPending,
   getAllProductsSuccess,
   getSingleProductSuccess,
+  getProductsByCategorySuccess,
   productRequestFail,
 } from "./productSlice";
 
@@ -35,7 +36,7 @@ export const getAllProductsByCategoryAction = (search) => async (dispatch) => {
     const result = await singleProductByCategoryApi(search);
 
     result.status === "success"
-      ? dispatch(getAllProductsSuccess(result))
+      ? dispatch(getProductsByCategorySuccess(result))
       : dispatch(productRequestFail(result));
   } catch (error) {
     const err = {

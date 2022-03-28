@@ -56,16 +56,19 @@ const CategoryItem = ({ item, search }) => {
     dispatch(getAllProductsByCategoryAction(search));
   };
 
-  useEffect(() => {
-    dispatch(getAllProductsByCategoryAction(search));
-  }, [dispatch, search]);
+  // useEffect(() => {
+  //   dispatch(getAllProductsByCategoryAction(search));
+  // }, [dispatch, search]);
 
   return (
     <Main>
       <Image src={item.img} />
       <Info>
         <Tilte>{item.title}</Tilte>
-        <Button to={`?category=${item.title}`} onClick={handleOnClick}>
+        <Button
+          to={`/categories?category=${item.title}`}
+          onClick={handleOnClick}
+        >
           SHOW NOW
         </Button>
       </Info>

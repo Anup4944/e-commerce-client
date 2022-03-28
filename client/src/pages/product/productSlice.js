@@ -6,6 +6,7 @@ const initialState = {
   message: "",
   allProducts: [],
   singleProduct: {},
+  productByCat: [],
 };
 
 const productSlice = createSlice({
@@ -27,6 +28,12 @@ const productSlice = createSlice({
       state.message = payload.message;
       state.singleProduct = payload.singleProduct;
     },
+    getProductsByCategorySuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.status = payload.status;
+      state.message = payload.message;
+      state.productByCat = payload.allProducts;
+    },
     productRequestFail: (state, { payload }) => {
       state.isLoading = false;
       state.status = payload.status;
@@ -41,6 +48,7 @@ export const {
   getAllProductsSuccess,
   getSingleProductSuccess,
   productRequestFail,
+  getProductsByCategorySuccess,
 } = actions;
 
 export default reducer;

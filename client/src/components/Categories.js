@@ -25,11 +25,17 @@ const Categories = () => {
     categories?.length && categories.filter((item) => !item.parentCategory);
 
   return (
-    <Container>
-      {categoriesItem.map((item) => {
-        return <CategoryItem item={item} key={item.id} search={search} />;
-      })}{" "}
-    </Container>
+    <>
+      <Container>
+        {categoriesItem.map((item) => {
+          return (
+            <>
+              <CategoryItem item={item} key={item.id} search={search} />
+            </>
+          );
+        })}{" "}
+      </Container>
+    </>
   );
 };
 
