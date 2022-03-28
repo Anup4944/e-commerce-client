@@ -167,9 +167,9 @@ const Slider = ({
         <ArrowBackIosOutlinedIcon />
       </Arrow>
 
-      {productOnSale.length ? (
+      {productOnSale?.length ? (
         <Wrapper sliderIndex={sliderIndex}>
-          {productOnSale.map((item) => {
+          {productOnSale?.map((item) => {
             const savedAmount = item.price - item.salePrice;
 
             const savePercentage = (savedAmount / item.price) * 100;
@@ -206,7 +206,7 @@ const Slider = ({
         </Wrapper>
       ) : (
         <Wrapper sliderIndex={sliderIndex}>
-          {productNotSale.map((item) => {
+          {productNotSale?.map((item) => {
             return (
               <>
                 <Slide key={item._id}>
