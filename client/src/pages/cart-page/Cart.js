@@ -181,7 +181,7 @@ const Cart = () => {
 
   const { cart, totalProduct } = useSelector((state) => state.cart);
 
-  const cartTotal = cart.reduce((iniVal, row) => {
+  const cartTotal = cart?.reduce((iniVal, row) => {
     if (row.onSale === true) {
       return iniVal + row.buyingItem * row.salePrice;
     } else {
@@ -227,17 +227,13 @@ const Cart = () => {
                         <PriceDetail>
                           <ProductAmountContainer>
                             <Add
-                              onClick={() =>
-                                dispatch(increaseCartQty(item.buyingItem))
-                              }
+                              onClick={() => dispatch(increaseCartQty(item))}
                             />
 
                             <ProductAmount>{item.buyingItem} </ProductAmount>
 
                             <RemoveCircleOutline
-                              onClick={() =>
-                                dispatch(decreaseCartQty(item.buyingItem))
-                              }
+                              onClick={() => dispatch(decreaseCartQty(item))}
                             />
                           </ProductAmountContainer>
                           <ProductPrice>$ {finalPrice}</ProductPrice>

@@ -5,6 +5,7 @@ const initialState = {
   status: "",
   message: "",
   cart: [],
+  finalPrice: "",
   totalProduct: "",
 };
 
@@ -16,7 +17,6 @@ const checkOutSlice = createSlice({
       state.isLoading = true;
     },
     addProductCartSuccess: (state, { payload }) => {
-      console.log("from reducer", payload);
       const itemIndex = state.cart.findIndex(
         (item) => item._id === payload._id
       );
@@ -29,17 +29,20 @@ const checkOutSlice = createSlice({
         state.message = "Item added to cart";
       }
     },
-    increaseCartQty: (state, { payload }) => {},
+
+    increaseCartQty: (state, { payload }) => {
+      const itemIndex = state.cart.findIndex(
+        (item) => item._id === payload._id
+      );
+
+      state.cart[itemIndex].buyingItem = payload.buyingItem + 1;
+    },
+
     decreaseCartQty: (state, { payload }) => {
-      // console.log(itemIndex);
-      // console.log(
-      //   state.cart[itemIndex].payload?.map((item) => item.buyingItem)
-      // );
-      // if (state.cart[itemIndex].buyingItem > 1) {
-      //   state.cart[itemIndex].buyingItem -= 1;
-      // } else if (state.cart[itemIndex].buyingItem === 1) {
-      //   const cart = state.cart.filter((row) => row._id !== payload);
-      // }
+      const itemIndex = state.cart.findIndex(
+        (item) => item._id === payload._id
+      );
+      state.cart[itemIndex].buyingItem = payload.buyingItem - 1;
     },
 
     removeProductCartSuccess: (state, { payload }) => {
