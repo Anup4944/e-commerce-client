@@ -34,8 +34,9 @@ const checkOutSlice = createSlice({
       const itemIndex = state.cart.findIndex(
         (item) => item._id === payload._id
       );
-
       state.cart[itemIndex].buyingItem = payload.buyingItem + 1;
+      state.status = "success";
+      state.message = "Item item quantity incresed";
     },
 
     decreaseCartQty: (state, { payload }) => {
@@ -43,6 +44,8 @@ const checkOutSlice = createSlice({
         (item) => item._id === payload._id
       );
       state.cart[itemIndex].buyingItem = payload.buyingItem - 1;
+      state.status = "success";
+      state.message = "Item item quantity decreased";
     },
 
     removeProductCartSuccess: (state, { payload }) => {
