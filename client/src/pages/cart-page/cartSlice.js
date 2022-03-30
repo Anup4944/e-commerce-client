@@ -43,9 +43,15 @@ const checkOutSlice = createSlice({
       const itemIndex = state.cart.findIndex(
         (item) => item._id === payload._id
       );
-      state.cart[itemIndex].buyingItem = payload.buyingItem - 1;
-      state.status = "success";
-      state.message = "Item item quantity decreased";
+
+      if (state.cart[itemIndex].buyingItem > 1) {
+        state.cart[itemIndex].buyingItem = payload.buyingItem - 1;
+        state.status = "success";
+        state.message = "Item item quantity decreased";
+      } else if (state.cart[itemIndex].buyingItem === 0) {
+        const filterCart = state.cart.filter((row) => row._id !== payload);
+        state.cart = filterCart;
+      }
     },
 
     removeProductCartSuccess: (state, { payload }) => {
