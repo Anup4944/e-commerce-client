@@ -1,18 +1,16 @@
 import React from "react";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 
-const PUBLIC_KEY = process.env.PK;
+// let stripeTestPromise;
 
-const stripeTestPromise = loadStripe(PUBLIC_KEY);
+// const getStripe = () => {
+//   if (!stripePromise) {
+//     stripeTestPromise = loadStripe(stripePromise);
+//   }
+//   return stripeTestPromise;
+// };
 
 const StripeContainer = () => {
-  return (
-    <>
-      <Elements stripe={stripeTestPromise} />
-      <h1>PAYMENT</h1>
-    </>
-  );
+  return <div>Payment </div>;
 };
 
 export default StripeContainer;

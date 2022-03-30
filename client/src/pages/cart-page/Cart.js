@@ -9,6 +9,7 @@ import { mobile } from "../../responsive";
 import { removeFromCart } from "./cartAction";
 import { useHistory } from "react-router-dom";
 import { increaseCartQty, decreaseCartQty } from "./cartSlice";
+import StrikeCheckout from "react-stripe-checkout";
 
 const Container = styled.div``;
 
@@ -176,6 +177,8 @@ const Cart = () => {
 
   const history = useHistory();
 
+  const KEY = process.env.REACT_APP_STRIPE_KEY;
+
   const goBack = () => {
     history.goBack();
   };
@@ -206,9 +209,7 @@ const Cart = () => {
             <TopText>Shopping Bag</TopText>
             <TopText>Your wishlist</TopText>
           </TopTexts>
-          <TopButton type="fill" onClick={handleOnClick}>
-            Check Out Now{" "}
-          </TopButton>
+          <TopButton type="fill">Check Out Now </TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -276,7 +277,16 @@ const Cart = () => {
               <SummaryItemText type="total">Total</SummaryItemText>
               <SummaryItemPrice>$ {cartTotal}</SummaryItemPrice>
             </SummaryItem>
-            <TopButton onClick={handleOnClick}>Check Out Now</TopButton>
+            <StrikeCheckout
+              name="ANUP" // the pop-in header title
+              description={`Your total is $${cartTotal}`} // the pop-in header subtitle
+              image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png" // the pop-in header image (default none)
+              panelLabel="PAY NOW" // prepended to the amount in the bottom pay button
+              amount={1000000 * cartTotal} // cents
+              currency="AUD"
+              stripeKey={KEY}
+              // email="info@vidhub.co"
+            />
           </Summary>
         </Bottom>
       </Wrapper>
