@@ -147,6 +147,7 @@ const SummaryItem = styled.h1`
 `;
 const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
+
 const Button = styled.button`
   width: 100%;
   padding: 10px;
@@ -179,7 +180,7 @@ const Cart = () => {
     history.goBack();
   };
 
-  const { cart, totalProduct } = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
 
   const cartTotal = cart?.reduce((iniVal, row) => {
     if (row.onSale === true) {
@@ -188,6 +189,10 @@ const Cart = () => {
       return iniVal + row.buyingItem * row.price;
     }
   }, 0);
+
+  const handleOnClick = () => {
+    history.push("/payment");
+  };
 
   return (
     <Container>
@@ -201,7 +206,9 @@ const Cart = () => {
             <TopText>Shopping Bag</TopText>
             <TopText>Your wishlist</TopText>
           </TopTexts>
-          <TopButton type="fill">Check Out Now </TopButton>
+          <TopButton type="fill" onClick={handleOnClick}>
+            Check Out Now{" "}
+          </TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -269,7 +276,7 @@ const Cart = () => {
               <SummaryItemText type="total">Total</SummaryItemText>
               <SummaryItemPrice>$ {cartTotal}</SummaryItemPrice>
             </SummaryItem>
-            <Button>Check Out Now</Button>
+            <TopButton onClick={handleOnClick}>Check Out Now</TopButton>
           </Summary>
         </Bottom>
       </Wrapper>

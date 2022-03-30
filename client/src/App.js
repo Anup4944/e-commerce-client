@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PassResetPage from "./pages/passreset-page/PassResetPage";
 import LoginPage from "./pages/login/LoginPage";
 import CategoryPage from "./pages/categories-page/CategoryPage";
+import PaymentPage from "./pages/payment-page/PaymentPage";
 
 const App = () => {
   return (
@@ -44,6 +45,10 @@ const App = () => {
 
           <Route exact path="/cart">
             <Cart />
+          </Route>
+
+          <Route exact path="/payment">
+            <PaymentPage />
           </Route>
         </Switch>
       </Router>
