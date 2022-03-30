@@ -3,13 +3,19 @@ import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
-import { Add, DeleteOutline, RemoveCircleOutline } from "@material-ui/icons";
+import {
+  Add,
+  DeleteOutline,
+  RemoveCircleOutline,
+  StayPrimaryPortraitRounded,
+} from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { mobile } from "../../responsive";
 import { removeFromCart } from "./cartAction";
 import { useHistory } from "react-router-dom";
 import { increaseCartQty, decreaseCartQty } from "./cartSlice";
 import StrikeCheckout from "react-stripe-checkout";
+import axios from "axios";
 
 const Container = styled.div``;
 
@@ -172,18 +178,20 @@ const iconStyle = {
 };
 
 const Cart = () => {
-  const [number, setNumber] = useState();
+  const [stripeToken, setStripeToken] = useState(null);
   const dispatch = useDispatch();
 
   const history = useHistory();
 
-  const KEY = process.env.REACT_APP_STRIPE_KEY;
+  const { cart } = useSelector((state) => state.cart);
 
   const goBack = () => {
     history.goBack();
   };
 
-  const { cart } = useSelector((state) => state.cart);
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
 
   const cartTotal = cart?.reduce((iniVal, row) => {
     if (row.onSale === true) {
@@ -192,6 +200,22 @@ const Cart = () => {
       return iniVal + row.buyingItem * row.price;
     }
   }, 0);
+
+  useEffect(() => {
+    const makeReq = async () => {
+      try {
+        const res = await axios.post(
+          "http://localhost:5001/api/v1/checkout/payment",
+          {
+            tokenId: stripeToken,
+            amount: cartTotal,
+          }
+        );
+      } catch (error) {}
+    };
+
+    makeReq();
+  }, [stripeToken, cartTotal]);
 
   const handleOnClick = () => {
     history.push("/payment");
@@ -278,13 +302,16 @@ const Cart = () => {
               <SummaryItemPrice>$ {cartTotal}</SummaryItemPrice>
             </SummaryItem>
             <StrikeCheckout
-              name="ANUP" // the pop-in header title
-              description={`Your total is $${cartTotal}`} // the pop-in header subtitle
-              image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png" // the pop-in header image (default none)
-              panelLabel="PAY NOW" // prepended to the amount in the bottom pay button
+              name="ANUP"
+              description={`Your total is $${cartTotal}`}
+              image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
+              panelLabel="PAY NOW"
+              billingAddress
+              shippingAddress
               amount={1000000 * cartTotal} // cents
               currency="AUD"
-              stripeKey={KEY}
+              token={onToken}
+              stripeKey={process.env.REACT_APP_STRIPE_KEY}
               // email="info@vidhub.co"
             />
           </Summary>
