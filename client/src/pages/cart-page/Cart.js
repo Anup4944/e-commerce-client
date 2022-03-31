@@ -185,6 +185,8 @@ const Cart = () => {
 
   const { cart } = useSelector((state) => state.cart);
 
+  const KEY = process.env.REACT_APP_STRIPE_KEY;
+
   const goBack = () => {
     history.goBack();
   };
@@ -207,14 +209,15 @@ const Cart = () => {
         const res = await axios.post(
           "http://localhost:5001/api/v1/checkout/payment",
           {
-            tokenId: stripeToken,
+            tokenId: stripeToken.id,
             amount: cartTotal,
           }
         );
+        console.log(res);
       } catch (error) {}
     };
 
-    makeReq();
+    stripeToken && makeReq();
   }, [stripeToken, cartTotal]);
 
   const handleOnClick = () => {
@@ -226,7 +229,7 @@ const Cart = () => {
       <Navbar />
       <Announcement />
       <Wrapper>
-        <Title>You bag</Title>
+        <Title>You bag </Title>
         <Top>
           <TopButton onClick={goBack}>Continue Shopping</TopButton>
           <TopTexts>
@@ -311,9 +314,10 @@ const Cart = () => {
               amount={1000000 * cartTotal} // cents
               currency="AUD"
               token={onToken}
-              stripeKey={process.env.REACT_APP_STRIPE_KEY}
+              stripeKey={KEY}
+
               // email="info@vidhub.co"
-            />
+            ></StrikeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>

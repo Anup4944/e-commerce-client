@@ -1,24 +1,45 @@
 import express from "express";
 const router = express.Router();
-import Stripe from "stripe";
+import stripePackage from "stripe";
 
-const stripe = Stripe("sk_test_iTtW5Zx4oKCrS9MQCjvJbBPW00f8C0PmUp");
+const stripe = stripePackage(process.env.STRIPE_PRIVATE_KEY);
 
-router.post("/payment", (req, res) => {
-  stripe.charges.create(
-    {
-      source: req.bodyTokenId,
-      amount: req.body.amount,
-      currency: "AUD",
-    },
-    (stripeErr, stripeRes) => {
-      if (stripeErr) {
-        res.status(500).json(stripeErr);
-      } else {
-        res.status(200).json(stripeRes);
-      }
-    }
-  );
+router.post("/payment", async (req, res) => {
+  try {
+    const session = await stripe.customers
+      .create({
+        description: "My First Test Customer (created for API docs)",
+      })
+
+      .then(function (customer) {
+        return stripe.customers.createSource(customer.id, {
+          source: "tok_visa",
+        });
+      })
+      .then(function (source) {
+        return stripe.charges
+          .create({
+            amount: req.body.amount,
+            currency: "aud",
+            customer: source.customer,
+          })
+          .then((res) => {
+            console.log("Charge", res);
+          })
+          .catch(function (err) {
+            console.log(err);
+          });
+      });
+
+    res.status(200).send({
+      status: "success",
+      message: "PAYMENT SUCESS",
+      session,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
 });
 
 export default router;
