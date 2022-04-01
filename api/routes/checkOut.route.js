@@ -23,19 +23,19 @@ router.post("/payment", async (req, res) => {
             currency: "aud",
             customer: source.customer,
           })
-          .then((res) => {
-            console.log("Charge", res);
+          .then((stripeData) => {
+            console.log("Charge", stripeData);
+            res.send({
+              stripeData,
+            });
           })
           .catch(function (err) {
             console.log(err);
+            res.send({
+              err,
+            });
           });
       });
-
-    res.status(200).send({
-      status: "success",
-      message: "PAYMENT SUCESS",
-      session,
-    });
   } catch (error) {
     console.log(error);
     res.status(400).json({ error: error.message });

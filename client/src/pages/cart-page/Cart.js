@@ -307,11 +307,11 @@ const Cart = () => {
             <StrikeCheckout
               name="ANUP"
               description={`Your total is $${cartTotal}`}
-              image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
+              // image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
               panelLabel="PAY NOW"
               billingAddress
               shippingAddress
-              amount={1000000 * cartTotal} // cents
+              amount={cartTotal} // cents
               currency="AUD"
               token={onToken}
               stripeKey={KEY}
