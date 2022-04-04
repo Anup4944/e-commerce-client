@@ -4,7 +4,7 @@ const initialState = {
   isLoading: false,
   status: "",
   message: "",
-  orders: [],
+  orders: {},
 };
 const checkOutSlice = createSlice({
   name: "checkOut",
@@ -19,6 +19,7 @@ const checkOutSlice = createSlice({
       state.message = payload.message;
       state.orders = payload.stripeRes;
     },
+    // getOrderByClient:(),
     checkoutFail: (state, { payload }) => {
       state.isLoading = false;
       state.status = payload.status;

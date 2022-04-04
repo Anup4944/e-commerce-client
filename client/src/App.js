@@ -9,6 +9,7 @@ import PassResetPage from "./pages/passreset-page/PassResetPage";
 import LoginPage from "./pages/login/LoginPage";
 import CategoryPage from "./pages/categories-page/CategoryPage";
 import PaymentPage from "./pages/payment-page/PaymentPage";
+import PurchaseHistory from "./pages/purchase-history/PurchaseHistory";
 
 const App = () => {
   return (
@@ -49,6 +50,10 @@ const App = () => {
 
           <Route exact path="/payment">
             <PaymentPage />
+          </Route>
+
+          <Route exact path="/purchase-history">
+            <PurchaseHistory />
           </Route>
         </Switch>
       </Router>

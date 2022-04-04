@@ -200,17 +200,6 @@ const Cart = () => {
     }
   }, 0);
 
-  // useEffect(() => {
-  //   dispatch(
-  //     checkOutAction({
-  //       tokenId: stripeToken.id,
-  //       amount: cartTotal,
-  //       email: clients.email,
-  //       name: clients.firstName + clients.lastName,
-  //     })
-  //   );
-  // }, [stripeToken, cartTotal]);
-
   useEffect(() => {
     const striepApi = async () => {
       try {
@@ -223,10 +212,10 @@ const Cart = () => {
             name: clients.firstName + clients.lastName,
           }
         );
-
         console.log(data);
-        console.log("stripe token", stripeToken);
+
         dispatch(checkOutSuccess(data));
+        data.status === "success" && history.push("/purchase-history");
       } catch (error) {
         console.log(error);
       }
