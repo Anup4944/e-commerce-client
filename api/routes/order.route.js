@@ -6,15 +6,28 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   const newOrder = req.body;
 
-  console.log("from fe", req.body);
   try {
     const savedOrder = await saveOrder(newOrder);
 
-    console.log("saved order", savedOrder);
-    res.send({ savedOrder });
+    savedOrder._id
+      ? res.send({
+          status: "success",
+          message: "Order has been saved",
+          savedOrder,
+        })
+      : res.send({
+          status: "error",
+          message: "Unable to save order , please try again later",
+        });
   } catch (error) {
-    res.send({ error });
+    res.send({
+      status: "error",
+      message: "Unable to save order , please try again later",
+      error,
+    });
   }
 });
+
+// GET MONTHLY INCOME
 
 export default router;

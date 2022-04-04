@@ -67,4 +67,19 @@ GET http://localhost:5001/api/v1/product/621ee3d7f2963f611f471271
 
 GET http://localHost:5001/api/v1/category
 
+################## ORDERS ####################
+POST http://localHost:5001/api/v1/order
+Content-Type: application/json
+
+{
+  "clientId" : "622ff2705966a728d4309ac1",
+  "products" : [
+    {
+      "productId": "12346",
+      "quantity": 2
+    }  
+  ],
+      "amount": 20,
+      "address": "12 princess highway"
+}
 

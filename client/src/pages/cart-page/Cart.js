@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 import { increaseCartQty, decreaseCartQty } from "./cartSlice";
 import StrikeCheckout from "react-stripe-checkout";
 import axios from "axios";
-import { checkOutSuccess } from "../orders/checkOutSlice";
+import { checkOutSuccess, checkoutFail } from "../orders/checkOutSlice";
 
 const Container = styled.div``;
 
@@ -212,10 +212,11 @@ const Cart = () => {
             name: clients.firstName + clients.lastName,
           }
         );
-        console.log(data);
 
         dispatch(checkOutSuccess(data));
-        data.status === "success" && history.push("/purchase-history");
+        data.status === "success"
+          ? history.push("/purchase-history")
+          : dispatch(checkoutFail(data));
       } catch (error) {
         console.log(error);
       }
@@ -223,10 +224,6 @@ const Cart = () => {
 
     stripeToken && striepApi();
   }, [stripeToken, cartTotal]);
-
-  const handleOnClick = () => {
-    history.push("/payment");
-  };
 
   return (
     <Container>
