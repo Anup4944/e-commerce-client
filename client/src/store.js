@@ -5,6 +5,7 @@ import passReducer from "./pages/passreset-page/passResetSlice";
 import productReducer from "./pages/product/productSlice";
 import cartReducer from "./pages/cart-page/cartSlice";
 import categoryReducer from "./pages/categories-page/categorySlice";
+import checkOutReducer from "./pages/orders/checkOutSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     product: productReducer,
     cart: cartReducer,
     category: categoryReducer,
+    checkOut: checkOutReducer,
   },
 });
 

@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { increaseCartQty, decreaseCartQty } from "./cartSlice";
 import StrikeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import { checkOutSuccess } from "../orders/checkOutSlice";
 
 const Container = styled.div``;
 
@@ -199,8 +200,19 @@ const Cart = () => {
     }
   }, 0);
 
+  // useEffect(() => {
+  //   dispatch(
+  //     checkOutAction({
+  //       tokenId: stripeToken.id,
+  //       amount: cartTotal,
+  //       email: clients.email,
+  //       name: clients.firstName + clients.lastName,
+  //     })
+  //   );
+  // }, [stripeToken, cartTotal]);
+
   useEffect(() => {
-    const makeReq = async () => {
+    const striepApi = async () => {
       try {
         const { data } = await axios.post(
           "http://localhost:5001/api/v1/checkout/payment",
@@ -211,13 +223,16 @@ const Cart = () => {
             name: clients.firstName + clients.lastName,
           }
         );
+
         console.log(data);
+        console.log("stripe token", stripeToken);
+        dispatch(checkOutSuccess(data));
       } catch (error) {
         console.log(error);
       }
     };
 
-    stripeToken && makeReq();
+    stripeToken && striepApi();
   }, [stripeToken, cartTotal]);
 
   const handleOnClick = () => {
