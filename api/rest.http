@@ -68,18 +68,34 @@ GET http://localhost:5001/api/v1/product/621ee3d7f2963f611f471271
 GET http://localHost:5001/api/v1/category
 
 ################## ORDERS ####################
+
+// GET ALL ORDERS
+GET http://localHost:5001/api/v1/order
+
+
+// GET ORDER BY CLIENT ID
+###
+GET http://localHost:5001/api/v1/order/single
+Content-Type: application/json
+
+{
+  "_id": "623e6d032b45f94555f219d9"
+}
+
+// SAVE ORDER
+###
 POST http://localHost:5001/api/v1/order
 Content-Type: application/json
 
 {
-  "clientId" : "622ff2705966a728d4309ac1",
+  "clientId" : "623e6d032b45f94555f219d9",
   "products" : [
     {
-      "productId": "12346",
+      "productId": "12346145236",
       "quantity": 2
     }  
   ],
       "amount": 20,
-      "address": "12 princess highway"
+      "address": "12567 princess highway"
 }
 
