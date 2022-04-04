@@ -6,6 +6,7 @@ import Products from "../../components/Products";
 import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
 import { mobile } from "../../responsive";
+import { useSelector } from "react-redux";
 
 const Container = styled.div``;
 const Title = styled.div`
@@ -35,36 +36,19 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+  const { allProducts } = useSelector((state) => state.product);
+
+  // const priceAcs = () => {
+  //   return allProducts.map((item) => {
+  //     item.price ? item.price : item.salePrice
+  //   });
+  // };
+
   return (
     <Container>
       <Navbar />
       <Announcement />
-      <Title>Dress </Title>
       <FilteredContainer>
-        <Filter>
-          <FilterText>Filter Products </FilterText>
-          <Select>
-            <Option disabled selected>
-              Color
-            </Option>
-            <Option>White</Option>
-            <Option>Black</Option>
-            <Option>Red</Option>
-            <Option>Blue</Option>
-            <Option>Yellow</Option>
-            <Option>Green</Option>
-          </Select>
-          <Select>
-            <Option disabled selected>
-              Size
-            </Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
-          </Select>
-        </Filter>
         <Filter>
           <FilterText>Sort Products</FilterText>
           <Select>
@@ -74,7 +58,7 @@ const ProductList = () => {
           </Select>
         </Filter>
       </FilteredContainer>
-      <Products />
+      <Products allProducts={allProducts} />
       <Newsletter />
       <Footer />
     </Container>

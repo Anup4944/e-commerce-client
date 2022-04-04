@@ -21,7 +21,7 @@ const Products = () => {
   }, [dispatch]);
   return (
     <Container>
-      {allProducts.map((item) => (
+      {allProducts?.map((item) => (
         <Product item={item} key={item.id} _id={item._id} />
       ))}
     </Container>

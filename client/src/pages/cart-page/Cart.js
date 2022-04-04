@@ -3,12 +3,7 @@ import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
-import {
-  Add,
-  DeleteOutline,
-  RemoveCircleOutline,
-  StayPrimaryPortraitRounded,
-} from "@material-ui/icons";
+import { Add, DeleteOutline, RemoveCircleOutline } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { mobile } from "../../responsive";
 import { removeFromCart } from "./cartAction";
@@ -184,11 +179,12 @@ const Cart = () => {
   const history = useHistory();
 
   const { cart } = useSelector((state) => state.cart);
+  const { clients } = useSelector((state) => state.login);
 
   const KEY = process.env.REACT_APP_STRIPE_KEY;
 
   const goBack = () => {
-    history.goBack();
+    history.push("/product");
   };
 
   const onToken = (token) => {
@@ -206,15 +202,19 @@ const Cart = () => {
   useEffect(() => {
     const makeReq = async () => {
       try {
-        const res = await axios.post(
+        const { data } = await axios.post(
           "http://localhost:5001/api/v1/checkout/payment",
           {
             tokenId: stripeToken.id,
             amount: cartTotal,
+            email: clients.email,
+            name: clients.firstName + clients.lastName,
           }
         );
-        console.log(res);
-      } catch (error) {}
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     stripeToken && makeReq();
@@ -235,6 +235,7 @@ const Cart = () => {
           <TopTexts>
             <TopText>Shopping Bag</TopText>
             <TopText>Your wishlist</TopText>
+            <TopText>Your purchase history</TopText>
           </TopTexts>
           <TopButton type="fill">Check Out Now </TopButton>
         </Top>

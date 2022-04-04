@@ -116,67 +116,69 @@ const SingleProduct = () => {
       ...singleProduct,
     };
 
-    // if (isAuth) {
-    dispatch(addToCart(itemToCart));
-    // } else {
-    //   alert("You must login to continue. ");
-    // }
+    if (isAuth) {
+      dispatch(addToCart(itemToCart));
+    } else {
+      alert("You must login to continue. ");
+    }
   };
 
   useEffect(() => {
     dispatch(getSingleProductsAction(id));
   }, [dispatch, id]);
   return (
-    <Container>
-      <Navbar />
-      <Wrapper>
-        <ImageSlider
-          currentImg={currentImg}
-          singleProduct={singleProduct}
-          setCurrentImg={setCurrentImg}
-        />
+    <>
+      <Container>
+        <Navbar />
+        <Wrapper>
+          <ImageSlider
+            currentImg={currentImg}
+            singleProduct={singleProduct}
+            setCurrentImg={setCurrentImg}
+          />
 
-        <InfoContainer>
-          <Title> {singleProduct?.title}</Title>
-          <Decs>{singleProduct?.description}</Decs>
+          <InfoContainer>
+            <Title> {singleProduct?.title}</Title>
+            <Decs>{singleProduct?.description}</Decs>
 
-          {singleProduct.onSale ? (
-            <Price> $ {singleProduct.salePrice * number} </Price>
-          ) : (
-            <Price> $ {singleProduct.price * number} </Price>
-          )}
+            {singleProduct.onSale ? (
+              <Price> $ {singleProduct.salePrice * number} </Price>
+            ) : (
+              <Price> $ {singleProduct.price * number} </Price>
+            )}
 
-          {singleProduct?.isAvailable === true ? (
-            <Title>Availabiality: Yes </Title>
-          ) : (
-            <Warning>Out of stock</Warning>
-          )}
+            {singleProduct?.isAvailable === true ? (
+              <Title>Availabiality: Yes </Title>
+            ) : (
+              <Warning>Out of stock</Warning>
+            )}
 
-          {singleProduct?.isAvailable === true ? (
-            <AddContainer>
-              <AmountContainer>
-                <RemoveCircleOutline
-                  ref={qtyRef}
-                  onClick={() => setNumber(number - 1)}
-                />
-                <Amount>{number}</Amount>
-                <AddCircleOutlined
-                  ref={qtyRef}
-                  onClick={() => setNumber(number + 1)}
-                />
-              </AmountContainer>
+            {singleProduct?.isAvailable === true ? (
+              <AddContainer>
+                <AmountContainer>
+                  <RemoveCircleOutline
+                    ref={qtyRef}
+                    onClick={() => setNumber(number - 1)}
+                  />
+                  <Amount>{number}</Amount>
+                  <AddCircleOutlined
+                    ref={qtyRef}
+                    onClick={() => setNumber(number + 1)}
+                  />
+                </AmountContainer>
 
-              {found === singleProduct._id && status === "success" ? (
-                <SuccessMg>{message}</SuccessMg>
-              ) : null}
-              <Button onClick={handleOnClick}>ADD TO CART </Button>
-            </AddContainer>
-          ) : null}
-        </InfoContainer>
-      </Wrapper>
+                {found === singleProduct._id && status === "success" ? (
+                  <SuccessMg>{message}</SuccessMg>
+                ) : null}
+                <Button onClick={handleOnClick}>ADD TO CART </Button>
+              </AddContainer>
+            ) : null}
+          </InfoContainer>
+        </Wrapper>
 
-      <Footer />
-    </Container>
+        <Footer />
+      </Container>
+    </>
   );
 };
 

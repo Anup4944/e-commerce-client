@@ -18,6 +18,19 @@ export const addToCart = (product) => async (dispatch) => {
   }
 };
 
+export const saveShippingInfo = (product) => async (dispatch) => {
+  // try {
+  //   dispatch(cartRequestPending());
+  //   dispatch(addProductCartSuccess(product));
+  // } catch (error) {
+  //   const err = {
+  //     status: "error",
+  //     message: error.message,
+  //   };
+  //   dispatch(requestCartFail(err));
+  // }
+};
+
 export const removeFromCart = (_id) => async (dispatch) => {
   try {
     dispatch(cartRequestPending());
