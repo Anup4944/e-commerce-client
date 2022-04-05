@@ -5,6 +5,7 @@ const initialState = {
   status: "",
   message: "",
   orders: {},
+  purchaseHistory: [],
 };
 const checkOutSlice = createSlice({
   name: "checkOut",
@@ -19,7 +20,18 @@ const checkOutSlice = createSlice({
       state.message = payload.message;
       state.orders = payload.stripeRes;
     },
+    saveOrderSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.status = payload.status;
+      state.message = payload.message;
+      state.purchaseHistory = payload.savedOrder;
+    },
     checkoutFail: (state, { payload }) => {
+      state.isLoading = false;
+      state.status = payload.status;
+      state.message = payload.message;
+    },
+    saveOrderFail: (state, { payload }) => {
       state.isLoading = false;
       state.status = payload.status;
       state.message = payload.message;
@@ -28,6 +40,12 @@ const checkOutSlice = createSlice({
 });
 
 const { reducer, actions } = checkOutSlice;
-export const { checkoutPending, checkOutSuccess, checkoutFail } = actions;
+export const {
+  checkoutPending,
+  checkOutSuccess,
+  saveOrderSuccess,
+  saveOrderFail,
+  checkoutFail,
+} = actions;
 
 export default reducer;

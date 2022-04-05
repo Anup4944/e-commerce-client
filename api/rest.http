@@ -79,26 +79,30 @@ GET http://localHost:5001/api/v1/order/single
 Content-Type: application/json
 
 {
-  "_id": "62466b6aa9f2aaa3c342e7a7"
+  "_id": "6246eaa891314747f2fefad9"
 }
 
 
 // GET MONTHLY INCOME
+###
 GET http://localHost:5001/api/v1/order/income
+
+
 // SAVE ORDER
 ###
 POST http://localHost:5001/api/v1/order
 Content-Type: application/json
 
 {
-  "clientId" : "62466b6aa9f2aaa3c342e7a7",
+  "clientId" : "6246eaa891314747f2fefad9",
   "products" : [
     {
       "productId": "122356",
       "quantity": 20
     }  
   ],
-      "amount": 120,
-      "address": "10 queen highway"
+   "amount": 120,
+   "address": "10 queen highway",
+   "status":"success"
 }
 

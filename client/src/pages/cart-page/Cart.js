@@ -12,6 +12,7 @@ import { increaseCartQty, decreaseCartQty } from "./cartSlice";
 import StrikeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { checkOutSuccess, checkoutFail } from "../orders/checkOutSlice";
+import { saveOrderAction } from "../orders/checkOutAction";
 
 const Container = styled.div``;
 
@@ -213,7 +214,31 @@ const Cart = () => {
           }
         );
 
-        dispatch(checkOutSuccess(data));
+        const { stripeRes } = data;
+
+        console.log("Stripe response", stripeRes);
+
+        const productIdOnly = cart.map((item) => item._id).toString();
+        const qtyOnly = cart.map((item) => item.buyingItem).toString();
+        const saveOrder = [
+          {
+            clientId: clients._id,
+            products: [
+              {
+                productId: productIdOnly,
+                quantity: qtyOnly,
+              },
+            ],
+            amount: cartTotal,
+            address: stripeRes.billing_details.address,
+            status: stripeRes?.status,
+          },
+        ];
+
+        console.log("This has to be saved", saveOrder);
+
+        dispatch(checkOutSuccess(data)) && dispatch(saveOrderAction(saveOrder));
+
         data.status === "success"
           ? history.push("/purchase-history")
           : dispatch(checkoutFail(data));
@@ -223,7 +248,7 @@ const Cart = () => {
     };
 
     stripeToken && striepApi();
-  }, [stripeToken, cartTotal]);
+  }, [stripeToken, cartTotal, history]);
 
   return (
     <Container>
@@ -306,20 +331,25 @@ const Cart = () => {
               <SummaryItemText type="total">Total</SummaryItemText>
               <SummaryItemPrice>$ {cartTotal}</SummaryItemPrice>
             </SummaryItem>
-            <StrikeCheckout
-              name="ANUP"
-              description={`Your total is $${cartTotal}`}
-              // image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
-              panelLabel="PAY NOW"
-              billingAddress
-              shippingAddress
-              amount={cartTotal} // cents
-              currency="AUD"
-              token={onToken}
-              stripeKey={KEY}
 
-              // email="info@vidhub.co"
-            ></StrikeCheckout>
+            {stripeToken ? (
+              <span>Processing payment................</span>
+            ) : (
+              <StrikeCheckout
+                name="ANUP"
+                description={`Your total is $${cartTotal}`}
+                // image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
+                panelLabel="PAY NOW"
+                billingAddress
+                shippingAddress
+                amount={cartTotal} // cents
+                currency="AUD"
+                token={onToken}
+                stripeKey={KEY}
+
+                // email="info@vidhub.co"
+              ></StrikeCheckout>
+            )}
           </Summary>
         </Bottom>
       </Wrapper>
