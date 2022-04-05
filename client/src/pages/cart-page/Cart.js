@@ -180,7 +180,7 @@ const Cart = () => {
 
   const history = useHistory();
 
-  const { cart } = useSelector((state) => state.cart);
+  const { cart, orders } = useSelector((state) => state.cart);
   const { clients } = useSelector((state) => state.login);
 
   const KEY = process.env.REACT_APP_STRIPE_KEY;
@@ -229,8 +229,8 @@ const Cart = () => {
                 quantity: qtyOnly,
               },
             ],
-            amount: cartTotal,
-            address: stripeRes.billing_details.address,
+            amount: orders?.amount,
+            address: stripeRes?.billing_details.address,
             status: stripeRes?.status,
           },
         ];
