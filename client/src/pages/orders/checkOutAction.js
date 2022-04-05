@@ -1,5 +1,9 @@
 import { saveOrderApi } from "../../apiS/orderApi";
-import { saveOrderSuccess, saveOrderFail } from "./checkOutSlice";
+import {
+  saveOrderSuccess,
+  saveOrderFail,
+  checkOutSuccess,
+} from "./checkOutSlice";
 
 export const saveOrderAction = (orderData) => async (dispatch) => {
   try {

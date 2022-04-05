@@ -12,7 +12,7 @@ import { increaseCartQty, decreaseCartQty } from "./cartSlice";
 import StrikeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { checkOutSuccess, checkoutFail } from "../orders/checkOutSlice";
-import { saveOrderAction } from "../orders/checkOutAction";
+import { paymentAction, saveOrderAction } from "../orders/checkOutAction";
 
 const Container = styled.div``;
 
@@ -201,6 +201,8 @@ const Cart = () => {
     }
   }, 0);
 
+  console.log(cartTotal);
+
   useEffect(() => {
     const striepApi = async () => {
       try {
@@ -215,11 +217,13 @@ const Cart = () => {
         );
 
         const { stripeRes } = data;
-
         console.log("Stripe response", stripeRes);
 
         const productIdOnly = cart.map((item) => item._id).toString();
+
         const qtyOnly = cart.map((item) => item.buyingItem).toString();
+        console.log(productIdOnly, qtyOnly);
+
         const saveOrder = [
           {
             clientId: clients._id,
@@ -229,16 +233,12 @@ const Cart = () => {
                 quantity: qtyOnly,
               },
             ],
-            amount: orders?.amount,
+            amount: cartTotal,
             address: stripeRes?.billing_details.address,
             status: stripeRes?.status,
           },
         ];
-
-        console.log("This has to be saved", saveOrder);
-
         dispatch(checkOutSuccess(data)) && dispatch(saveOrderAction(saveOrder));
-
         data.status === "success"
           ? history.push("/purchase-history")
           : dispatch(checkoutFail(data));
@@ -246,7 +246,6 @@ const Cart = () => {
         console.log(error);
       }
     };
-
     stripeToken && striepApi();
   }, [stripeToken, cartTotal, history]);
 

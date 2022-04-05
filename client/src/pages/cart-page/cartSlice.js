@@ -5,8 +5,6 @@ const initialState = {
   status: "",
   message: "",
   cart: [],
-  finalPrice: "",
-  totalProduct: "",
 };
 
 const checkOutSlice = createSlice({

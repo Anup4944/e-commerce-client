@@ -44,7 +44,6 @@ const OrderSchema = mongoose.Schema(
     },
     status: {
       type: String,
-      default: "pending",
     },
   },
 

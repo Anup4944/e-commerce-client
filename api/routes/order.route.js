@@ -9,8 +9,9 @@ const router = express.Router();
 
 //CREATE ORDER OR SAVE ORDER AFTER PAYMENT
 router.post("/", async (req, res) => {
-  console.log("REQ BODY", req.body);
   const newOrder = req.body;
+
+  console.log("REQ BODY", req.body);
 
   try {
     const savedOrder = await saveOrder(newOrder);
