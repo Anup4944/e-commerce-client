@@ -75,12 +75,8 @@ GET http://localHost:5001/api/v1/order
 
 // GET ORDER BY CLIENT ID
 ###
-GET http://localHost:5001/api/v1/order/single
-Content-Type: application/json
+GET http://localHost:5001/api/v1/order/single/622ff2705966a728d4309ac1
 
-{
-  "_id": "622ff2705966a728d4309ac1"
-}
 
 
 // GET MONTHLY INCOME

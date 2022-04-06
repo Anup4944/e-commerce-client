@@ -52,7 +52,7 @@ const App = () => {
             <PaymentPage />
           </Route>
 
-          <Route exact path="/purchase-history">
+          <Route exact path="/purchase-history/:id">
             <PurchaseHistory />
           </Route>
         </Switch>

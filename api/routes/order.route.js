@@ -11,8 +11,6 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   const newOrder = req.body;
 
-  console.log("REQ BODY", req.body);
-
   try {
     const savedOrder = await saveOrder(newOrder);
 
@@ -60,9 +58,9 @@ router.get("/", async (req, res) => {
 });
 
 // GET ORDER BY CLIENT ID
-router.get("/single", async (req, res) => {
+router.get("/single/:_id", async (req, res) => {
   try {
-    const { _id } = req.body;
+    const { _id } = req.params;
 
     const result = await getOrderByClient(_id);
 

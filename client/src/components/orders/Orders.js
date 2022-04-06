@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrderByClientAction } from "../../pages/orders/checkOutAction";
 
 const Orders = () => {
-  const { orders } = useSelector((state) => state.checkOut);
+  const dispatch = useDispatch();
+
+  const { clients } = useSelector((state) => state.login);
+
+  useEffect(() => {
+    dispatch(getOrderByClientAction(clients._id));
+  }, [dispatch]);
   return <div>Orders</div>;
 };
 

@@ -180,7 +180,7 @@ const Cart = () => {
 
   const history = useHistory();
 
-  const { cart, orders } = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
   const { clients } = useSelector((state) => state.login);
 
   const KEY = process.env.REACT_APP_STRIPE_KEY;
@@ -201,8 +201,6 @@ const Cart = () => {
     }
   }, 0);
 
-  console.log(cartTotal);
-
   useEffect(() => {
     const striepApi = async () => {
       try {
@@ -222,7 +220,6 @@ const Cart = () => {
         const productIdOnly = cart.map((item) => item._id).toString();
 
         const qtyOnly = cart.map((item) => item.buyingItem).toString();
-        console.log(productIdOnly, qtyOnly);
 
         const saveOrder = {
           clientId: clients._id,
@@ -239,7 +236,7 @@ const Cart = () => {
 
         dispatch(checkOutSuccess(data)) && dispatch(saveOrderAction(saveOrder));
         data.status === "success"
-          ? history.push("/purchase-history")
+          ? history.push(`/purchase-history/${clients._id}`)
           : dispatch(checkoutFail(data));
       } catch (error) {
         console.log(error);
