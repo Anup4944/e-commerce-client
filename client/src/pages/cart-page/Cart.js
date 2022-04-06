@@ -217,27 +217,26 @@ const Cart = () => {
         );
 
         const { stripeRes } = data;
-        console.log("Stripe response", stripeRes);
+        console.log("Stripe response", stripeRes.amount);
 
         const productIdOnly = cart.map((item) => item._id).toString();
 
         const qtyOnly = cart.map((item) => item.buyingItem).toString();
         console.log(productIdOnly, qtyOnly);
 
-        const saveOrder = [
-          {
-            clientId: clients._id,
-            products: [
-              {
-                productId: productIdOnly,
-                quantity: qtyOnly,
-              },
-            ],
-            amount: cartTotal,
-            address: stripeRes?.billing_details.address,
-            status: stripeRes?.status,
-          },
-        ];
+        const saveOrder = {
+          clientId: clients._id,
+          products: [
+            {
+              productId: productIdOnly,
+              quantity: qtyOnly,
+            },
+          ],
+          amount: stripeRes.amount,
+          address: stripeRes.billing_details.address,
+          status: stripeRes.status,
+        };
+
         dispatch(checkOutSuccess(data)) && dispatch(saveOrderAction(saveOrder));
         data.status === "success"
           ? history.push("/purchase-history")
