@@ -1,7 +1,6 @@
 import OrderSchema from "./order.schema.js";
 
 export const saveOrder = (orderObj) => {
-  console.log("frm modal", orderObj);
   return OrderSchema(orderObj).save();
 };
 

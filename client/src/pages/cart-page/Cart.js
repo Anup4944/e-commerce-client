@@ -226,13 +226,8 @@ const Cart = () => {
 
         const saveOrder = {
           clientId: clients._id,
-          products: [
-            {
-              productId: productIdOnly,
-              quantity: qtyOnly,
-              products: cart,
-            },
-          ],
+          products: cart,
+
           amount: stripeRes.amount,
           address: stripeRes.billing_details.address,
           status: stripeRes.status,

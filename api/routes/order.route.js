@@ -14,8 +14,6 @@ router.post("/", async (req, res) => {
   try {
     const savedOrder = await saveOrder(newOrder);
 
-    console.log("SAVED ORDER", savedOrder);
-
     savedOrder._id
       ? res.send({
           status: "success",
@@ -63,6 +61,8 @@ router.get("/single/:_id", async (req, res) => {
     const { _id } = req.params;
 
     const result = await getOrderByClient(_id);
+
+    console.log(result.products);
 
     result.length
       ? res.send({

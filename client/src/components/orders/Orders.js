@@ -70,6 +70,7 @@ const Orders = () => {
   const { status, message, allOrders } = useSelector((state) => state.checkOut);
 
   console.log(allOrders);
+  console.log(allOrders.map((item) => item.products[0]));
 
   const sortByCreated = allOrders?.slice().sort((a, b) => {
     const dateA = new Date(a.createdAt);
@@ -85,7 +86,7 @@ const Orders = () => {
     <Container>
       <Header>{message}</Header>
 
-      {/* {sortByCreated?.length &&
+      {sortByCreated?.length &&
         sortByCreated.map((item) => {
           return (
             <Item>
@@ -101,14 +102,16 @@ const Orders = () => {
 
               <ItmWrapper>
                 <Amount>Order Details </Amount>
-                <Product>
-                  <ProductInfo>
-                    {item?.products?.map((prod) => prod.productId)}
-                  </ProductInfo>
-                  <ProductInfo>
-                    Total Qty : {item?.products?.map((prod) => prod.quantity)}
-                  </ProductInfo>
-                </Product>
+
+                {item?.products?.map((prod) => {
+                  return (
+                    <Product>
+                      <ProductInfo>{prod.title}</ProductInfo>
+                      <ProductInfo></ProductInfo>
+                    </Product>
+                  );
+                })}
+
                 <Amount>Shipping Address </Amount>
                 <Address>
                   {" "}
@@ -122,7 +125,7 @@ const Orders = () => {
               </ItmWrapper>
             </Item>
           );
-        })} */}
+        })}
     </Container>
   );
 };
