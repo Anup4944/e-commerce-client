@@ -181,7 +181,7 @@ const Cart = () => {
   const history = useHistory();
 
   const { cart } = useSelector((state) => state.cart);
-  const { clients } = useSelector((state) => state.login);
+  const { clients, isAuth } = useSelector((state) => state.login);
 
   const KEY = process.env.REACT_APP_STRIPE_KEY;
 
@@ -216,9 +216,13 @@ const Cart = () => {
 
         const { stripeRes } = data;
 
-        const productIdOnly = cart.map((item) => item._id).toString();
+        console.log(cart);
 
-        const qtyOnly = cart.map((item) => item.buyingItem).toString();
+        console.log(stripeRes);
+
+        const productIdOnly = cart.map((item) => item._id);
+
+        const qtyOnly = cart.map((item) => item.buyingItem);
 
         const saveOrder = {
           clientId: clients._id,
@@ -226,6 +230,7 @@ const Cart = () => {
             {
               productId: productIdOnly,
               quantity: qtyOnly,
+              products: cart,
             },
           ],
           amount: stripeRes.amount,
@@ -256,7 +261,11 @@ const Cart = () => {
             <TopText>Shopping Bag</TopText>
             <TopText>Your wishlist</TopText>
             <TopText
-              onClick={() => history.push(`/purchase-history/${clients._id}`)}
+              onClick={() =>
+                isAuth
+                  ? history.push(`/purchase-history/${clients._id}`)
+                  : alert("Please login to view your purchase hisrtory.")
+              }
             >
               Your purchase history
             </TopText>

@@ -12,14 +12,17 @@ const Container = styled.div`
 const Header = styled.h1`
   font-weight: 700;
   font-size: 30px;
+  font-family: "Courier New", Courier, monospace;
 `;
 
 const Item = styled.div`
+  display: flex;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   margin-top: 20px;
 `;
 
 const ItmWrapper = styled.div`
+  flex: 1;
   margin: 25px 10px;
   padding: 20px 20px;
   display: flex;
@@ -66,6 +69,8 @@ const Orders = () => {
   const { clients } = useSelector((state) => state.login);
   const { status, message, allOrders } = useSelector((state) => state.checkOut);
 
+  console.log(allOrders);
+
   const sortByCreated = allOrders?.slice().sort((a, b) => {
     const dateA = new Date(a.createdAt);
     const dateB = new Date(b.createdAt);
@@ -80,19 +85,21 @@ const Orders = () => {
     <Container>
       <Header>{message}</Header>
 
-      {sortByCreated?.length &&
+      {/* {sortByCreated?.length &&
         sortByCreated.map((item) => {
           return (
             <Item>
               <ItmWrapper>
-                <SubHeader>Order Number : {item._id}</SubHeader>
-                <SubHeader>
-                  Order Placed Date : {item.createdAt.toString()}
-                </SubHeader>
+                <SubHeader>Order Placed at {item.createdAt}</SubHeader>
+                <SubHeader>Order Number {item._id}</SubHeader>
+
                 <StatusBox>
                   <Amount>Status : </Amount> <Status> {item.status} </Status>
                 </StatusBox>
                 <Amount>Amount Paid : ${item.amount}</Amount>
+              </ItmWrapper>
+
+              <ItmWrapper>
                 <Amount>Order Details </Amount>
                 <Product>
                   <ProductInfo>
@@ -115,7 +122,7 @@ const Orders = () => {
               </ItmWrapper>
             </Item>
           );
-        })}
+        })} */}
     </Container>
   );
 };

@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
     savedOrder._id
       ? res.send({
           status: "success",
-          message: "Order has been saved",
+          message: "Order saved to history",
           savedOrder,
         })
       : res.send({

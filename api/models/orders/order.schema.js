@@ -6,17 +6,9 @@ const OrderSchema = mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Client",
     },
-    products: [
-      {
-        productId: {
-          type: Object,
-        },
-        quantity: {
-          type: Number,
-          default: 1,
-        },
-      },
-    ],
+    products: {
+      type: Array,
+    },
     amount: {
       type: Number,
       required: true,

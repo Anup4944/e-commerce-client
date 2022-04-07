@@ -75,7 +75,7 @@ GET http://localHost:5001/api/v1/order
 
 // GET ORDER BY CLIENT ID
 ###
-GET http://localHost:5001/api/v1/order/single/62274da7bfc6939716a4fcdd
+GET http://localHost:5001/api/v1/order/single/6246eaa891314747f2fefad9
 
 
 // GET MONTHLY INCOME
@@ -92,8 +92,7 @@ Content-Type: application/json
   "clientId" : "6246eaa891314747f2fefad9",
   "products" : [
     {
-      "productId": "122356",
-      "quantity": 20
+      
     }  
   ],
    "amount": 120,
