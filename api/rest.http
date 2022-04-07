@@ -75,8 +75,7 @@ GET http://localHost:5001/api/v1/order
 
 // GET ORDER BY CLIENT ID
 ###
-GET http://localHost:5001/api/v1/order/single/622ff2705966a728d4309ac1
-
+GET http://localHost:5001/api/v1/order/single/62274da7bfc6939716a4fcdd
 
 
 // GET MONTHLY INCOME

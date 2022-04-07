@@ -215,7 +215,6 @@ const Cart = () => {
         );
 
         const { stripeRes } = data;
-        console.log("Stripe response", stripeRes.amount);
 
         const productIdOnly = cart.map((item) => item._id).toString();
 
@@ -256,7 +255,11 @@ const Cart = () => {
           <TopTexts>
             <TopText>Shopping Bag</TopText>
             <TopText>Your wishlist</TopText>
-            <TopText>Your purchase history</TopText>
+            <TopText
+              onClick={() => history.push(`/purchase-history/${clients._id}`)}
+            >
+              Your purchase history
+            </TopText>
           </TopTexts>
           <TopButton type="fill">Check Out Now </TopButton>
         </Top>
