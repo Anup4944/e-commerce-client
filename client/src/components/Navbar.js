@@ -5,6 +5,7 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { logoutAction } from "../pages/login/loginAction";
 
 const Container = styled.div`
@@ -75,6 +76,7 @@ const Navbar = () => {
   const { isAuth, clients } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <Container>
@@ -105,7 +107,11 @@ const Navbar = () => {
           ) : (
             <>
               <Name>Hello ! {clients.firstName}</Name>
-              <MenuItem onClick={() => dispatch(logoutAction())}>
+              <MenuItem
+                onClick={() =>
+                  history.push("/login") && dispatch(logoutAction())
+                }
+              >
                 Sign Out{" "}
               </MenuItem>
             </>

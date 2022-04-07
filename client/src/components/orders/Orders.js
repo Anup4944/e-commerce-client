@@ -19,14 +19,35 @@ const Item = styled.div`
   margin-top: 20px;
 `;
 
+const ItmWrapper = styled.div`
+  margin: 25px 10px;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 const SubHeader = styled.h2`
   font-size: 20px;
-  font-weight: 300;
+  font-weight: 500;
+`;
+
+const StatusBox = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Amount = styled.h3`
   font-size: 20px;
   font-weight: 300;
+`;
+
+const Status = styled.span`
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 12px;
+  background-color: #c0c0c0;
+  color: green;
 `;
 
 const Product = styled.ul`
@@ -45,6 +66,13 @@ const Orders = () => {
   const { clients } = useSelector((state) => state.login);
   const { status, message, allOrders } = useSelector((state) => state.checkOut);
 
+  const sortByCreated = allOrders?.slice().sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+
+    return dateB - dateA;
+  });
+
   useEffect(() => {
     dispatch(getOrderByClientAction(clients._id));
   }, [dispatch]);
@@ -52,31 +80,39 @@ const Orders = () => {
     <Container>
       <Header>{message}</Header>
 
-      {allOrders?.length &&
-        allOrders.map((item) => {
+      {sortByCreated?.length &&
+        sortByCreated.map((item) => {
           return (
             <Item>
-              <SubHeader>Order Number : {item._id}</SubHeader>
-              <SubHeader>
-                Order Placed Date : {new Date(item._createdAt).toString()}{" "}
-              </SubHeader>
-              <Amount>Amount Paid : ${item.amount}</Amount>
-              <Amount>Shipping Address </Amount>
-              <Amount>Status : {item.status} </Amount>
-
-              <Product>
-                <ProductInfo></ProductInfo>
-              </Product>
-
-              <Address>
-                {" "}
-                <AddressInfo>
-                  {item.address.line1} , {item.address.state}{" "}
-                </AddressInfo>
-                <AddressInfo>
-                  {item.address.city} ,{item.address.country}{" "}
-                </AddressInfo>
-              </Address>
+              <ItmWrapper>
+                <SubHeader>Order Number : {item._id}</SubHeader>
+                <SubHeader>
+                  Order Placed Date : {item.createdAt.toString()}
+                </SubHeader>
+                <StatusBox>
+                  <Amount>Status : </Amount> <Status> {item.status} </Status>
+                </StatusBox>
+                <Amount>Amount Paid : ${item.amount}</Amount>
+                <Amount>Order Details </Amount>
+                <Product>
+                  <ProductInfo>
+                    {item?.products?.map((prod) => prod.productId)}
+                  </ProductInfo>
+                  <ProductInfo>
+                    Total Qty : {item?.products?.map((prod) => prod.quantity)}
+                  </ProductInfo>
+                </Product>
+                <Amount>Shipping Address </Amount>
+                <Address>
+                  {" "}
+                  <AddressInfo>
+                    {item?.address?.line1} , {item?.address?.state}{" "}
+                  </AddressInfo>
+                  <AddressInfo>
+                    {item?.address?.city} ,{item?.address?.country}{" "}
+                  </AddressInfo>
+                </Address>
+              </ItmWrapper>
             </Item>
           );
         })}
