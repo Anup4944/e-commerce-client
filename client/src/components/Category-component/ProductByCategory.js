@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getAllProductsByCategoryAction } from "../../pages/product/productAction";
 import Slider from "../Slider";
+import Product from "../Product";
 
 const Container = styled.div`
   padding: 20px 20px;
@@ -52,7 +53,6 @@ const ProductByCategory = () => {
           ? 0
           : sliderIndex + 1
       );
-      console.log(sliderIndex);
     }
   };
 
@@ -69,6 +69,9 @@ const ProductByCategory = () => {
           handleOnClick={handleOnClick}
         />
       </Container>
+      {productByCat?.map((item) => (
+        <Product item={item} key={item.id} _id={item._id} />
+      ))}
     </>
   );
 };

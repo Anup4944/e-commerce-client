@@ -10,6 +10,7 @@ import LoginPage from "./pages/login/LoginPage";
 import CategoryPage from "./pages/categories-page/CategoryPage";
 import PaymentPage from "./pages/payment-page/PaymentPage";
 import PurchaseHistory from "./pages/purchase-history/PurchaseHistory";
+import Categories from "./components/Categories";
 
 const App = () => {
   return (
@@ -26,6 +27,10 @@ const App = () => {
 
           <Route exact path="/categories">
             <CategoryPage />
+          </Route>
+
+          <Route exact path="/shop-by-category">
+            <Categories />
           </Route>
 
           <Route exact path="/register">

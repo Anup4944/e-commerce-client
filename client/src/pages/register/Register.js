@@ -75,10 +75,10 @@ const Warning = styled.div`
 `;
 
 const List = styled.ul`
-  margin: 5px 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 250px;
 `;
 
 const Items = styled.li`
@@ -93,12 +93,12 @@ const SuccessMg = styled.span`
 `;
 
 const initialState = {
-  firstName: "James",
-  lastName: "Maddison",
-  userName: "James123",
-  email: "jm@j.com",
-  password: "vangunneR@45",
-  confPass: "vangunneR@45",
+  firstName: "",
+  lastName: "",
+  userName: "",
+  email: "",
+  password: "",
+  confPass: "",
 };
 
 const passVerificationError = {

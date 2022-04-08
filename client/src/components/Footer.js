@@ -143,7 +143,7 @@ const Footer = () => {
           </ListItem>
           <ListItem>
             <ComputerRounded style={{ marginRight: "10px" }} />{" "}
-            <Link to="/categories" className="link">
+            <Link to="/shop-by-category" className="link">
               Shop by category
             </Link>
           </ListItem>
