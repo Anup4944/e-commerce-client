@@ -1,3 +1,5 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   Facebook,
   Instagram,
@@ -5,10 +7,20 @@ import {
   Phone,
   Room,
   Twitter,
+  HomeOutlined,
+  InvertColorsOutlined,
+  ComputerRounded,
+  AccountBox,
+  HistoryOutlined,
+  FavoriteOutlined,
+  SecurityOutlined,
+  CollectionsBookmarkOutlined,
 } from "@material-ui/icons";
-import React from "react";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   display: flex;
@@ -48,11 +60,12 @@ const SocialIcon = styled.div`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  background-color: #fcf5f5;
   ${mobile({ backgroundColor: "#eee" })}
 `;
 
 const Title = styled.h3`
-  margin-bottom: 3px;
+  margin-bottom: 8px;
 `;
 
 const List = styled.ul`
@@ -66,11 +79,16 @@ const List = styled.ul`
 const ListItem = styled.li`
   width: 50%;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
 `;
 
 const Center = styled.div`
   flex: 1;
   padding: 20px;
+  background-color: skyblue;
   ${mobile({ display: "none" })}
 `;
 
@@ -81,6 +99,7 @@ const ContactItem = styled.div`
 `;
 
 const Footer = () => {
+  const { isAuth, clients } = useSelector((state) => state.login);
   return (
     <Container>
       <Left>
@@ -101,15 +120,55 @@ const Footer = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Mens Fashion</ListItem>
-          <ListItem>Womens Fashion</ListItem>
-          <ListItem>Accessiories</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
+          <ListItem>
+            {" "}
+            <HomeOutlined style={{ marginRight: "10px" }} />
+            <Link to="/" className="link">
+              Home
+            </Link>
+          </ListItem>
+          <ListItem>
+            {" "}
+            <CollectionsBookmarkOutlined style={{ marginRight: "10px" }} />{" "}
+            <Link to="/product" className="link">
+              Products
+            </Link>
+          </ListItem>
+          <ListItem>
+            {" "}
+            <ShoppingCartOutlinedIcon style={{ marginRight: "10px" }} />{" "}
+            <Link to="/cart" className="link">
+              Cart
+            </Link>
+          </ListItem>
+          <ListItem>
+            <ComputerRounded style={{ marginRight: "10px" }} />{" "}
+            <Link to="/categories" className="link">
+              Shop by category
+            </Link>
+          </ListItem>
+          <ListItem>
+            {" "}
+            <AccountBox style={{ marginRight: "10px" }} />
+            My Account
+          </ListItem>
+          {isAuth ? (
+            <ListItem>
+              {" "}
+              <HistoryOutlined style={{ marginRight: "10px" }} />{" "}
+              <Link to={`/purchase-history/${clients._id}`} className="link">
+                Purchase History
+              </Link>
+            </ListItem>
+          ) : null}
+          <ListItem>
+            {" "}
+            <FavoriteOutlined style={{ marginRight: "10px" }} /> Wishlist
+          </ListItem>
+          <ListItem>
+            {" "}
+            <SecurityOutlined style={{ marginRight: "10px" }} /> Terms
+          </ListItem>
         </List>
       </Center>
       <Right>
