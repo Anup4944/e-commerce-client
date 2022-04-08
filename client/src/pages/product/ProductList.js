@@ -38,12 +38,6 @@ const Option = styled.option``;
 const ProductList = () => {
   const { allProducts } = useSelector((state) => state.product);
 
-  // const priceAcs = () => {
-  //   return allProducts.map((item) => {
-  //     item.price ? item.price : item.salePrice
-  //   });
-  // };
-
   return (
     <Container>
       <Navbar />

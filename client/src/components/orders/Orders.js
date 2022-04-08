@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getOrderByClientAction } from "../../pages/orders/checkOutAction";
+import Footer from "../Footer";
 
 const Container = styled.div`
   height: 100%;
