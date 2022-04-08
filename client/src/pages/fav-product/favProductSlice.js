@@ -4,7 +4,6 @@ const initialState = {
   isLoading: false,
   status: "",
   message: "",
-  savedFav: {},
   prodInfo: [],
 };
 const checkOutSlice = createSlice({
@@ -14,23 +13,23 @@ const checkOutSlice = createSlice({
     requestPending: (state) => {
       state.isLoading = true;
     },
-    saveFavProdSuccess: (state, { payload }) => {
-      state.isLoading = false;
-      state.status = payload.status;
-      state.message = payload.message;
-      state.savedFav = payload.savedFav;
-    },
+
     getFavProdByClientSuccess: (state, { payload }) => {
       state.isLoading = false;
       state.status = payload.status;
       state.message = payload.message;
-      state.prodInfo = payload.result;
+      state.prodInfo = payload.prodByClientId;
+    },
+    saveFavProdSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.status = payload.status;
+      state.message = payload.message;
+      state.prodInfo = payload.savedFav;
     },
     requestFail: (state, { payload }) => {
       state.isLoading = false;
       state.status = payload.status;
       state.message = payload.message;
-      state.allOrders = null;
     },
   },
 });

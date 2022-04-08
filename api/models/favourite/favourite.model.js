@@ -9,5 +9,6 @@ export const getAllFavourite = () => {
 };
 
 export const getFavouriteByClient = (_id) => {
+  console.log("form model", _id);
   return FavouriteSchema.find({ clientId: _id });
 };

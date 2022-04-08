@@ -118,5 +118,5 @@ Content-Type: application/json
 GET http://localHost:5001/api/v1/fav
 
 ###  GET ALL FAVOURITES BY CLIENT ID
-GET http://localHost:5001/api/v1/fav/6246eaa891314747f3fefad9
+GET http://localHost:5001/api/v1/fav/622ff2705966a728d4309ac1
 

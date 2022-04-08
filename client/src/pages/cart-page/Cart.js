@@ -246,7 +246,11 @@ const Cart = () => {
           <TopTexts>
             <TopText>Shopping Bag</TopText>
             <TopText
-              onClick={() => history.push(`/liked-product/${clients._id}`)}
+              onClick={() =>
+                isAuth
+                  ? history.push(`/liked-product/${clients._id}`)
+                  : alert("You must login to continue")
+              }
             >
               Your wishlist
             </TopText>

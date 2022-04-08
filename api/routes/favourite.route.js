@@ -13,7 +13,6 @@ router.post("/", async (req, res) => {
 
   try {
     const savedFav = await saveFavourite(newFav);
-
     savedFav
       ? res.send({
           status: "success",
@@ -37,7 +36,7 @@ router.get("/", async (req, res) => {
   try {
     const result = await getAllFavourite();
 
-    result
+    result.length
       ? res.send({
           status: "success",
           message: "Here are all favourites product",
@@ -45,7 +44,7 @@ router.get("/", async (req, res) => {
         })
       : res.send({
           status: "error",
-          message: "Unable to get favourites product , please try again later",
+          message: "No products in favourite.",
         });
   } catch (error) {
     res.send({
@@ -60,13 +59,15 @@ router.get("/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
 
-    const result = await getFavouriteByClient(_id);
+    const prodByClientId = await getFavouriteByClient(_id);
 
-    result.length
+    console.log("route", prodByClientId);
+
+    prodByClientId.length
       ? res.send({
           status: "success",
           message: "Your liked products",
-          result,
+          prodByClientId,
         })
       : res.send({
           status: "error",

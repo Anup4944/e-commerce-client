@@ -14,7 +14,6 @@ export const saveOrderApi = async (orderData) => {
 export const getOrderByClientApi = async (_id) => {
   try {
     const { data } = await axios.get(saveOrderUrl + `/${_id}`);
-
     return data;
   } catch (error) {
     console.log(error);
