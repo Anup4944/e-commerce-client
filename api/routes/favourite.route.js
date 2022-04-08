@@ -13,7 +13,8 @@ router.post("/", async (req, res) => {
 
   try {
     const savedFav = await saveFavourite(newFav);
-    savedFav
+
+    savedFav._id
       ? res.send({
           status: "success",
           message: "Product added to your liked list.",
@@ -61,8 +62,6 @@ router.get("/:_id", async (req, res) => {
 
     const prodByClientId = await getFavouriteByClient(_id);
 
-    console.log("route", prodByClientId);
-
     prodByClientId.length
       ? res.send({
           status: "success",
@@ -70,7 +69,7 @@ router.get("/:_id", async (req, res) => {
           prodByClientId,
         })
       : res.send({
-          status: "error",
+          status: "success",
           message: "You can view your liked products here",
         });
   } catch (error) {

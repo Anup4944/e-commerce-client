@@ -197,7 +197,6 @@ const SingleProduct = () => {
                           : alert("Please sign in to continue")
                       }
                     />
-                    {/* <Favorite /> */}
                   </IconContainer>
                 </AddContainer>
               </>

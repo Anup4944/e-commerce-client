@@ -5,6 +5,7 @@ const initialState = {
   status: "",
   message: "",
   prodInfo: [],
+  savedInfo: [],
 };
 const checkOutSlice = createSlice({
   name: "favourite",
@@ -13,8 +14,8 @@ const checkOutSlice = createSlice({
     requestPending: (state) => {
       state.isLoading = true;
     },
-
     getFavProdByClientSuccess: (state, { payload }) => {
+      console.log("payload", payload);
       state.isLoading = false;
       state.status = payload.status;
       state.message = payload.message;
@@ -24,7 +25,7 @@ const checkOutSlice = createSlice({
       state.isLoading = false;
       state.status = payload.status;
       state.message = payload.message;
-      state.prodInfo = payload.savedFav;
+      state.savedInfo = payload.savedFav;
     },
     requestFail: (state, { payload }) => {
       state.isLoading = false;

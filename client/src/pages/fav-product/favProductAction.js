@@ -28,8 +28,6 @@ export const getFavProdByClientAction = (_id) => async (dispatch) => {
 
     const result = await getFavProdByClientApi(_id);
 
-    console.log(result);
-
     result.status === "success"
       ? dispatch(getFavProdByClientSuccess(result))
       : dispatch(requestFail(result));

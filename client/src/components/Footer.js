@@ -162,7 +162,10 @@ const Footer = () => {
           ) : null}
           <ListItem>
             {" "}
-            <FavoriteOutlined style={{ marginRight: "10px" }} /> Wishlist
+            <FavoriteOutlined style={{ marginRight: "10px" }} />{" "}
+            <Link to={`/liked-product/${clients._id}`} className="link">
+              Liked Products
+            </Link>
           </ListItem>
           <ListItem>
             {" "}
