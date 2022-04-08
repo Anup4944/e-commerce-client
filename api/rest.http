@@ -100,3 +100,18 @@ Content-Type: application/json
    "status":"success"
 }
 
+
+################## FAVOURITES PRODUCTS ####################
+
+### SAVE TO FAVOURITE
+POST http://localHost:5001/api/v1/fav
+Content-Type: application/json
+
+{
+  "clientId" : "6246eaa891314747f2fefad9",
+  "products" : {
+    "name" :"Honda Car parts"
+  }
+}
+
+

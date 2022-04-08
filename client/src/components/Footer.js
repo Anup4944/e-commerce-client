@@ -8,7 +8,6 @@ import {
   Room,
   Twitter,
   HomeOutlined,
-  InvertColorsOutlined,
   ComputerRounded,
   AccountBox,
   HistoryOutlined,

@@ -3,7 +3,13 @@ import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
-import { AddCircleOutlined, RemoveCircleOutline } from "@material-ui/icons";
+import {
+  AddCircleOutlined,
+  Favorite,
+  FavoriteBorder,
+  HeadsetRounded,
+  RemoveCircleOutline,
+} from "@material-ui/icons";
 import { mobile } from "../../responsive";
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleProductsAction } from "./productAction";
@@ -89,6 +95,8 @@ const SuccessMg = styled.span`
   margin-top: 10px;
 `;
 
+const IconContainer = styled.div``;
+
 const SingleProduct = () => {
   const dispatch = useDispatch();
 
@@ -154,24 +162,32 @@ const SingleProduct = () => {
             )}
 
             {singleProduct?.isAvailable === true ? (
-              <AddContainer>
-                <AmountContainer>
-                  <RemoveCircleOutline
-                    ref={qtyRef}
-                    onClick={() => setNumber(number - 1)}
-                  />
-                  <Amount>{number}</Amount>
-                  <AddCircleOutlined
-                    ref={qtyRef}
-                    onClick={() => setNumber(number + 1)}
-                  />
-                </AmountContainer>
+              <>
+                <AddContainer>
+                  <AmountContainer>
+                    <RemoveCircleOutline
+                      ref={qtyRef}
+                      onClick={() => setNumber(number - 1)}
+                    />
+                    <Amount>{number}</Amount>
+                    <AddCircleOutlined
+                      ref={qtyRef}
+                      onClick={() => setNumber(number + 1)}
+                    />
+                  </AmountContainer>
 
-                {found === singleProduct._id && status === "success" ? (
-                  <SuccessMg>{message}</SuccessMg>
-                ) : null}
-                <Button onClick={handleOnClick}>ADD TO CART </Button>
-              </AddContainer>
+                  {found === singleProduct._id && status === "success" ? (
+                    <SuccessMg>{message}</SuccessMg>
+                  ) : null}
+                  <Button onClick={handleOnClick}>ADD TO CART </Button>
+                </AddContainer>
+                <AddContainer>
+                  <IconContainer>
+                    <FavoriteBorder style={{ cursor: "pointer" }} />
+                    <Favorite />
+                  </IconContainer>
+                </AddContainer>
+              </>
             ) : null}
           </InfoContainer>
         </Wrapper>

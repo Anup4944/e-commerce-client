@@ -92,6 +92,10 @@ const SuccessMg = styled.span`
   margin-top: 10px;
 `;
 
+const Error = styled.div`
+  color: red;
+  margin-top: 10px;
+`;
 const initialState = {
   firstName: "",
   lastName: "",
@@ -163,6 +167,7 @@ const Register = () => {
         <Title>Create an account</Title>
 
         {status === "success" && <SuccessMg>{message}</SuccessMg>}
+        {status === "error" && <Error>{message}</Error>}
         <Form onSubmit={handleOnSubmit}>
           <Input
             placeholder="Enter your first name"

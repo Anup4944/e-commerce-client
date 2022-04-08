@@ -33,6 +33,7 @@ import productRouter from "./routes/product.route.js";
 import categoryRouter from "./routes/categeory.route.js";
 import checkOutRouter from "./routes/checkOut.route.js";
 import orderRouter from "./routes/order.route.js";
+import favRouter from "./routes/favourite.route.js";
 
 //Use Api
 app.use("/api/v1/user", clientRouter);
@@ -40,7 +41,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/product", productRouter);
 app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/checkout", checkOutRouter);
-app.use("/api/v1/order", orderRouter);
+app.use("/api/v1/fav", favRouter);
 
 //404 return
 app.use((req, res, next) => {

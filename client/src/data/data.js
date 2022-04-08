@@ -19,7 +19,7 @@ export const sliderItems = [
 export const categoriesItem = [
   {
     id: 1,
-    img: "https://www.siliconindia.com/news/newsimages/Webp.net-resizeimage%20(18).jpg",
+    img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1201&q=80",
     title: "Electronics",
   },
   {
