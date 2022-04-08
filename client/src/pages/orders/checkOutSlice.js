@@ -25,7 +25,7 @@ const checkOutSlice = createSlice({
       state.isLoading = false;
       state.status = payload.status;
       state.message = payload.message;
-      state.purchaseHistory = payload.savedOrder;
+      state.allOrders = payload.savedOrder;
     },
     getOrderByClientSuccess: (state, { payload }) => {
       state.isLoading = false;
@@ -42,6 +42,7 @@ const checkOutSlice = createSlice({
       state.isLoading = false;
       state.status = payload.status;
       state.message = payload.message;
+      state.allOrders = null;
     },
   },
 });

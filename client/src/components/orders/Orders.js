@@ -67,10 +67,7 @@ const Orders = () => {
   const dispatch = useDispatch();
 
   const { clients } = useSelector((state) => state.login);
-  const { status, message, allOrders } = useSelector((state) => state.checkOut);
-
-  console.log(allOrders);
-  console.log(allOrders.map((item) => item.products[0]));
+  const { message, allOrders } = useSelector((state) => state.checkOut);
 
   const sortByCreated = allOrders?.slice().sort((a, b) => {
     const dateA = new Date(a.createdAt);

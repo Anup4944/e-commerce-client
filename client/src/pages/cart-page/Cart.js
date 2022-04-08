@@ -216,18 +216,9 @@ const Cart = () => {
 
         const { stripeRes } = data;
 
-        console.log(cart);
-
-        console.log(stripeRes);
-
-        const productIdOnly = cart.map((item) => item._id);
-
-        const qtyOnly = cart.map((item) => item.buyingItem);
-
         const saveOrder = {
           clientId: clients._id,
           products: cart,
-
           amount: stripeRes.amount,
           address: stripeRes.billing_details.address,
           status: stripeRes.status,

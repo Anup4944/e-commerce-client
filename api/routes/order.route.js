@@ -62,8 +62,6 @@ router.get("/single/:_id", async (req, res) => {
 
     const result = await getOrderByClient(_id);
 
-    console.log(result.products);
-
     result.length
       ? res.send({
           status: "success",
