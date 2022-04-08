@@ -114,4 +114,9 @@ Content-Type: application/json
   }
 }
 
+###  GET ALL FAVOURITES PRODUCTS
+GET http://localHost:5001/api/v1/fav
+
+###  GET ALL FAVOURITES BY CLIENT ID
+GET http://localHost:5001/api/v1/fav/6246eaa891314747f3fefad9
 

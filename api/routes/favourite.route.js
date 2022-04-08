@@ -1,5 +1,9 @@
 import express from "express";
-import { saveFavourite } from "../models/favourite/favourite.model.js";
+import {
+  saveFavourite,
+  getAllFavourite,
+  getFavouriteByClient,
+} from "../models/favourite/favourite.model.js";
 
 const router = express.Router();
 
@@ -52,7 +56,7 @@ router.get("/", async (req, res) => {
 });
 
 // GET FAVOURITE BY CLIENT ID
-router.get("/single/:_id", async (req, res) => {
+router.get("/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
 
