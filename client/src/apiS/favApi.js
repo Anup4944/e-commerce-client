@@ -2,9 +2,9 @@ import axios from "axios";
 
 const saveFavOrderUrl = "http://localHost:5001/api/v1/fav";
 
-export const saveFavOrderApi = async (orderData) => {
+export const saveFavOrderApi = async (prodDt) => {
   try {
-    const { data } = await axios.post(saveFavOrderUrl, orderData);
+    const { data } = await axios.post(saveFavOrderUrl, prodDt);
     return data;
   } catch (error) {
     console.log(error);
@@ -13,7 +13,8 @@ export const saveFavOrderApi = async (orderData) => {
 
 export const getFavOrderByClientApi = async (_id) => {
   try {
-    const { data } = await axios.get(saveOrderUrl + `/${_id}`);
+    const { data } = await axios.get(saveFavOrderUrl + `/${_id}`);
+    console.log(data);
     return data;
   } catch (error) {
     console.log(error);

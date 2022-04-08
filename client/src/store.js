@@ -17,7 +17,7 @@ const store = configureStore({
     cart: cartReducer,
     category: categoryReducer,
     checkOut: checkOutReducer,
-    favProd: favProductReducer,
+    favourite: favProductReducer,
   },
 });
 

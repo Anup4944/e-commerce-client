@@ -56,7 +56,7 @@ router.get("/", async (req, res) => {
 });
 
 // GET ORDER BY CLIENT ID
-router.get("/single/:_id", async (req, res) => {
+router.get("/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
 

@@ -22,7 +22,7 @@ export const saveFavProdAction = (prdDt) => async (dispatch) => {
     dispatch(requestFail(err));
   }
 };
-export const getOrderByClientAction = (_id) => async (dispatch) => {
+export const getFavProdByClientAction = (_id) => async (dispatch) => {
   try {
     dispatch(requestPending());
 

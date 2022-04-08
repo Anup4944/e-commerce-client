@@ -16,6 +16,7 @@ import { getSingleProductsAction } from "./productAction";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../cart-page/cartAction";
 import ImageSlider from "../../components/iamge-slider/ImageSlider";
+import { saveFavProdAction } from "../fav-product/favProductAction";
 
 const Container = styled.div``;
 
@@ -103,7 +104,7 @@ const SingleProduct = () => {
   const [number, setNumber] = useState(1);
 
   const { singleProduct } = useSelector((state) => state.product);
-  const { isAuth } = useSelector((state) => state.login);
+  const { isAuth, clients } = useSelector((state) => state.login);
 
   const [currentImg, setCurrentImg] = useState(0);
   let { id } = useParams();
@@ -115,6 +116,11 @@ const SingleProduct = () => {
   const cartId = cart.map((item) => item._id);
 
   const found = cartId.find((item) => item === id);
+
+  const savedProd = {
+    clientId: clients._id,
+    products: singleProduct,
+  };
 
   const handleOnClick = () => {
     const buyingItem = number;
@@ -183,8 +189,15 @@ const SingleProduct = () => {
                 </AddContainer>
                 <AddContainer>
                   <IconContainer>
-                    <FavoriteBorder style={{ cursor: "pointer" }} />
-                    <Favorite />
+                    <FavoriteBorder
+                      style={{ cursor: "pointer" }}
+                      onClick={() =>
+                        isAuth
+                          ? dispatch(saveFavProdAction(savedProd))
+                          : alert("Please sign in to continue")
+                      }
+                    />
+                    {/* <Favorite /> */}
                   </IconContainer>
                 </AddContainer>
               </>
