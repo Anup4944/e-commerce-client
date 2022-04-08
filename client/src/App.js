@@ -11,6 +11,7 @@ import CategoryPage from "./pages/categories-page/CategoryPage";
 import PaymentPage from "./pages/payment-page/PaymentPage";
 import PurchaseHistory from "./pages/purchase-history/PurchaseHistory";
 import Categories from "./components/Categories";
+import FavProduct from "./pages/fav-product/FavProduct";
 
 const App = () => {
   return (
@@ -59,6 +60,10 @@ const App = () => {
 
           <Route exact path="/purchase-history/:id">
             <PurchaseHistory />
+          </Route>
+
+          <Route exact path="/liked-product/:id">
+            <FavProduct />
           </Route>
         </Switch>
       </Router>

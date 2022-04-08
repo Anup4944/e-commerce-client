@@ -245,7 +245,11 @@ const Cart = () => {
           <TopButton onClick={goBack}>Continue Shopping</TopButton>
           <TopTexts>
             <TopText>Shopping Bag</TopText>
-            <TopText>Your wishlist</TopText>
+            <TopText
+              onClick={() => history.push(`/liked-product/${clients._id}`)}
+            >
+              Your wishlist
+            </TopText>
             <TopText
               onClick={() =>
                 isAuth

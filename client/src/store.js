@@ -6,6 +6,7 @@ import productReducer from "./pages/product/productSlice";
 import cartReducer from "./pages/cart-page/cartSlice";
 import categoryReducer from "./pages/categories-page/categorySlice";
 import checkOutReducer from "./pages/orders/checkOutSlice";
+import favProductReducer from "./pages/fav-product/favProductSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     cart: cartReducer,
     category: categoryReducer,
     checkOut: checkOutReducer,
+    favProd: favProductReducer,
   },
 });
 
