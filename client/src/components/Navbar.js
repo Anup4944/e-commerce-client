@@ -69,7 +69,7 @@ const Logo = styled.h1`
 `;
 const Name = styled.h1`
   font-size: 15px;
-  ${mobile({ fontSize: "24px" })}
+  ${mobile({ fontSize: "15px" })}
 `;
 
 const Navbar = () => {

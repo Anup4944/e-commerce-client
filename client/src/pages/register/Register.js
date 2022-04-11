@@ -18,13 +18,14 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  ${mobile({ width: "auto", padding: "60px 20px" })}
 `;
 
 const Wrapper = styled.div`
   padding: 20px;
   width: 40%;
   background-color: white;
-  ${mobile({ width: "75%" })}
+  ${mobile({ width: "80%" })}
 `;
 
 const Title = styled.h1`
@@ -37,6 +38,7 @@ const Title = styled.h1`
 const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Input = styled.input`
@@ -44,6 +46,7 @@ const Input = styled.input`
   min-width: 40%;
   margin: 20px 10px 10px 0px;
   padding: 10px;
+  ${mobile({ height: "10px", width: "90%" })}
 `;
 
 const Agreement = styled.span`
@@ -62,6 +65,12 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   margin-top: 10px;
+  ${mobile({
+    width: "50%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  })}
 `;
 
 const linkStyle = {
@@ -72,17 +81,23 @@ const linkStyle = {
 const Warning = styled.div`
   margin-top: 3px;
   color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const List = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 250px;
+  ${mobile({ fontSize: "10px" })}
 `;
 
 const Items = styled.li`
   margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   list-style: none;
   color: red;
 `;

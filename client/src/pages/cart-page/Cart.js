@@ -42,16 +42,18 @@ const TopButton = styled.button`
   background-color: ${(props) =>
     props.type === "fill" ? "black" : "transparent"};
   color: ${(props) => props.type === "fill" && "white"};
-`;
-
-const TopTexts = styled.div`
   ${mobile({ display: "none" })}
 `;
+
+const TopTexts = styled.div``;
 
 const TopText = styled.span`
   cursor: pointer;
   text-decoration: underline;
   margin: 0px 10px;
+  ${mobile({
+    fontSize: "12px",
+  })}
 `;
 
 const Bottom = styled.div`
@@ -74,10 +76,13 @@ const ProductDetails = styled.div`
   flex: 2;
   display: flex;
   border: 1px solid grey;
+
+  ${mobile({ border: "none", flexDirection: "column" })}
 `;
 
 const Image = styled.img`
   width: 200px;
+  ${mobile({ width: "auto" })}
 `;
 
 const Details = styled.div`
@@ -85,20 +90,14 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  ${mobile({ fontSize: "15px" })}
 `;
 
-const ProductName = styled.span``;
+const ProductName = styled.span`
+  ${mobile({ display: "flex" })}
+`;
 
 const ProductId = styled.span``;
-
-const ProductColor = styled.span`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-`;
-
-const ProductSize = styled.span``;
 
 const PriceDetail = styled.div`
   flex: 1;
@@ -106,6 +105,7 @@ const PriceDetail = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  ${mobile({ fontSize: "10px" })}
 `;
 
 const ProductAmountContainer = styled.div`
@@ -182,8 +182,6 @@ const Cart = () => {
 
   const { cart } = useSelector((state) => state.cart);
   const { clients, isAuth } = useSelector((state) => state.login);
-
-  console.log(clients.email);
 
   const KEY = process.env.REACT_APP_STRIPE_KEY;
 

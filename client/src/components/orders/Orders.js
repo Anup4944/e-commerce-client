@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-
+import { mobile } from "../../responsive";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrderByClientAction } from "../../pages/orders/checkOutAction";
-import Footer from "../Footer";
 
 const Container = styled.div`
   height: 100%;
   padding: 20px 20px;
+  ${mobile({ width: "100%" })}
 `;
 
 const Header = styled.h1`
@@ -29,11 +29,13 @@ const ItmWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const SubHeader = styled.h2`
   font-size: 20px;
   font-weight: 500;
+  ${mobile({ fontSize: "13px" })}
 `;
 
 const StatusBox = styled.div`
@@ -61,6 +63,7 @@ const ProductInfo = styled.li``;
 
 const Address = styled.ul`
   list-style-type: none;
+  ${mobile({ fontSize: "13px" })}
 `;
 const AddressInfo = styled.li``;
 

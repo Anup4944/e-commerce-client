@@ -88,7 +88,6 @@ const Center = styled.div`
   flex: 1;
   padding: 20px;
   background-color: skyblue;
-  ${mobile({ display: "none" })}
 `;
 
 const ContactItem = styled.div`
