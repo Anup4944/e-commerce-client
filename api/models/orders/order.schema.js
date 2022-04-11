@@ -6,6 +6,9 @@ const OrderSchema = mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Client",
     },
+    clientId: {
+      type: String,
+    },
     products: {
       type: Array,
     },

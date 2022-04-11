@@ -71,11 +71,10 @@ const Orders = () => {
   const { message, allOrders } = useSelector((state) => state.checkOut);
 
   const sortByCreated = allOrders?.slice().sort((a, b) => {
-    // const dateA = new Date(a.createdAt);
-    // const dateB = new Date(b.createdAt);
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
 
-    // return dateB - dateA;
-    return b.createdAt - a.createdAt;
+    return dateB - dateA;
   });
 
   useEffect(() => {

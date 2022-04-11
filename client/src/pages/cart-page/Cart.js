@@ -218,6 +218,7 @@ const Cart = () => {
 
         const saveOrder = {
           clientId: clients._id,
+          email: clients.email,
           products: cart,
           amount: stripeRes.amount,
           address: stripeRes.billing_details.address,
@@ -225,8 +226,11 @@ const Cart = () => {
         };
 
         dispatch(checkOutSuccess(data)) && dispatch(saveOrderAction(saveOrder));
+        // data.status === "success"
+        //   ? history.push(`/purchase-history/${clients._id}`)
+        //   : dispatch(checkoutFail(data));
         data.status === "success"
-          ? history.push(`/purchase-history/${clients._id}`)
+          ? history.push(`/success`)
           : dispatch(checkoutFail(data));
       } catch (error) {
         console.log(error);

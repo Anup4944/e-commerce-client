@@ -12,6 +12,7 @@ import PaymentPage from "./pages/payment-page/PaymentPage";
 import PurchaseHistory from "./pages/purchase-history/PurchaseHistory";
 import Categories from "./components/Categories";
 import FavProduct from "./pages/fav-product/FavProduct";
+import ThankYou from "./pages/ThankYou";
 
 const App = () => {
   return (
@@ -56,6 +57,10 @@ const App = () => {
 
           <Route exact path="/payment">
             <PaymentPage />
+          </Route>
+
+          <Route exact path="/success">
+            <ThankYou />
           </Route>
 
           <Route exact path="/purchase-history/:id">
