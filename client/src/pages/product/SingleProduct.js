@@ -207,7 +207,14 @@ const SingleProduct = () => {
                         }
                       />
                     ) : (
-                      <FavoriteOutlined />
+                      <FavoriteOutlined
+                        style={{ cursor: "pointer" }}
+                        onClick={() =>
+                          isAuth
+                            ? dispatch(removeFavProdAction(id))
+                            : alert("Please sign in to continue")
+                        }
+                      />
                     )}
                   </IconContainer>
                 </AddContainer>

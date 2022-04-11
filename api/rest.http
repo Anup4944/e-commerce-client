@@ -121,5 +121,5 @@ GET http://localHost:5001/api/v1/fav
 GET http://localHost:5001/api/v1/fav/622ff2705966a728d4309ac1
 
 ### DELETE ITEM FROM FAV LIST
-DELETE http://localHost:5001/api/v1/fav/6251057bee6328560007f9ac
+DELETE http://localHost:5001/api/v1/fav/622ffca3bd6e88b06b10dec6
 

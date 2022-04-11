@@ -62,6 +62,8 @@ router.delete("/:_id", async (req, res) => {
 
     const result = await removeFavouriteByProdId(_id);
 
+    console.log(result);
+
     result
       ? res.send({
           status: "success",

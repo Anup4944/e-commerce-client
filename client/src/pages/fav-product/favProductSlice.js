@@ -29,11 +29,12 @@ const checkOutSlice = createSlice({
       state.prodInfo = payload.savedFav.products;
     },
     removeFavProdSuccess: (state, { payload }) => {
-      const filterCart = state.cart.filter((row) => row._id !== payload);
+      console.log(payload);
+      // const filterProd = state.savedInfo.filter((row) => row._id !== payload);
       state.isLoading = false;
       state.status = payload.status;
       state.message = payload.message;
-      state.savedInfo = filterCart;
+      // state.savedInfo = filterProd;
     },
     requestFail: (state, { payload }) => {
       state.isLoading = false;

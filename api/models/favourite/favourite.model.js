@@ -8,7 +8,9 @@ export const getAllFavourite = () => {
   return FavouriteSchema.find();
 };
 export const removeFavouriteByProdId = (_id) => {
-  return FavouriteSchema.findByIdAndDelete(_id);
+  return FavouriteSchema.findByIdAndDelete({
+    _id: products._id,
+  }).remove();
 };
 
 export const getFavouriteByClient = (_id) => {

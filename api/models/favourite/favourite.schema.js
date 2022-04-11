@@ -9,6 +9,10 @@ const FavouriteSchema = mongoose.Schema(
     products: {
       type: Array,
     },
+    productId: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Product",
+    },
   },
 
   {
