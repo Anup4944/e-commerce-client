@@ -78,9 +78,7 @@ GET http://localHost:5001/api/v1/order
 GET http://localHost:5001/api/v1/order/622ff2705966a728d4309ac1
 
 
-// GET MONTHLY INCOME
-###
-GET http://localHost:5001/api/v1/order/income
+
 
 
 // SAVE ORDER
