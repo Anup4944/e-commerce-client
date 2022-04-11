@@ -3,6 +3,7 @@ import {
   saveFavourite,
   getAllFavourite,
   getFavouriteByClient,
+  removeFavouriteByProdId,
 } from "../models/favourite/favourite.model.js";
 
 const router = express.Router();
@@ -55,6 +56,29 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.delete("/:_id", async (req, res) => {
+  try {
+    const { _id } = req.params;
+
+    const result = await removeFavouriteByProdId(_id);
+
+    result
+      ? res.send({
+          status: "success",
+          message: "Item removed form your liked list",
+        })
+      : res.send({
+          status: "error",
+          message: "Please try again later",
+        });
+  } catch (error) {
+    res.send({
+      status: "error",
+      message: "Unable to get order , please try again later",
+    });
+  }
+});
+
 // GET FAVOURITE BY CLIENT ID
 router.get("/:_id", async (req, res) => {
   try {
@@ -62,11 +86,15 @@ router.get("/:_id", async (req, res) => {
 
     const prodByClientId = await getFavouriteByClient(_id);
 
-    prodByClientId.length
+    const onlyProdDt =
+      prodByClientId?.length &&
+      prodByClientId.map((item) => item.products).flat(1);
+
+    onlyProdDt.length
       ? res.send({
           status: "success",
           message: "Your liked products",
-          prodByClientId,
+          onlyProdDt,
         })
       : res.send({
           status: "success",

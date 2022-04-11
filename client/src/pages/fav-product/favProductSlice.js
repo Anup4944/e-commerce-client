@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoading: false,
+  isLiked: false,
   status: "",
   message: "",
   prodInfo: [],
@@ -15,17 +16,24 @@ const checkOutSlice = createSlice({
       state.isLoading = true;
     },
     getFavProdByClientSuccess: (state, { payload }) => {
-      console.log("payload", payload);
       state.isLoading = false;
       state.status = payload.status;
       state.message = payload.message;
-      state.prodInfo = payload.prodByClientId;
+      state.prodInfo = payload.onlyProdDt;
     },
     saveFavProdSuccess: (state, { payload }) => {
       state.isLoading = false;
+      state.isLiked = true;
       state.status = payload.status;
       state.message = payload.message;
-      state.savedInfo = payload.savedFav;
+      state.prodInfo = payload.savedFav.products;
+    },
+    removeFavProdSuccess: (state, { payload }) => {
+      const filterCart = state.cart.filter((row) => row._id !== payload);
+      state.isLoading = false;
+      state.status = payload.status;
+      state.message = payload.message;
+      state.savedInfo = filterCart;
     },
     requestFail: (state, { payload }) => {
       state.isLoading = false;
@@ -41,6 +49,7 @@ export const {
   getFavProdSuccess,
   saveFavProdSuccess,
   getFavProdByClientSuccess,
+  removeFavProdSuccess,
   requestFail,
 } = actions;
 

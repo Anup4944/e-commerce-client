@@ -1,11 +1,15 @@
 import {
+  FavoriteBorder,
   FavoriteBorderOutlined,
+  FavoriteOutlined,
   SearchOutlined,
   ShoppingBasketOutlined,
 } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { saveFavProdAction } from "../pages/fav-product/favProductAction";
 
 const Info = styled.div`
   opacity: 0;
@@ -68,6 +72,12 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item, _id }) => {
+  const dispatch = useDispatch();
+  const { prodInfo } = useSelector((state) => state.favourite);
+
+  const foundId = prodInfo?.map((item) => item._id);
+
+  const checkId = foundId?.includes(_id);
   return (
     <Container>
       <Circle />
@@ -81,9 +91,7 @@ const Product = ({ item, _id }) => {
             <SearchOutlined />
           </Link>
         </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
-        </Icon>
+        <Icon>{!checkId ? <FavoriteBorder /> : <FavoriteOutlined />}</Icon>
       </Info>
     </Container>
   );

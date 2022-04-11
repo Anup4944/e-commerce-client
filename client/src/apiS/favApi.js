@@ -11,6 +11,17 @@ export const saveFavOrderApi = async (prodDt) => {
   }
 };
 
+export const removeFavOrderApi = async (_id) => {
+  try {
+    const { data } = await axios.delete(
+      `http://localHost:5001/api/v1/fav/${_id}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getFavProdByClientApi = async (_id) => {
   try {
     const { data } = await axios.get(`http://localHost:5001/api/v1/fav/${_id}`);

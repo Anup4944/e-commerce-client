@@ -7,6 +7,9 @@ export const saveFavourite = (favouriteObj) => {
 export const getAllFavourite = () => {
   return FavouriteSchema.find();
 };
+export const removeFavouriteByProdId = (_id) => {
+  return FavouriteSchema.findByIdAndDelete(_id);
+};
 
 export const getFavouriteByClient = (_id) => {
   return FavouriteSchema.find({ clientId: _id });

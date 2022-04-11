@@ -120,3 +120,6 @@ GET http://localHost:5001/api/v1/fav
 ###  GET ALL FAVOURITES BY CLIENT ID
 GET http://localHost:5001/api/v1/fav/622ff2705966a728d4309ac1
 
+### DELETE ITEM FROM FAV LIST
+DELETE http://localHost:5001/api/v1/fav/6251057bee6328560007f9ac
+

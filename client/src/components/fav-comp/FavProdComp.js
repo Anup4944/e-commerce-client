@@ -3,9 +3,12 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getFavProdByClientAction } from "../../pages/fav-product/favProductAction";
+import Product from "../Product";
 
 const Container = styled.div`
-  height: 100vh;
+  height: 100%;
+  margin: 10px 0px;
+  padding: 20px 20px;
 `;
 
 const FavProdComp = () => {
@@ -14,14 +17,12 @@ const FavProdComp = () => {
 
   const { prodInfo, message } = useSelector((state) => state.favourite);
 
-  const sortByCreated = prodInfo?.slice().sort((a, b) => {
-    const dateA = new Date(a.createdAt);
-    const dateB = new Date(b.createdAt);
+  // const sortByCreated = prodInfo?.slice().sort((a, b) => {
+  //   const dateA = new Date(a.createdAt);
+  //   const dateB = new Date(b.createdAt);
 
-    return dateB - dateA;
-  });
-
-  console.log(sortByCreated);
+  //   return dateB - dateA;
+  // });
 
   useEffect(() => {
     dispatch(getFavProdByClientAction(id));
@@ -31,9 +32,9 @@ const FavProdComp = () => {
     <>
       <Container>
         {message}
-        {sortByCreated?.length &&
-          sortByCreated.map((item) => {
-            return <h1>{item.products[0].title}</h1>;
+        {prodInfo?.length &&
+          prodInfo.map((item) => {
+            return <Product item={item} key={item.id} _id={item._id} />;
           })}
       </Container>
     </>

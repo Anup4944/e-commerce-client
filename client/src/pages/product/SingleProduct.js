@@ -7,6 +7,7 @@ import {
   AddCircleOutlined,
   Favorite,
   FavoriteBorder,
+  FavoriteOutlined,
   HeadsetRounded,
   RemoveCircleOutline,
 } from "@material-ui/icons";
@@ -16,7 +17,10 @@ import { getSingleProductsAction } from "./productAction";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../cart-page/cartAction";
 import ImageSlider from "../../components/iamge-slider/ImageSlider";
-import { saveFavProdAction } from "../fav-product/favProductAction";
+import {
+  removeFavProdAction,
+  saveFavProdAction,
+} from "../fav-product/favProductAction";
 
 const Container = styled.div``;
 
@@ -105,17 +109,21 @@ const SingleProduct = () => {
 
   const { singleProduct } = useSelector((state) => state.product);
   const { isAuth, clients } = useSelector((state) => state.login);
+  const { message, status, cart } = useSelector((state) => state.cart);
+  const { isLiked, prodInfo } = useSelector((state) => state.favourite);
 
   const [currentImg, setCurrentImg] = useState(0);
   let { id } = useParams();
 
   const qtyRef = useRef();
 
-  const { message, status, cart } = useSelector((state) => state.cart);
-
   const cartId = cart.map((item) => item._id);
 
   const found = cartId.find((item) => item === id);
+
+  const foundId = prodInfo?.map((item) => item._id);
+
+  const checkId = foundId?.includes(id);
 
   const savedProd = {
     clientId: clients._id,
@@ -189,14 +197,18 @@ const SingleProduct = () => {
                 </AddContainer>
                 <AddContainer>
                   <IconContainer>
-                    <FavoriteBorder
-                      style={{ cursor: "pointer" }}
-                      onClick={() =>
-                        isAuth
-                          ? dispatch(saveFavProdAction(savedProd))
-                          : alert("Please sign in to continue")
-                      }
-                    />
+                    {!checkId ? (
+                      <FavoriteBorder
+                        style={{ cursor: "pointer" }}
+                        onClick={() =>
+                          isAuth
+                            ? dispatch(saveFavProdAction(savedProd))
+                            : alert("Please sign in to continue")
+                        }
+                      />
+                    ) : (
+                      <FavoriteOutlined />
+                    )}
                   </IconContainer>
                 </AddContainer>
               </>
