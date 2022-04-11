@@ -34,6 +34,12 @@ const productSlice = createSlice({
       state.message = payload.message;
       state.productByCat = payload.allProducts;
     },
+    // getProductsByNewestSuccess: (state, { payload }) => {
+    //   console.log(payload);
+    //   state.status = "success";
+    //   state.message = "By newest";
+    //   state.allProducts = payload.byDate;
+    // },
     productRequestFail: (state, { payload }) => {
       state.isLoading = false;
       state.status = payload.status;
@@ -49,6 +55,7 @@ export const {
   getSingleProductSuccess,
   productRequestFail,
   getProductsByCategorySuccess,
+  getProductsByNewestSuccess,
 } = actions;
 
 export default reducer;

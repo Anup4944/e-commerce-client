@@ -183,6 +183,8 @@ const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
   const { clients, isAuth } = useSelector((state) => state.login);
 
+  console.log(clients.email);
+
   const KEY = process.env.REACT_APP_STRIPE_KEY;
 
   const goBack = () => {
@@ -209,7 +211,6 @@ const Cart = () => {
           {
             tokenId: stripeToken.id,
             amount: cartTotal,
-            email: clients.email,
             name: clients.firstName + clients.lastName,
           }
         );
@@ -226,9 +227,7 @@ const Cart = () => {
         };
 
         dispatch(checkOutSuccess(data)) && dispatch(saveOrderAction(saveOrder));
-        // data.status === "success"
-        //   ? history.push(`/purchase-history/${clients._id}`)
-        //   : dispatch(checkoutFail(data));
+
         data.status === "success"
           ? history.push(`/success`)
           : dispatch(checkoutFail(data));

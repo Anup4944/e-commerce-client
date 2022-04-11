@@ -8,7 +8,7 @@ const ThankYou = () => {
     <>
       <Navbar />
       <Announcement />
-      ThankYou
+      Thank you fro choosing us.
       <Footer />
     </>
   );

@@ -6,9 +6,6 @@ const OrderSchema = mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Client",
     },
-    clientId: {
-      type: String,
-    },
     products: {
       type: Array,
     },
@@ -36,6 +33,9 @@ const OrderSchema = mongoose.Schema(
       state: {
         type: String,
       },
+    },
+    email: {
+      type: String,
     },
     status: {
       type: String,

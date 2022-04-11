@@ -70,12 +70,9 @@ const Orders = () => {
   const { clients } = useSelector((state) => state.login);
   const { message, allOrders } = useSelector((state) => state.checkOut);
 
-  const sortByCreated = allOrders?.slice().sort((a, b) => {
-    const dateA = new Date(a.createdAt);
-    const dateB = new Date(b.createdAt);
-
-    return dateB - dateA;
-  });
+  // const sortByCreated = allOrders?.slice().sort((a, b) => {
+  //   return b.createdAt - a.createdAt;
+  // });
 
   useEffect(() => {
     dispatch(getOrderByClientAction(clients._id));
@@ -84,8 +81,8 @@ const Orders = () => {
     <Container>
       <Header>{message}</Header>
 
-      {sortByCreated?.length &&
-        sortByCreated.map((item) => {
+      {allOrders?.length &&
+        allOrders.map((item) => {
           return (
             <Item>
               <ItmWrapper>

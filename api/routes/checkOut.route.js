@@ -1,7 +1,6 @@
 import express from "express";
 const router = express.Router();
 import stripePackage from "stripe";
-import { saveOrder } from "../models/orders/order.model.js";
 
 const stripe = stripePackage(process.env.STRIPE_PRIVATE_KEY);
 

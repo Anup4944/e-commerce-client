@@ -146,11 +146,7 @@ const Footer = () => {
               Shop by category
             </Link>
           </ListItem>
-          <ListItem>
-            {" "}
-            <AccountBox style={{ marginRight: "10px" }} />
-            My Account
-          </ListItem>
+
           {isAuth ? (
             <ListItem>
               {" "}

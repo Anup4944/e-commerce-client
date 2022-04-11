@@ -7,6 +7,7 @@ import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import ProductsOnSale from "../components/ProductsOnSale";
 import Slider from "../components/Slider";
+import ProductList from "./product/ProductList";
 
 const HomePage = () => {
   return (
@@ -15,9 +16,7 @@ const HomePage = () => {
       <Navbar />
       <ProductsOnSale />
       <Categories />
-      <Products />
-      <Newsletter />
-      <Footer />
+      <ProductList />
     </div>
   );
 };
