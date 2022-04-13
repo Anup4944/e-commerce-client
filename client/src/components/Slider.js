@@ -188,7 +188,8 @@ const Slider = ({
                       </AnimatedSale>
                       <Price>
                         {" "}
-                        Sale End before {new Date(item.saleEndDate).toString()}
+                        Sale End before{" "}
+                        {new Date(item.saleEndDate).toDateString()}
                       </Price>
                       <Title>{item.title}</Title>
                       <Description>{item.description}</Description>
