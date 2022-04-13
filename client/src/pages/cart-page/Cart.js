@@ -333,25 +333,21 @@ const Cart = () => {
               <SummaryItemText type="total">Total</SummaryItemText>
               <SummaryItemPrice>$ {cartTotal}</SummaryItemPrice>
             </SummaryItem>
-
-            {stripeToken ? (
-              <span>Processing payment................</span>
-            ) : (
+            {stripeToken && <span>Processing payment................</span>}
+            {!cart.length ? null : (
               <StrikeCheckout
                 name="ANUP"
                 description={`Your total is $${cartTotal}`}
-                // image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
                 panelLabel="PAY NOW"
                 billingAddress
                 shippingAddress
-                amount={cartTotal} // cents
+                amount={cartTotal * 100}
                 currency="AUD"
                 token={onToken}
                 stripeKey={KEY}
-
-                // email="info@vidhub.co"
               ></StrikeCheckout>
             )}
+            )
           </Summary>
         </Bottom>
       </Wrapper>

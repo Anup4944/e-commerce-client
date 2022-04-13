@@ -56,7 +56,6 @@ const SearchConatiner = styled.div`
   display: flex;
   align-items: center;
   margin-left: 25px;
-  padding: 5px;
 `;
 const Input = styled.input`
   border: none;
@@ -65,11 +64,11 @@ const Input = styled.input`
 
 const Logo = styled.h1`
   font-weight: bold;
-  ${mobile({ fontSize: "24px" })}
+  ${mobile({ fontSize: "12px" })}
 `;
 const Name = styled.h1`
   font-size: 15px;
-  ${mobile({ fontSize: "15px" })}
+  ${mobile({ fontSize: "12px" })}
 `;
 
 const Navbar = () => {
@@ -85,7 +84,9 @@ const Navbar = () => {
           <Language>ENG</Language>
           <SearchConatiner>
             <Input placeholder="Search" />
-            <SearchOutlinedIcon style={{ color: "red", size: "10px" }} />
+            <SearchOutlinedIcon
+              style={{ color: "red", size: "10px", cursor: "pointer" }}
+            />
           </SearchConatiner>
         </Left>
         <Center>
