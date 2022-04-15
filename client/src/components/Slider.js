@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled, { keyframes } from "styled-components";
 import ArrowBackIosOutlinedIcon from "@material-ui/icons/ArrowBackIosOutlined";
 import ArrowForwardIosOutlinedIcon from "@material-ui/icons/ArrowForwardIosOutlined";
 import { mobile } from "../responsive";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllProductsAction } from "../pages/product/productAction";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import Footer from "./Footer";
-import Navbar from "./Navbar";
 import Product from "./Product";
 
 const Container = styled.div`

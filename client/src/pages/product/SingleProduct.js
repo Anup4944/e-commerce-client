@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
-import Announcement from "../../components/Announcement";
 import Footer from "../../components/Footer";
 import {
   AddCircleOutlined,
-  Favorite,
   FavoriteBorder,
   FavoriteOutlined,
-  HeadsetRounded,
   RemoveCircleOutline,
 } from "@material-ui/icons";
 import { mobile } from "../../responsive";
@@ -91,10 +88,6 @@ const Button = styled.button`
   }
 `;
 
-const Info = styled.span`
-  color: red;
-`;
-
 const SuccessMg = styled.span`
   color: green;
   margin-top: 10px;
@@ -110,7 +103,7 @@ const SingleProduct = () => {
   const { singleProduct } = useSelector((state) => state.product);
   const { isAuth, clients } = useSelector((state) => state.login);
   const { message, status, cart } = useSelector((state) => state.cart);
-  const { isLiked, prodInfo } = useSelector((state) => state.favourite);
+  const { prodInfo } = useSelector((state) => state.favourite);
 
   const [currentImg, setCurrentImg] = useState(0);
   let { id } = useParams();

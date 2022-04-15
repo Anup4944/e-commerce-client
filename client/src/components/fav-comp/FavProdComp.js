@@ -26,7 +26,7 @@ const FavProdComp = () => {
 
   useEffect(() => {
     dispatch(getFavProdByClientAction(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <>

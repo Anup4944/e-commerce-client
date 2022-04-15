@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useLocation, useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAllProductsByCategoryAction } from "../pages/product/productAction";
-import { getAllCategoriesAction } from "../pages/categories-page/categoryAction";
 
 const Main = styled.div`
   flex: 1;

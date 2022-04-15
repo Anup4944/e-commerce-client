@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Products from "../../components/Products";
-import { mobile } from "../../responsive";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProductsAction } from "./productAction";
-import { getProductsByNewestSuccess } from "./productSlice";
 
 const Container = styled.div``;
-const Title = styled.div`
-  margin: 20px;
-`;
 
 const ProductList = () => {
   const [filteredPro, setFilteredPro] = useState([]);
+  console.log(filteredPro);
 
   const { allProducts } = useSelector((state) => state.product);
 
@@ -21,8 +17,6 @@ const ProductList = () => {
   useEffect(() => {
     dispatch(getAllProductsAction());
   }, [dispatch]);
-
-  console.log(filteredPro);
 
   const byDate = allProducts
     .slice()

@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { categoriesItem } from "../data/data";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
-
-import { useSelector, useDispatch } from "react-redux";
-import { getAllCategoriesAction } from "../pages/categories-page/categoryAction";
+// import { useSelector } from "react-redux";
 import CategoryItem from "./CategoryItem";
 
 const Container = styled.div`
@@ -19,10 +17,10 @@ const Container = styled.div`
 const Categories = () => {
   const { search } = useLocation();
 
-  const { categories } = useSelector((state) => state.category);
+  // const { categories } = useSelector((state) => state.category);
 
-  const parentCat =
-    categories?.length && categories.filter((item) => !item.parentCategory);
+  // const parentCat =
+  //   categories?.length && categories.filter((item) => !item.parentCategory);
 
   return (
     <>

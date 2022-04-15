@@ -12,13 +12,6 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Cart = styled.div`
-  height: 380px;
-  width: 380px;
-  border: 1px solid grey;
-  margin-left: 20px;
-`;
-
 const ProductByCategory = () => {
   const [sliderIndex, setSliderIndex] = useState(0);
 

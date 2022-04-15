@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updatePasswordAction } from "../../pages/passreset-page/passResetAction";
 
@@ -103,7 +102,6 @@ const UpdatePass = () => {
   );
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;

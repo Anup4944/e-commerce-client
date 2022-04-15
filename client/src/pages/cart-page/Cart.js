@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
@@ -12,7 +12,7 @@ import { increaseCartQty, decreaseCartQty } from "./cartSlice";
 import StrikeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { checkOutSuccess, checkoutFail } from "../orders/checkOutSlice";
-import { paymentAction, saveOrderAction } from "../orders/checkOutAction";
+import { saveOrderAction } from "../orders/checkOutAction";
 
 const Container = styled.div``;
 
@@ -152,14 +152,6 @@ const SummaryItem = styled.h1`
 const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
 
-const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  background-color: black;
-  color: white;
-  font-weight: 600;
-`;
-
 const Msg = styled.span`
   color: tomato;
   font-weight: 700;
@@ -234,7 +226,17 @@ const Cart = () => {
       }
     };
     stripeToken && striepApi();
-  }, [stripeToken, cartTotal, history]);
+  }, [
+    stripeToken,
+    cartTotal,
+    history,
+    cart,
+    clients._id,
+    clients.email,
+    clients.firstName,
+    clients.lastName,
+    dispatch,
+  ]);
 
   return (
     <Container>

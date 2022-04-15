@@ -61,6 +61,8 @@ const EnterEmail = () => {
   const [email, setEmail] = useState("");
 
   const [formSwitcher, setFormSwitcher] = useState(sendOtpReq);
+  console.log(formSwitcher);
+  console.log(setFormSwitcher);
 
   const dispatch = useDispatch();
 

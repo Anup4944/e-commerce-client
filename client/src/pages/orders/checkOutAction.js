@@ -2,7 +2,6 @@ import { getOrderByClientApi, saveOrderApi } from "../../apiS/orderApi";
 import {
   saveOrderSuccess,
   saveOrderFail,
-  checkOutSuccess,
   getOrderByClientSuccess,
 } from "./checkOutSlice";
 

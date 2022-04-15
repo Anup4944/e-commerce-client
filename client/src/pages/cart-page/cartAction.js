@@ -27,5 +27,6 @@ export const removeFromCart = (_id) => async (dispatch) => {
       status: "error",
       message: error.message,
     };
+    dispatch(requestCartFail(err));
   }
 };

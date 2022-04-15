@@ -9,7 +9,6 @@ import {
   Twitter,
   HomeOutlined,
   ComputerRounded,
-  AccountBox,
   HistoryOutlined,
   FavoriteOutlined,
   SecurityOutlined,
