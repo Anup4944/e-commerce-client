@@ -36,7 +36,6 @@ const ProductsOnSale = () => {
           ? 0
           : sliderIndex + 1
       );
-      console.log(sliderIndex);
     }
   };
 

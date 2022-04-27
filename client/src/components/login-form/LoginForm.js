@@ -44,6 +44,12 @@ const Input = styled.input`
   padding: 10px;
 `;
 
+const ShowHide = styled.h5`
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+`;
+
 const Button = styled.button`
   width: 60%;
   border: none;
@@ -52,6 +58,7 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  margin-top: 20px;
 `;
 
 const SuccessMg = styled.span`
@@ -71,6 +78,7 @@ const initialState = {
 
 const LoginForm = () => {
   const [client, setClient] = useState(initialState);
+  const [show, setShow] = useState(true);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -110,11 +118,18 @@ const LoginForm = () => {
           <Input
             placeholder="Enter your password"
             name="password"
-            type="password"
+            type={show ? "password" : "text"}
             value={client.password}
             onChange={handleOnChange}
             required
           />
+
+          {show ? (
+            <ShowHide onClick={() => setShow(false)}>SHOW</ShowHide>
+          ) : (
+            <ShowHide onClick={() => setShow(true)}>HIDE</ShowHide>
+          )}
+
           <Button type="submit">LOGIN</Button>
           <Link to="/password-reset" style={linkStyle}>
             FORGOT PASSWORD

@@ -68,6 +68,12 @@ const Warning = styled.div`
   color: red;
 `;
 
+const ShowHide = styled.h5`
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+`;
+
 const List = styled.ul`
   margin: 5px 0px;
   display: flex;
@@ -94,6 +100,8 @@ const initialState = {
 
 const UpdatePass = () => {
   const [passwordError, setPasswordError] = useState(passVerificationError);
+  const [show, setShow] = useState(true);
+  const [showNew, setShowNew] = useState(true);
 
   const [updatePass, setUpdatePass] = useState(initialState);
 
@@ -163,20 +171,33 @@ const UpdatePass = () => {
         />
         <Iuput
           placeholder="Enter your new password"
-          type="password"
+          type={showNew ? "password" : "text"}
           name="newPassword"
           value={updatePass.newPassword}
           required
           onChange={handleOnChange}
         />
+
+        {showNew ? (
+          <ShowHide onClick={() => setShowNew(false)}>SHOW</ShowHide>
+        ) : (
+          <ShowHide onClick={() => setShowNew(true)}>HIDE</ShowHide>
+        )}
+
         <Iuput
           placeholder="Confirm passowrd"
-          type="password"
+          type={show ? "password" : "text"}
           name="confPass"
           value={updatePass.confPass}
           onChange={handleOnChange}
           required
         />
+
+        {show ? (
+          <ShowHide onClick={() => setShow(false)}>SHOW</ShowHide>
+        ) : (
+          <ShowHide onClick={() => setShow(true)}>HIDE</ShowHide>
+        )}
         <List>
           {!passwordError.confPass && <Warning>Password doesnt match</Warning>}
 

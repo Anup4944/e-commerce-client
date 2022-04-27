@@ -85,7 +85,9 @@ const Orders = () => {
           return (
             <Item>
               <ItmWrapper>
-                <SubHeader>Order Placed at {item.createdAt}</SubHeader>
+                <SubHeader>
+                  Order Placed at {new Date(item.createdAt).toDateString()}
+                </SubHeader>
                 <SubHeader>Order Number {item._id}</SubHeader>
 
                 <StatusBox>
